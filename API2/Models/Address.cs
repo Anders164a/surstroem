@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace surstroem.Models
+{
+    public partial class Address
+    {
+        public Address()
+        {
+            Users = new HashSet<User>();
+        }
+
+        public int Id { get; set; }
+        public string StreetName { get; set; }
+        public string HouseNumber { get; set; }
+        public int? PostalCodeId { get; set; }
+        public string Floor { get; set; }
+        public string Additional { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+
+        public virtual PostalCode PostalCode { get; set; }
+        public virtual ICollection<User> Users { get; set; }
+    }
+}
