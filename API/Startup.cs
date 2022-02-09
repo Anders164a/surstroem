@@ -1,5 +1,5 @@
-using API2.Service.Interfaces;
-using API2.Service.Repositories;
+using API.Service.Interfaces;
+using API.Service.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +38,7 @@ namespace API
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddScoped<IColorRepository, ColorRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
 
             services.AddSwaggerGen(c =>
             {

@@ -1,4 +1,4 @@
-﻿using API2.Service.Interfaces;
+﻿using API.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using surstroem.Data;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API2.Service.Repositories
+namespace API.Service.Repositories
 {
         public class GenericRepository<T, TDBContext> : IGenericRepository<T>
         where T : class

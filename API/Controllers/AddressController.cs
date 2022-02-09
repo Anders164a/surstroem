@@ -1,5 +1,5 @@
-﻿using API2.Dtos;
-using API2.Service.Interfaces;
+﻿using API.Dtos;
+using API.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,12 +10,12 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ColorController : ControllerBase
+    public class AddressController : ControllerBase
     {
-        private IAddressRepository _addresRepository;
-        public ColorController(IColorRepository colorRepository)
+        private IAddressRepository _addressRepository;
+        public AddressController(IAddressRepository addressRepository)
         {
-            _colorRepository = colorRepository;
+            _addressRepository = addressRepository;
         }
 
         /*        // GET: api/CreditCards/1
@@ -32,28 +32,33 @@ namespace API.Controllers
                     return Ok(product);
                 }*/
 
-        //api/Colors
+        //api/Address
         [HttpGet]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetColors()
+        public async Task<IActionResult> GetAddresses()
         {
-            var colors = await _colorRepository.GetAllAsync();
+            var addresses = await _addressRepository.GetAllAsync();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var colorDto = new List<ColorDto>();
+            var addressDto = new List<AddressDto>();
 
-            foreach (var color in colors)
+            foreach (var a in addresses)
             {
-                colorDto.Add(new ColorDto
+                addressDto.Add(new AddressDto
                 {
-                    Name = color.Name
+                    Id = a.Id,
+                    StreetName = a.StreetName,
+                    HouseNumber = a.HouseNumber,
+                    Postal = (int)a.PostalCodeId,
+                    Floor = a.Floor,
+                    Additional = a.Additional
                 });
             }
-            return Ok(colorDto);
+            return Ok(addressDto);
         }
         /*
                 //api/CreditCards

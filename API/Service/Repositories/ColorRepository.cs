@@ -1,6 +1,6 @@
 ﻿using API.Service.Interfaces;
-using API2.Service.Interfaces;
-using API2.Service.Repositories;
+using API.Service.Interfaces;
+using API.Service.Repositories;
 using surstroem.Data;
 using surstroem.Models;
 using System;
