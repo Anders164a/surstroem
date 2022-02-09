@@ -1,100 +1,61 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace API.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AddressController
-    {
-    }
-}
-/*using API2.Dtos;
+﻿using API2.Dtos;
 using API2.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using surstroem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API2.Controllers
+namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ColorController : ControllerBase
     {
-        private IColorRepository _colorRepository;
+        private IAddressRepository _addresRepository;
         public ColorController(IColorRepository colorRepository)
         {
             _colorRepository = colorRepository;
         }
 
-/*        // GET: api/CreditCards/1
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetCreditCard(int id)
-        {
-            if (!await _creditCardRepository.entityExists(id))
-                return NotFound();
-            var product = await _creditCardRepository.GetById(id);
+        /*        // GET: api/CreditCards/1
+                [HttpGet("{id}")]
+                public async Task<IActionResult> GetCreditCard(int id)
+                {
+                    if (!await _creditCardRepository.entityExists(id))
+                        return NotFound();
+                    var product = await _creditCardRepository.GetById(id);
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                    if (!ModelState.IsValid)
+                        return BadRequest(ModelState);
 
-            return Ok(product);
-        }
+                    return Ok(product);
+                }*/
 
-//api/Colors
-[HttpGet]
-[ProducesResponseType(400)]
-public async Task<IActionResult> GetColors()
-{
-    var colors = await _colorRepository.GetAllAsync();
-
-    if (!ModelState.IsValid)
-    {
-        return BadRequest(ModelState);
-    }
-
-    var colorDto = new List<ColorDto>();
-
-    foreach (var color in colors)
-    {
-        colorDto.Add(new ColorDto
-        {
-            Name = color.Name
-        });
-    }
-    return Ok(colorDto);
-}
-
-        
         //api/Colors
-        /*[HttpPost]
-        public async Task<IActionResult> CreateColors([FromBody] Color color)
+        [HttpGet]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetColors()
         {
-            if (color == null)
-            {
-                return BadRequest(ModelState);
-            }
+            var colors = await _colorRepository.GetAllAsync();
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            try
-            {
-                await _colorRepository.Insert(colorToCreate);
-            }
-            catch (Exception e)
-            {
-                ModelState.AddModelError("", e.GetBaseException().Message);
-                return StatusCode(500, ModelState);
-            }
+            var colorDto = new List<ColorDto>();
 
-            return CreatedAtAction("GetCreditCard", new { id = creditCardToCreate.Id }, creditCardToCreate);
+            foreach (var color in colors)
+            {
+                colorDto.Add(new ColorDto
+                {
+                    Name = color.Name
+                });
+            }
+            return Ok(colorDto);
         }
-        
-        
+        /*
                 //api/CreditCards
                 [HttpPost]
                 public async Task<IActionResult> CreateCreditCard([FromBody] CreditCard creditCardToCreate)
@@ -177,7 +138,6 @@ public async Task<IActionResult> GetColors()
                     }
 
                     return NoContent();
-                }
+                }*/
     }
 }
-*/
