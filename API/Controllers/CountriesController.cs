@@ -10,12 +10,12 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class CountriesController : ControllerBase
     {
-        private IProductRepository _productRepository;
-        public ProductController(IProductRepository productRepository)
+        private ICountryRepository _countryRepository;
+        public CountriesController(ICountryRepository countryRepository)
         {
-            _productRepository = productRepository;
+            _countryRepository = countryRepository;
         }
 
         /*        // GET: api/CreditCards/1
@@ -35,36 +35,26 @@ namespace API.Controllers
         //api/Address
         [HttpGet]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetProducts()
+        public async Task<IActionResult> GetCountries()
         {
-            var products = await _productRepository.GetAllAsync();
+            var countries = await _countryRepository.GetAllAsync();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var productDto = new List<ProductDto>();
+            var countryDto = new List<CountryDto>();
 
-            foreach (var a in products)
+            foreach (var a in countries)
             {
-                productDto.Add(new ProductDto
+                countryDto.Add(new CountryDto
                 {
                     Id = a.Id,
-                    Title = a.ProductTitle,
-                    ShortDescription = a.ShortDescription,
-                    Description = a.Description,
-                    Price = (decimal)a.Price,
-                    Weight = (double)a.Weight,
-                    Width = (double)a.Width,
-                    Length = (double)a.Length,
-                    Height = (double)a.Height,
-                    WarrantyPeriodId = (int)a.WarrantyPeriodId,
-                    ColorId = (int)a.ColorId,
-                    BrandId = (int)a.BrandId
+                    Country = a.Country1
                 });
             }
-            return Ok(productDto);
+            return Ok(countryDto);
         }
         /*
                 //api/CreditCards

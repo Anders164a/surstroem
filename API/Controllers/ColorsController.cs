@@ -10,10 +10,10 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ColorController : ControllerBase
+    public class ColorsController : ControllerBase
     {
         private IColorRepository _colorRepository;
-        public ColorController(IColorRepository colorRepository)
+        public ColorsController(IColorRepository colorRepository)
         {
             _colorRepository = colorRepository;
         }

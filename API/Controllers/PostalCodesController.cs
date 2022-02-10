@@ -10,12 +10,12 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WarrantyPeriodController : ControllerBase
+    public class PostalCodesController : ControllerBase
     {
-        private IWarrantyPeriodRepository _warrantyPeriodRepository;
-        public WarrantyPeriodController(IWarrantyPeriodRepository warrantyPeriodRepository)
+        private IPostalCodeRepository _postalCodeRepository;
+        public PostalCodesController(IPostalCodeRepository postalCodeRepository)
         {
-            _warrantyPeriodRepository = warrantyPeriodRepository;
+            _postalCodeRepository = postalCodeRepository;
         }
 
         /*        // GET: api/CreditCards/1
@@ -35,27 +35,28 @@ namespace API.Controllers
         //api/Address
         [HttpGet]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetWarrantyPeriods()
+        public async Task<IActionResult> GetPostalCodes()
         {
-            var warrantyPeriods = await _warrantyPeriodRepository.GetAllAsync();
+            var postalCodes = await _postalCodeRepository.GetAllAsync();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var warrantyPeriodDto = new List<WarrantyPeriodDto>();
+            var postalCodeDto = new List<PostalCodeDto>();
 
-            foreach (var a in warrantyPeriods)
+            foreach (var a in postalCodes)
             {
-                warrantyPeriodDto.Add(new WarrantyPeriodDto
+                postalCodeDto.Add(new PostalCodeDto
                 {
                     Id = a.Id,
-                    WarrantyType = a.WarrantyType,
-                    WarrantyPeriod = (double)a.WarrantyPeriod1
+                    Postal = a.PostalCode1,
+                    City = a.CityName,
+                    CountryId = (int)a.CountryId
                 });
             }
-            return Ok(warrantyPeriodDto);
+            return Ok(postalCodeDto);
         }
         /*
                 //api/CreditCards

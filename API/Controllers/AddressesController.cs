@@ -10,10 +10,10 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AddressController : ControllerBase
+    public class AddressesController : ControllerBase
     {
         private IAddressRepository _addressRepository;
-        public AddressController(IAddressRepository addressRepository)
+        public AddressesController(IAddressRepository addressRepository)
         {
             _addressRepository = addressRepository;
         }

@@ -10,12 +10,12 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandController : ControllerBase
+    public class ProductsController : ControllerBase
     {
-        private IBrandRepository _brandRepository;
-        public BrandController(IBrandRepository brandRepository)
+        private IProductRepository _productRepository;
+        public ProductsController(IProductRepository productRepository)
         {
-            _brandRepository = brandRepository;
+            _productRepository = productRepository;
         }
 
         /*        // GET: api/CreditCards/1
@@ -35,26 +35,36 @@ namespace API.Controllers
         //api/Address
         [HttpGet]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetBrands()
+        public async Task<IActionResult> GetProducts()
         {
-            var brands = await _brandRepository.GetAllAsync();
+            var products = await _productRepository.GetAllAsync();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var brandDto = new List<BrandDto>();
+            var productDto = new List<ProductDto>();
 
-            foreach (var a in brands)
+            foreach (var a in products)
             {
-                brandDto.Add(new BrandDto
+                productDto.Add(new ProductDto
                 {
                     Id = a.Id,
-                    Name = a.Name
+                    Title = a.ProductTitle,
+                    ShortDescription = a.ShortDescription,
+                    Description = a.Description,
+                    Price = (decimal)a.Price,
+                    Weight = (double)a.Weight,
+                    Width = (double)a.Width,
+                    Length = (double)a.Length,
+                    Height = (double)a.Height,
+                    WarrantyPeriodId = (int)a.WarrantyPeriodId,
+                    ColorId = (int)a.ColorId,
+                    BrandId = (int)a.BrandId
                 });
             }
-            return Ok(brandDto);
+            return Ok(productDto);
         }
         /*
                 //api/CreditCards
