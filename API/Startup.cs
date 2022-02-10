@@ -37,8 +37,30 @@ namespace API
 
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddScoped<IColorRepository, ColorRepository>();
-            services.AddScoped<IAddressRepository, AddressRepository>();
+
+
+            services.AddScoped<IColorRepository, ColorRepository>()
+                    .AddScoped<IAddressRepository, AddressRepository>()
+                    .AddScoped<IBrandRepository, BrandRepository>()
+                    //.AddScoped<ICategoryRepository, CategoryRepository>()
+                    .AddScoped<ICountryRepository, CountryRepository>()
+                    //.AddScoped<IDeliveryStateRepository, DeliveryStateRepository>()
+                    //.AddScoped<IDeliveryTypeRepository, DeliveryTypeRepository>()
+                    //.AddScoped<IEmployeeRepository, EmployeeRepository>()
+                    //.AddScoped<IEmployeeHasShiftRepository, EmployeeHasShiftRepository>()
+                    //.AddScoped<IOrderRepository, OrderRepository>()
+                    //.AddScoped<IOrderProductRepository, OrderProductRepository>()
+                    .AddScoped<IPostalCodeRepository, PostalCodeRepository>()
+                    .AddScoped<IProductRepository, ProductRepository>()
+                    //.AddScoped<IProductCategoryRepository, ProductCategoryRepository>()
+                    //.AddScoped<IReviewRepository, ReviewRepository>()
+                    //.AddScoped<IReviewOpinionRepository, ReviewOpinionRepository>()
+                    //.AddScoped<IShiftRepository, ShiftRepository>()
+                    //.AddScoped<IStockRepository, StockRepository>()
+                    .AddScoped<IUserRepository, UserRepository>()
+                    //.AddScoped<IWarehouseRepository, WarehouseRepository>()
+                    //.AddScoped<IWarehouseTypeRepository, WarehouseTypeRepository>()
+                    .AddScoped<IWarrantyPeriodRepository, WarrantyPeriodRepository>();
 
             services.AddSwaggerGen(c =>
             {
