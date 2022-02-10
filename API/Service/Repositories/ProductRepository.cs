@@ -1,5 +1,4 @@
 ﻿using API.Service.Interfaces;
-using API.Service.Repositories;
 using surstroem.Data;
 using surstroem.Models;
 using System;
@@ -9,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace API.Service.Repositories
 {
-    public class ColorRepository : GenericRepository<Color, surstroemContext>, IColorRepository
+    public class ProductRepository : GenericRepository<Product, surstroemContext>, IProductRepository
     {
-        public ColorRepository(surstroemContext dbcontext)
+        public ProductRepository(surstroemContext dbcontext)
             : base(dbcontext)
         {
 
