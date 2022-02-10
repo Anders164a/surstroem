@@ -17,14 +17,14 @@ namespace surstroem.Models
         public string ProductTitle { get; set; }
         public string ShortDescription { get; set; }
         public string Description { get; set; }
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
         public double? Weight { get; set; }
         public double? Width { get; set; }
         public double? Length { get; set; }
         public double? Height { get; set; }
         public int? WarrantyPeriodId { get; set; }
         public int? ColorId { get; set; }
-        public int? BrandId { get; set; }
+        public int BrandId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 

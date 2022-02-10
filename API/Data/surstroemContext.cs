@@ -79,6 +79,7 @@ namespace surstroem.Data
                     .HasColumnName("postal_code_id");
 
                 entity.Property(e => e.StreetName)
+                    .IsRequired()
                     .HasMaxLength(100)
                     .HasColumnName("street_name");
 
@@ -90,6 +91,7 @@ namespace surstroem.Data
                 entity.HasOne(d => d.PostalCode)
                     .WithMany(p => p.Addresses)
                     .HasForeignKey(d => d.PostalCodeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("address_ibfk_1");
             });
 
@@ -107,6 +109,7 @@ namespace surstroem.Data
                     .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("name");
 
@@ -127,6 +130,7 @@ namespace surstroem.Data
                     .HasColumnName("id");
 
                 entity.Property(e => e.Category1)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("category");
 
@@ -164,6 +168,7 @@ namespace surstroem.Data
                     .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("name");
 
@@ -182,6 +187,7 @@ namespace surstroem.Data
                     .HasColumnName("id");
 
                 entity.Property(e => e.Country1)
+                    .IsRequired()
                     .HasMaxLength(60)
                     .HasColumnName("country");
 
@@ -210,6 +216,7 @@ namespace surstroem.Data
                     .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.State)
+                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("state");
 
@@ -233,6 +240,7 @@ namespace surstroem.Data
                     .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.Type)
+                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("type");
 
@@ -310,11 +318,13 @@ namespace surstroem.Data
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.EmployeeHasShifts)
                     .HasForeignKey(d => d.EmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("employee_has_shift_ibfk_2");
 
                 entity.HasOne(d => d.Shifts)
                     .WithMany(p => p.EmployeeHasShifts)
                     .HasForeignKey(d => d.ShiftsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("employee_has_shift_ibfk_1");
             });
 
@@ -332,6 +342,7 @@ namespace surstroem.Data
                     .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.Info)
+                    .IsRequired()
                     .HasColumnType("text")
                     .HasColumnName("info");
 
@@ -386,11 +397,13 @@ namespace surstroem.Data
                 entity.HasOne(d => d.DeliveryState)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.DeliveryStateId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("orders_ibfk_2");
 
                 entity.HasOne(d => d.DeliveryType)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.DeliveryTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("orders_ibfk_1");
             });
 
@@ -435,11 +448,13 @@ namespace surstroem.Data
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderProducts)
                     .HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("order_products_ibfk_2");
 
                 entity.HasOne(d => d.Products)
                     .WithMany(p => p.OrderProducts)
                     .HasForeignKey(d => d.ProductsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("order_products_ibfk_1");
             });
 
@@ -454,6 +469,7 @@ namespace surstroem.Data
                     .HasColumnName("id");
 
                 entity.Property(e => e.CityName)
+                    .IsRequired()
                     .HasMaxLength(100)
                     .HasColumnName("city_name");
 
@@ -467,6 +483,7 @@ namespace surstroem.Data
                     .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.PostalCode1)
+                    .IsRequired()
                     .HasMaxLength(10)
                     .HasColumnName("postal_code");
 
@@ -478,6 +495,7 @@ namespace surstroem.Data
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.PostalCodes)
                     .HasForeignKey(d => d.CountryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("postal_codes_ibfk_1");
             });
 
@@ -509,6 +527,7 @@ namespace surstroem.Data
                     .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.Description)
+                    .IsRequired()
                     .HasColumnType("text")
                     .HasColumnName("description");
 
@@ -521,10 +540,12 @@ namespace surstroem.Data
                     .HasColumnName("price");
 
                 entity.Property(e => e.ProductTitle)
+                    .IsRequired()
                     .HasMaxLength(200)
                     .HasColumnName("product_title");
 
                 entity.Property(e => e.ShortDescription)
+                    .IsRequired()
                     .HasMaxLength(200)
                     .HasColumnName("short_description");
 
@@ -544,6 +565,7 @@ namespace surstroem.Data
                 entity.HasOne(d => d.Brand)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.BrandId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("products_ibfk_2");
 
                 entity.HasOne(d => d.Color)
@@ -588,6 +610,7 @@ namespace surstroem.Data
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.ProductCategories)
                     .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("product_categories_ibfk_1");
             });
 
@@ -661,6 +684,7 @@ namespace surstroem.Data
                 entity.HasOne(d => d.Review)
                     .WithMany(p => p.ReviewOpinions)
                     .HasForeignKey(d => d.ReviewId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("review_opinions_ibfk_1");
             });
 
@@ -699,6 +723,7 @@ namespace surstroem.Data
                 entity.HasOne(d => d.Warehouse)
                     .WithMany(p => p.Shifts)
                     .HasForeignKey(d => d.WarehouseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("shifts_ibfk_1");
             });
 
@@ -739,11 +764,13 @@ namespace surstroem.Data
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Stocks)
                     .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("stocks_ibfk_1");
 
                 entity.HasOne(d => d.Warehouse)
                     .WithMany(p => p.Stocks)
                     .HasForeignKey(d => d.WarehouseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("stocks_ibfk_2");
             });
 
@@ -767,14 +794,17 @@ namespace surstroem.Data
                     .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.Email)
+                    .IsRequired()
                     .HasMaxLength(70)
                     .HasColumnName("email");
 
                 entity.Property(e => e.Firstname)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .HasColumnName("firstname");
 
                 entity.Property(e => e.Lastname)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("lastname");
 
@@ -830,11 +860,13 @@ namespace surstroem.Data
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.Warehouses)
                     .HasForeignKey(d => d.AddressId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("warehouses_ibfk_2");
 
                 entity.HasOne(d => d.WarehouseType)
                     .WithMany(p => p.Warehouses)
                     .HasForeignKey(d => d.WarehouseTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("warehouses_ibfk_1");
             });
 
@@ -852,6 +884,7 @@ namespace surstroem.Data
                     .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.Type)
+                    .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("type");
 
@@ -884,6 +917,7 @@ namespace surstroem.Data
                     .HasColumnName("warranty_period");
 
                 entity.Property(e => e.WarrantyType)
+                    .IsRequired()
                     .HasMaxLength(100)
                     .HasColumnName("warranty_type");
             });

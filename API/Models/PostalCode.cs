@@ -15,7 +15,7 @@ namespace surstroem.Models
         public int Id { get; set; }
         public string PostalCode1 { get; set; }
         public string CityName { get; set; }
-        public int? CountryId { get; set; }
+        public int CountryId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 

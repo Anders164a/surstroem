@@ -8,10 +8,10 @@ namespace surstroem.Models
     public partial class ReviewOpinion
     {
         public int Id { get; set; }
-        public int? UserId { get; set; }
-        public int? ReviewId { get; set; }
-        public bool? IsLiked { get; set; }
-        public bool? IsDisliked { get; set; }
+        public int UserId { get; set; }
+        public int ReviewId { get; set; }
+        public bool IsLiked { get; set; }
+        public bool IsDisliked { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 

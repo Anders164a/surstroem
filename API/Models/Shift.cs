@@ -13,9 +13,9 @@ namespace surstroem.Models
         }
 
         public int Id { get; set; }
-        public int? WarehouseId { get; set; }
-        public DateTime? ShiftStart { get; set; }
-        public DateTime? ShiftEnd { get; set; }
+        public int WarehouseId { get; set; }
+        public DateTime ShiftStart { get; set; }
+        public DateTime ShiftEnd { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 

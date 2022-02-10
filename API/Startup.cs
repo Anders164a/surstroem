@@ -1,16 +1,12 @@
-using API.Service.Interfaces;
-using API.Service.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using surstroem.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,14 +28,6 @@ namespace API
         {
 
             services.AddControllers();
-            var connectionString = Configuration.GetConnectionString("surstroemDB");
-            services.AddDbContext<surstroemContext>(cnn => cnn.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 11))));
-
-            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
-            services.AddScoped<IColorRepository, ColorRepository>();
-            services.AddScoped<IAddressRepository, AddressRepository>();
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
