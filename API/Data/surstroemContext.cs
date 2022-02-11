@@ -61,10 +61,6 @@ namespace surstroem.Data
                     .HasMaxLength(50)
                     .HasColumnName("additional");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.Floor)
                     .HasMaxLength(50)
@@ -83,11 +79,6 @@ namespace surstroem.Data
                     .HasMaxLength(100)
                     .HasColumnName("street_name");
 
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.HasOne(d => d.PostalCode)
                     .WithMany(p => p.Addresses)
                     .HasForeignKey(d => d.PostalCodeId)
@@ -103,20 +94,10 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("name");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
             });
 
             modelBuilder.Entity<Category>(entity =>
@@ -134,19 +115,9 @@ namespace surstroem.Data
                     .HasMaxLength(50)
                     .HasColumnName("category");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.ParentCategoryId)
                     .HasColumnType("int(11)")
                     .HasColumnName("parent_category_id");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.HasOne(d => d.ParentCategory)
                     .WithMany(p => p.InverseParentCategory)
@@ -162,20 +133,10 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("name");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
             });
 
             modelBuilder.Entity<Country>(entity =>
@@ -190,16 +151,6 @@ namespace surstroem.Data
                     .IsRequired()
                     .HasMaxLength(60)
                     .HasColumnName("country");
-
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
             });
 
             modelBuilder.Entity<DeliveryState>(entity =>
@@ -210,20 +161,12 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.State)
                     .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("state");
 
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
             });
 
             modelBuilder.Entity<DeliveryType>(entity =>
@@ -234,20 +177,11 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.Type)
                     .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("type");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
             });
 
             modelBuilder.Entity<Employee>(entity =>
@@ -257,16 +191,6 @@ namespace surstroem.Data
                 entity.Property(e => e.Id)
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
-
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.UserId)
                     .HasColumnType("int(11)")
@@ -293,11 +217,6 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.Date)
                     .HasColumnType("datetime")
                     .HasColumnName("date");
@@ -309,11 +228,6 @@ namespace surstroem.Data
                 entity.Property(e => e.ShiftsId)
                     .HasColumnType("int(11)")
                     .HasColumnName("shifts_id");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.EmployeeHasShifts)
@@ -336,20 +250,10 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.Info)
                     .IsRequired()
                     .HasColumnType("text")
                     .HasColumnName("info");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -363,11 +267,6 @@ namespace surstroem.Data
                 entity.Property(e => e.Id)
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
-
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.DeliveryStateId)
                     .HasColumnType("int(11)")
@@ -384,11 +283,6 @@ namespace surstroem.Data
                 entity.Property(e => e.ShippingAddress)
                     .HasColumnType("int(11)")
                     .HasColumnName("shipping_address");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.UserId)
                     .HasColumnType("int(11)")
@@ -419,11 +313,6 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.OrderId)
                     .HasColumnType("int(11)")
                     .HasColumnName("order_id");
@@ -439,11 +328,6 @@ namespace surstroem.Data
                 entity.Property(e => e.Quantity)
                     .HasColumnType("int(11)")
                     .HasColumnName("quantity");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderProducts)
@@ -477,20 +361,10 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("country_id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.PostalCode1)
                     .IsRequired()
                     .HasMaxLength(10)
                     .HasColumnName("postal_code");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.PostalCodes)
@@ -521,11 +395,6 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("color_id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.Description)
                     .IsRequired()
                     .HasColumnType("text")
@@ -548,11 +417,6 @@ namespace surstroem.Data
                     .IsRequired()
                     .HasMaxLength(200)
                     .HasColumnName("short_description");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.WarrantyPeriodId)
                     .HasColumnType("int(11)")
@@ -593,19 +457,9 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("category_id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.ProductId)
                     .HasColumnType("int(11)")
                     .HasColumnName("product_id");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.ProductCategories)
@@ -626,11 +480,6 @@ namespace surstroem.Data
                     .HasColumnType("text")
                     .HasColumnName("comment");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.ProductId)
                     .HasColumnType("int(11)")
                     .HasColumnName("product_id");
@@ -638,11 +487,6 @@ namespace surstroem.Data
                 entity.Property(e => e.Star)
                     .HasColumnType("double(3,1)")
                     .HasColumnName("star");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.UserId)
                     .HasColumnType("int(11)")
@@ -659,11 +503,6 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.IsDisliked).HasColumnName("is_disliked");
 
                 entity.Property(e => e.IsLiked).HasColumnName("is_liked");
@@ -671,11 +510,6 @@ namespace surstroem.Data
                 entity.Property(e => e.ReviewId)
                     .HasColumnType("int(11)")
                     .HasColumnName("review_id");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.UserId)
                     .HasColumnType("int(11)")
@@ -698,11 +532,6 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.ShiftEnd)
                     .HasColumnType("datetime")
                     .HasColumnName("shift_end");
@@ -710,11 +539,6 @@ namespace surstroem.Data
                 entity.Property(e => e.ShiftStart)
                     .HasColumnType("datetime")
                     .HasColumnName("shift_start");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.WarehouseId)
                     .HasColumnType("int(11)")
@@ -739,11 +563,6 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.ProductId)
                     .HasColumnType("int(11)")
                     .HasColumnName("product_id");
@@ -751,11 +570,6 @@ namespace surstroem.Data
                 entity.Property(e => e.Quantity)
                     .HasColumnType("int(11)")
                     .HasColumnName("quantity");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.WarehouseId)
                     .HasColumnType("int(11)")
@@ -833,16 +647,6 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("address_id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.WarehouseTypeId)
                     .HasColumnType("int(11)")
                     .HasColumnName("warehouse_type_id");
@@ -868,20 +672,10 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.Type)
                     .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("type");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
             });
 
             modelBuilder.Entity<WarrantyPeriod>(entity =>
@@ -891,16 +685,6 @@ namespace surstroem.Data
                 entity.Property(e => e.Id)
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
-
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.WarrantyPeriod1)
                     .HasColumnType("double(2,2)")

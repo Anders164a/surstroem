@@ -11,8 +11,6 @@ namespace surstroem.Models
         public int EmployeeId { get; set; }
         public int ShiftsId { get; set; }
         public DateTime Date { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual Employee Employee { get; set; }
         public virtual Shift Shifts { get; set; }

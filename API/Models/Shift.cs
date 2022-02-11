@@ -16,8 +16,6 @@ namespace surstroem.Models
         public int WarehouseId { get; set; }
         public DateTime ShiftStart { get; set; }
         public DateTime ShiftEnd { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual Warehouse Warehouse { get; set; }
         public virtual ICollection<EmployeeHasShift> EmployeeHasShifts { get; set; }

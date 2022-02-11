@@ -1,6 +1,7 @@
 ﻿using API.Dtos;
 using API.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using surstroem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,19 +19,19 @@ namespace API.Controllers
             _addressRepository = addressRepository;
         }
 
-        /*        // GET: api/CreditCards/1
-                [HttpGet("{id}")]
-                public async Task<IActionResult> GetCreditCard(int id)
-                {
-                    if (!await _creditCardRepository.entityExists(id))
-                        return NotFound();
-                    var product = await _creditCardRepository.GetById(id);
+        // GET: api/Addresss/1
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAddress(int id)
+        {
+            if (!await _addressRepository.entityExists(id))
+                return NotFound();
+            var product = await _addressRepository.GetById(id);
 
-                    if (!ModelState.IsValid)
-                        return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-                    return Ok(product);
-                }*/
+            return Ok(product);
+        }
 
         //api/Address
         [HttpGet]
@@ -60,89 +61,89 @@ namespace API.Controllers
             }
             return Ok(addressDto);
         }
-        /*
-                //api/CreditCards
-                [HttpPost]
-                public async Task<IActionResult> CreateCreditCard([FromBody] CreditCard creditCardToCreate)
+        
+            //api/Addresss
+            [HttpPost]
+            public async Task<IActionResult> CreateAddress([FromBody] Address creditCardToCreate)
+            {
+                if (creditCardToCreate == null)
                 {
-                    if (creditCardToCreate == null)
-                    {
-                        return BadRequest(ModelState);
-                    }
-                    if (!ModelState.IsValid)
-                    {
-                        return BadRequest(ModelState);
-                    }
-
-                    try
-                    {
-                        await _creditCardRepository.Insert(creditCardToCreate);
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", e.GetBaseException().Message);
-                        return StatusCode(500, ModelState);
-                    }
-
-                    return CreatedAtAction("GetCreditCard", new { id = creditCardToCreate.Id }, creditCardToCreate);
+                    return BadRequest(ModelState);
+                }
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
                 }
 
-
-                //api/CreditCards/id
-                [HttpPut("{id}")]
-                public async Task<IActionResult> UpdateCreditCard(int id, [FromBody] CreditCard updateCreditCard)
+                try
                 {
-                    if (updateCreditCard == null)
-                    {
-                        return BadRequest(ModelState);
-                    }
-                    if (id != updateCreditCard.Id)
-                    {
-                        return BadRequest(ModelState);
-                    }
-                    if (!await _creditCardRepository.entityExists(id))
-                    {
-                        return NotFound();
-                    }
-                    if (!ModelState.IsValid)
-                    {
-                        return BadRequest(ModelState);
-                    }
-
-                    try
-                    {
-                        await _creditCardRepository.Update(updateCreditCard);
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", e.GetBaseException().Message);
-                        return StatusCode(500, ModelState);
-                    }
-
-                    return NoContent();
+                    await _addressRepository.Insert(creditCardToCreate);
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.GetBaseException().Message);
+                    return StatusCode(500, ModelState);
                 }
 
+                return CreatedAtAction("GetAddress", new { id = creditCardToCreate.Id }, creditCardToCreate);
+            }
 
-                // DELETE: api/CreditCards/3
-                [HttpDelete("{id}")]
-                public async Task<IActionResult> DeleteCreditCard(int id)
+
+            //api/Addresss/id
+            [HttpPut("{id}")]
+            public async Task<IActionResult> UpdateAddress(int id, [FromBody] Address updateAddress)
+            {
+                if (updateAddress == null)
                 {
-                    if (!await _creditCardRepository.entityExists(id))
-                        return NotFound();
-                    if (!ModelState.IsValid)
-                        return BadRequest(ModelState);
+                    return BadRequest(ModelState);
+                }
+                if (id != updateAddress.Id)
+                {
+                    return BadRequest(ModelState);
+                }
+                if (!await _addressRepository.entityExists(id))
+                {
+                    return NotFound();
+                }
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
 
-                    try
-                    {
-                        await _creditCardRepository.Delete(id);
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", e.GetBaseException().Message);
-                        return StatusCode(500, ModelState);
-                    }
+                try
+                {
+                    await _addressRepository.Update(updateAddress);
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.GetBaseException().Message);
+                    return StatusCode(500, ModelState);
+                }
 
-                    return NoContent();
-                }*/
+                return NoContent();
+            }
+
+
+            // DELETE: api/Addresss/3
+            [HttpDelete("{id}")]
+            public async Task<IActionResult> DeleteAddress(int id)
+            {
+                if (!await _addressRepository.entityExists(id))
+                    return NotFound();
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                try
+                {
+                    await _addressRepository.Delete(id);
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.GetBaseException().Message);
+                    return StatusCode(500, ModelState);
+                }
+
+                return NoContent();
+            }
     }
 }

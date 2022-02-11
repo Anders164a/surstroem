@@ -14,8 +14,6 @@ namespace surstroem.Models
 
         public int Id { get; set; }
         public string Country1 { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual ICollection<PostalCode> PostalCodes { get; set; }
     }

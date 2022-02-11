@@ -9,7 +9,5 @@ namespace surstroem.Models
     {
         public int Id { get; set; }
         public string Info { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
     }
 }

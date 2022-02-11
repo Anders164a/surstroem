@@ -18,8 +18,6 @@ namespace surstroem.Models
         public int PayingAddress { get; set; }
         public int DeliveryStateId { get; set; }
         public int DeliveryTypeId { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual DeliveryState DeliveryState { get; set; }
         public virtual DeliveryType DeliveryType { get; set; }
