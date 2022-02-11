@@ -16,8 +16,6 @@ namespace surstroem.Models
         public int Id { get; set; }
         public string Category1 { get; set; }
         public int? ParentCategoryId { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual Category ParentCategory { get; set; }
         public virtual ICollection<Category> InverseParentCategory { get; set; }

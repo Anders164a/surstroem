@@ -25,8 +25,6 @@ namespace surstroem.Models
         public int? WarrantyPeriodId { get; set; }
         public int? ColorId { get; set; }
         public int BrandId { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual Brand Brand { get; set; }
         public virtual Color Color { get; set; }

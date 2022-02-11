@@ -15,8 +15,6 @@ namespace surstroem.Models
         public int Id { get; set; }
         public string WarrantyType { get; set; }
         public double WarrantyPeriod1 { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
     }

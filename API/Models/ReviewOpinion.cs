@@ -12,8 +12,6 @@ namespace surstroem.Models
         public int ReviewId { get; set; }
         public bool IsLiked { get; set; }
         public bool IsDisliked { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual Review Review { get; set; }
     }

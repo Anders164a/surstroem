@@ -16,8 +16,6 @@ namespace surstroem.Models
         public int Id { get; set; }
         public int AddressId { get; set; }
         public int WarehouseTypeId { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual Address Address { get; set; }
         public virtual WarehouseType WarehouseType { get; set; }

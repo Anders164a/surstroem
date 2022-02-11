@@ -17,8 +17,6 @@ namespace surstroem.Models
         public int ProductId { get; set; }
         public double Star { get; set; }
         public string Comment { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual ICollection<ReviewOpinion> ReviewOpinions { get; set; }
     }
