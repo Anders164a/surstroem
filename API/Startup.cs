@@ -45,7 +45,7 @@ namespace API
             services.AddScoped<ICountryRepository, CountryRepository>();
             //.AddScoped<IDeliveryStateRepository, DeliveryStateRepository>()
             //.AddScoped<IDeliveryTypeRepository, DeliveryTypeRepository>()
-            //.AddScoped<IEmployeeRepository, EmployeeRepository>()
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             //.AddScoped<IEmployeeHasShiftRepository, EmployeeHasShiftRepository>()
             //.AddScoped<IOrderRepository, OrderRepository>()
             //.AddScoped<IOrderProductRepository, OrderProductRepository>()
