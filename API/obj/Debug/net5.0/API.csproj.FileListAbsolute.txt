@@ -36,3 +36,7 @@ C:\Users\HFGF\source\repos\surstroem\API\bin\Debug\net5.0\Microsoft.Extensions.D
 C:\Users\HFGF\source\repos\surstroem\API\bin\Debug\net5.0\MySqlConnector.dll
 C:\Users\HFGF\source\repos\surstroem\API\bin\Debug\net5.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\HFGF\source\repos\surstroem\API\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\HFGF\source\repos\surstroem\API\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\HFGF\source\repos\surstroem\API\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\HFGF\source\repos\surstroem\API\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\HFGF\source\repos\surstroem\API\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
