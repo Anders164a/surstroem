@@ -33,10 +33,9 @@ namespace API
 
             services.AddControllers();
             var connectionString = Configuration.GetConnectionString("surstroemDB");
-            services.AddDbContext<surstroemContext>(cnn => cnn.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 11))));
+            services.AddDbContext<surstroemContext>(cnn => cnn.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 11))).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
 
 
             services.AddScoped<IColorRepository, ColorRepository>();
