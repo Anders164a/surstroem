@@ -14,8 +14,6 @@ namespace surstroem.Models
         public string Password { get; set; }
         public int? PhoneNumber { get; set; }
         public int? AddressId { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual Address Address { get; set; }
     }

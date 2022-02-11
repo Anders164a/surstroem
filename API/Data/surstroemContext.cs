@@ -788,11 +788,6 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("address_id");
 
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("created_at")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasMaxLength(70)
@@ -815,11 +810,6 @@ namespace surstroem.Data
                 entity.Property(e => e.PhoneNumber)
                     .HasColumnType("int(15)")
                     .HasColumnName("phone_number");
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updated_at")
-                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.Users)

@@ -1,6 +1,7 @@
 ﻿using API.Dtos;
 using API.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using surstroem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +19,13 @@ namespace API.Controllers
             _colorRepository = colorRepository;
         }
 
-/*        // GET: api/CreditCards/1
+/*        // GET: api/Colors/1
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCreditCard(int id)
+        public async Task<IActionResult> GetColor(int id)
         {
-            if (!await _creditCardRepository.entityExists(id))
+            if (!await _colorRepository.entityExists(id))
                 return NotFound();
-            var product = await _creditCardRepository.GetById(id);
+            var product = await _colorRepository.GetById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -56,11 +57,11 @@ namespace API.Controllers
             return Ok(colorDto);
         }
 /*
-        //api/CreditCards
+        //api/Colors
         [HttpPost]
-        public async Task<IActionResult> CreateCreditCard([FromBody] CreditCard creditCardToCreate)
+        public async Task<IActionResult> CreateColor([FromBody] Color colorToCreate)
         {
-            if (creditCardToCreate == null)
+            if (colorToCreate == null)
             {
                 return BadRequest(ModelState);
             }
@@ -71,7 +72,7 @@ namespace API.Controllers
 
             try
             {
-                await _creditCardRepository.Insert(creditCardToCreate);
+                await _colorRepository.Insert(colorToCreate);
             }
             catch (Exception e)
             {
@@ -79,23 +80,23 @@ namespace API.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtAction("GetCreditCard", new { id = creditCardToCreate.Id }, creditCardToCreate);
+            return CreatedAtAction("GetColor", new { id = colorToCreate.Id }, colorToCreate);
         }
 
-
-        //api/CreditCards/id
+        */
+        //api/Colors/id
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCreditCard(int id, [FromBody] CreditCard updateCreditCard)
+        public async Task<IActionResult> UpdateColor(int id, [FromBody] Color updateColor)
         {
-            if (updateCreditCard == null)
+            if (updateColor == null)
             {
                 return BadRequest(ModelState);
             }
-            if (id != updateCreditCard.Id)
+            if (id != updateColor.Id)
             {
                 return BadRequest(ModelState);
             }
-            if (!await _creditCardRepository.entityExists(id))
+            if (!await _colorRepository.entityExists(id))
             {
                 return NotFound();
             }
@@ -106,7 +107,7 @@ namespace API.Controllers
 
             try
             {
-                await _creditCardRepository.Update(updateCreditCard);
+                await _colorRepository.Update(updateColor);
             }
             catch (Exception e)
             {
@@ -117,19 +118,19 @@ namespace API.Controllers
             return NoContent();
         }
 
-
-        // DELETE: api/CreditCards/3
+        /*
+        // DELETE: api/Colors/3
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCreditCard(int id)
+        public async Task<IActionResult> DeleteColor(int id)
         {
-            if (!await _creditCardRepository.entityExists(id))
+            if (!await _colorRepository.entityExists(id))
                 return NotFound();
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                await _creditCardRepository.Delete(id);
+                await _colorRepository.Delete(id);
             }
             catch (Exception e)
             {
