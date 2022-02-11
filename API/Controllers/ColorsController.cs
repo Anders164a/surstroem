@@ -1,7 +1,6 @@
 ﻿using API.Dtos;
 using API.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using surstroem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,63 +10,57 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class ColorsController : ControllerBase
     {
-        private IUserRepository _userRepository;
-        public UsersController(IUserRepository userRepository)
+        private IColorRepository _colorRepository;
+        public ColorsController(IColorRepository colorRepository)
         {
-            _userRepository = userRepository;
+            _colorRepository = colorRepository;
         }
 
-        // GET: api/Users/1
+/*        // GET: api/CreditCards/1
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser(int id)
+        public async Task<IActionResult> GetCreditCard(int id)
         {
-            if (!await _userRepository.entityExists(id))
+            if (!await _creditCardRepository.entityExists(id))
                 return NotFound();
-            var user = await _userRepository.GetById(id);
+            var product = await _creditCardRepository.GetById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(user);
-        }
+            return Ok(product);
+        }*/
 
-        //api/User
+        //api/Colors
         [HttpGet]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetColors()
         {
-            var users = await _userRepository.GetAllAsync();
+            var colors = await _colorRepository.GetAllAsync();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var userDto = new List<UserDto>();
+            var colorDto = new List<ColorDto>();
 
-            foreach (var a in users)
+            foreach (var color in colors)
             {
-                userDto.Add(new UserDto
+                colorDto.Add(new ColorDto
                 {
-                    Id = a.Id,
-                    FirstName = a.Firstname,
-                    LastName = a.Lastname,
-                    Email = a.Email,
-                    Password = a.Password,
-                    PhoneNumber = (int)a.PhoneNumber,
-                    AddressId = (int)a.AddressId
+                    Name = color.Name
                 });
             }
-            return Ok(userDto);
+            return Ok(colorDto);
         }
-
-        //api/Users
+/*
+        //api/CreditCards
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] User userToCreate)
+        public async Task<IActionResult> CreateCreditCard([FromBody] CreditCard creditCardToCreate)
         {
-            if (userToCreate == null)
+            if (creditCardToCreate == null)
             {
                 return BadRequest(ModelState);
             }
@@ -78,7 +71,7 @@ namespace API.Controllers
 
             try
             {
-                await _userRepository.Insert(userToCreate);
+                await _creditCardRepository.Insert(creditCardToCreate);
             }
             catch (Exception e)
             {
@@ -86,23 +79,23 @@ namespace API.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtAction("GetUser", new { id = userToCreate.Id }, userToCreate);
+            return CreatedAtAction("GetCreditCard", new { id = creditCardToCreate.Id }, creditCardToCreate);
         }
 
 
-        //api/Users/id
+        //api/CreditCards/id
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody] User updateUser)
+        public async Task<IActionResult> UpdateCreditCard(int id, [FromBody] CreditCard updateCreditCard)
         {
-            if (updateUser == null)
+            if (updateCreditCard == null)
             {
                 return BadRequest(ModelState);
             }
-            if (id != updateUser.Id)
+            if (id != updateCreditCard.Id)
             {
                 return BadRequest(ModelState);
             }
-            if (!await _userRepository.entityExists(id))
+            if (!await _creditCardRepository.entityExists(id))
             {
                 return NotFound();
             }
@@ -113,7 +106,7 @@ namespace API.Controllers
 
             try
             {
-                await _userRepository.Update(updateUser);
+                await _creditCardRepository.Update(updateCreditCard);
             }
             catch (Exception e)
             {
@@ -125,18 +118,18 @@ namespace API.Controllers
         }
 
 
-        // DELETE: api/Users/3
+        // DELETE: api/CreditCards/3
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteCreditCard(int id)
         {
-            if (!await _userRepository.entityExists(id))
+            if (!await _creditCardRepository.entityExists(id))
                 return NotFound();
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                await _userRepository.Delete(id);
+                await _creditCardRepository.Delete(id);
             }
             catch (Exception e)
             {
@@ -145,6 +138,6 @@ namespace API.Controllers
             }
 
             return NoContent();
-        }
+        }*/
     }
 }
