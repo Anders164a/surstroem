@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace API.Service.Repositories
 {
-    public class EmployeeRepository : GenericRepository<Employee, surstroemContext>, IEmployeeRepository
+    public class WarehouseRepository : GenericRepository<Warehouse, surstroemContext>, IWarehouseRepository
     {
-        public EmployeeRepository(surstroemContext dbcontext)
+        public WarehouseRepository(surstroemContext dbcontext)
             : base(dbcontext)
         {
 
@@ -20,9 +20,9 @@ namespace API.Service.Repositories
         public async Task<ICollection<Employee>> GetEmployeesByWarehouse(int warehouseId)
         {
             return await _dbcontext.Employees.Where(c => c.WarehouseId == warehouseId)
-                /*                .Include(c => c.Title)
-                                .Include(c => c.Checked)
-                                .Include(c => c.ShoppinglistId)*/
+                               .Include(c => c.Id)
+                                .Include(c => c.WarehouseId)
+                                .Include(c => c.WarehouseId)
                 .ToListAsync();
         }
     }

@@ -11,60 +11,58 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public class WarehouseTypesController : ControllerBase
     {
-        private IEmployeeRepository _employeeRepository;
-        public EmployeesController(IEmployeeRepository employeeRepository)
+        private IWarehouseTypeRepository _warehouseTypeRepository;
+        public WarehouseTypesController(IWarehouseTypeRepository warehouseTypeRepository)
         {
-            _employeeRepository = employeeRepository;
+            _warehouseTypeRepository = warehouseTypeRepository;
         }
 
-        // GET: api/Employees/1
+        // GET: api/WarehouseTypes/1
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetEmployee(int id)
+        public async Task<IActionResult> GetWarehouse(int id)
         {
-            if (!await _employeeRepository.entityExists(id))
+            if (!await _warehouseTypeRepository.entityExists(id))
                 return NotFound();
-            var product = await _employeeRepository.GetById(id);
+            var warehouse = await _warehouseTypeRepository.GetById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(product);
+            return Ok(warehouse);
         }
 
-        //api/Employees
+        //api/WarehouseTypes
         [HttpGet]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetEmployees()
+        public async Task<IActionResult> GetWarehouseTypes()
         {
-            var employees = await _employeeRepository.GetAllAsync();
+            var WarehouseTypes = await _warehouseTypeRepository.GetAllAsync();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var employeeDto = new List<EmployeeDto>();
+            var warehouseTypeDto = new List<WarehouseTypeDto>();
 
-            foreach (var a in employees)
+            foreach (var a in WarehouseTypes)
             {
-                employeeDto.Add(new EmployeeDto
+                warehouseTypeDto.Add(new WarehouseTypeDto
                 {
                     Id = a.Id,
-                    UserId = a.UserId,
-                    WarehouseId = a.WarehouseId,
-                    WorkPhone = (int)a.WorkPhone
+                    Type = a.Type
                 });
             }
-            return Ok(employeeDto);
+            return Ok(warehouseTypeDto);
         }
 
-        //api/Employees
+        //api/WarehouseTypes
         [HttpPost]
-        public async Task<IActionResult> CreateEmployee([FromBody] Employee EmployeeToCreate)
+        public async Task<IActionResult> CreateWarehouse([FromBody] WarehouseType warehouseToCreate)
         {
-            if (EmployeeToCreate == null)
+            if (warehouseToCreate == null)
             {
                 return BadRequest(ModelState);
             }
@@ -75,7 +73,7 @@ namespace API.Controllers
 
             try
             {
-                await _employeeRepository.Insert(EmployeeToCreate);
+                await _warehouseTypeRepository.Insert(warehouseToCreate);
             }
             catch (Exception e)
             {
@@ -83,23 +81,23 @@ namespace API.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtAction("GetEmployee", new { id = EmployeeToCreate.Id }, EmployeeToCreate);
+            return CreatedAtAction("GetWarehouse", new { id = warehouseToCreate.Id }, warehouseToCreate);
         }
 
 
-        //api/Employees/id
+        //api/WarehouseTypes/id
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEmployee(int id, [FromBody] Employee updateEmployee)
+        public async Task<IActionResult> UpdateWarehouse(int id, [FromBody] WarehouseType updateWarehouseType)
         {
-            if (updateEmployee == null)
+            if (updateWarehouseType == null)
             {
                 return BadRequest(ModelState);
             }
-            if (id != updateEmployee.Id)
+            if (id != updateWarehouseType.Id)
             {
                 return BadRequest(ModelState);
             }
-            if (!await _employeeRepository.entityExists(id))
+            if (!await _warehouseTypeRepository.entityExists(id))
             {
                 return NotFound();
             }
@@ -110,7 +108,7 @@ namespace API.Controllers
 
             try
             {
-                await _employeeRepository.Update(updateEmployee);
+                await _warehouseTypeRepository.Update(updateWarehouseType);
             }
             catch (Exception e)
             {
@@ -122,18 +120,18 @@ namespace API.Controllers
         }
 
 
-        // DELETE: api/Employees/3
+        // DELETE: api/WarehouseTypes/3
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmployee(int id)
+        public async Task<IActionResult> DeleteWarehouse(int id)
         {
-            if (!await _employeeRepository.entityExists(id))
+            if (!await _warehouseTypeRepository.entityExists(id))
                 return NotFound();
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                await _employeeRepository.Delete(id);
+                await _warehouseTypeRepository.Delete(id);
             }
             catch (Exception e)
             {
@@ -145,3 +143,4 @@ namespace API.Controllers
         }
     }
 }
+

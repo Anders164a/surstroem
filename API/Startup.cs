@@ -41,24 +41,24 @@ namespace API
             services.AddScoped<IColorRepository, ColorRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IBrandRepository, BrandRepository>();
-            //.AddScoped<ICategoryRepository, CategoryRepository>()
+            //services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
-            //.AddScoped<IDeliveryStateRepository, DeliveryStateRepository>()
-            //.AddScoped<IDeliveryTypeRepository, DeliveryTypeRepository>()
+            //services.AddScoped<IDeliveryStateRepository, DeliveryStateRepository>();
+            //services.AddScoped<IDeliveryTypeRepository, DeliveryTypeRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            //.AddScoped<IEmployeeHasShiftRepository, EmployeeHasShiftRepository>()
-            //.AddScoped<IOrderRepository, OrderRepository>()
-            //.AddScoped<IOrderProductRepository, OrderProductRepository>()
+            //services.AddScoped<IEmployeeHasShiftRepository, EmployeeHasShiftRepository>();
+            //services.AddScoped<IOrderRepository, OrderRepository>();
+            //services.AddScoped<IOrderProductRepository, OrderProductRepository>();
             services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            //.AddScoped<IProductCategoryRepository, ProductCategoryRepository>()
-            //.AddScoped<IReviewRepository, ReviewRepository>()
-            //.AddScoped<IReviewOpinionRepository, ReviewOpinionRepository>()
-            //.AddScoped<IShiftRepository, ShiftRepository>()
-            //.AddScoped<IStockRepository, StockRepository>()
+            //services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            //services.AddScoped<IReviewRepository, ReviewRepository>();
+            //services.AddScoped<IReviewOpinionRepository, ReviewOpinionRepository>();
+            //services.AddScoped<IShiftRepository, ShiftRepository>();
+            //services.AddScoped<IStockRepository, StockRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            //.AddScoped<IWarehouseRepository, WarehouseRepository>()
-            //.AddScoped<IWarehouseTypeRepository, WarehouseTypeRepository>()
+            services.AddScoped<IWarehouseRepository, WarehouseRepository>();
+            services.AddScoped<IWarehouseTypeRepository, WarehouseTypeRepository>();
             services.AddScoped<IWarrantyPeriodRepository, WarrantyPeriodRepository>();
 
             services.AddSwaggerGen(c =>
