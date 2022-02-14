@@ -61,7 +61,7 @@ namespace API.Controllers
             return Ok(warehouseDto);
         }
 
-        [HttpGet("{warehouseId}")]
+        [HttpGet("EmployeesByWarehouse/{warehouseId}")]
         public async Task<IActionResult> GetEmployeesByWarehouse(int warehouseId)
         {
             ICollection<Employee> employees;
