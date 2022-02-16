@@ -1,5 +1,6 @@
 ﻿using API.Dtos;
 using API.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using surstroem.Models;
 using System;
@@ -34,7 +35,7 @@ namespace API.Controllers
         }
 
         //api/Address
-        [HttpGet]
+        [HttpGet, Authorize]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetAddresses()
         {

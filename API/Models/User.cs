@@ -14,6 +14,8 @@ namespace surstroem.Models
         public string Password { get; set; }
         public int? PhoneNumber { get; set; }
         public int? AddressId { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
 
         public virtual Address Address { get; set; }
     }
