@@ -16,16 +16,15 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "API": {
-      "commandName": "Project",
-      "dotnetRunMessages": "true",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "applicationUrl": "http://localhost",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
-    }
+		"API": {
+			"applicationUrl": "https://localhost",
+			"commandName": "Project",
+			"dotnetRunMessages": "true",
+			"environmentVariables": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			},
+			"launchBrowser": true,
+			"launchUrl": "swagger"
+		}
   }
 }
