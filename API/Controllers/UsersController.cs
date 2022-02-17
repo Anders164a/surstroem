@@ -89,6 +89,19 @@ namespace API.Controllers
             return Ok(users);
         }
 
+        [HttpGet("GetUserContactInformations/{userId}")]
+        public async Task<IActionResult> GetUserContactInformationById(int userId)
+        {
+            if (!await _userRepository.entityExists(userId))
+                return NotFound();
+            var user = await _userRepository.GetUserContactInformation(userId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(user);
+        }
+
         //api/Users
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] User userToCreate)
