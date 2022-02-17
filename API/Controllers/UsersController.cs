@@ -63,6 +63,32 @@ namespace API.Controllers
             return Ok(userDto);
         }
 
+        [HttpGet("GetUsersByAdressId/{addressId}")]
+        public async Task<IActionResult> GetUsersByAddress(int addressId)
+        {
+            ICollection<User> users;
+
+            users = await _userRepository.GetUsersByAddressId(addressId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(users);
+        }
+
+        [HttpGet("GetUsersByOrderId/{orderId}")]
+        public async Task<IActionResult> GetUsersByOrderId(int orderId)
+        {
+            ICollection<User> users;
+
+            users = await _userRepository.GetUsersByOrderId(orderId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(users);
+        }
+
         //api/Users
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] User userToCreate)

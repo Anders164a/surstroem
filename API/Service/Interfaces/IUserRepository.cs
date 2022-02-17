@@ -8,5 +8,8 @@ namespace API.Service.Interfaces
 {
     public interface IUserRepository : IGenericRepository<User>
     {
+        Task<ICollection<User>> GetUsersByAddressId(int addresId);
+        Task<ICollection<User>> GetUsersByOrderId(int orderId);
+        Task<ICollection<User>> GetUserContactInformation(int userId);
     }
 }
