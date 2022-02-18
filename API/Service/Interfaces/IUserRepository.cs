@@ -10,6 +10,6 @@ namespace API.Service.Interfaces
     {
         Task<ICollection<User>> GetUsersByAddressId(int addresId);
         Task<ICollection<User>> GetUsersByOrderId(int orderId);
-        Task<ICollection<User>> GetUserContactInformation(int userId);
+        Task<User> GetUserContactInformation(int userId);
     }
 }
