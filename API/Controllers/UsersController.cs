@@ -104,12 +104,21 @@ namespace API.Controllers
         {
             if (!await _userRepository.entityExists(userId))
                 return NotFound();
-            var user = await _userRepository.GetUserContactInformation(userId);
+            var chosenUser = await _userRepository.GetUserContactInformation(userId);
+
+            foreach (var user in chosenUser)
+            {
+/*                foreach(var address in user.Address)
+                {
+
+                }*/
+            }
+
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(user);
+            return Ok(chosenUser);
         }
 
         //api/Users
