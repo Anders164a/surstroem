@@ -26,12 +26,20 @@ namespace API.Controllers
         {
             if (!await _userRepository.entityExists(id))
                 return NotFound();
+            var userDto = new UserDto();
             var user = await _userRepository.GetById(id);
-
+            userDto.Id = user.Id;
+            userDto.FirstName = user.Firstname;
+            userDto.LastName = user.Lastname;
+            userDto.Email = user.Email;
+            userDto.PasswordHash = user.PasswordHash;
+            userDto.PasswordSalt = user.PasswordSalt;
+            userDto.PhoneNumber = (int)user.PhoneNumber;
+            userDto.AddressId = (int)user.AddressId;
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(user);
+            return Ok(userDto);
         }
 
         //api/User

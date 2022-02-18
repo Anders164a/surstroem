@@ -35,7 +35,7 @@ namespace API.Controllers
         }
 
         //api/Address
-        [HttpGet, Authorize]
+        [HttpGet]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetAddresses()
         {

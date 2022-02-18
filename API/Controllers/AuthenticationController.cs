@@ -41,18 +41,6 @@ namespace API.Controllers
                     //return Ok(new { userName, userName2, role });
                 }*/
 
-        [HttpPost("register")]
-        public ActionResult<User> Register(LoginDto request)
-        {
-            CreatePasswordHash(request.Password, out string passwordHash, out string passwordSalt);
-
-            user.Firstname = request.Username;
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
-            return Ok(user);
-        }
-
         [HttpPost("login")]
         public ActionResult<string> Login(LoginDto request)
         {
@@ -91,18 +79,6 @@ namespace API.Controllers
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
             return jwt;
-        }
-
-        private void CreatePasswordHash(string password, out string passwordHash, out string passwordSalt)
-        {
-            using (var hmac = new HMACSHA512())
-            {
-                var salt = hmac.Key;
-                var hash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-
-                passwordHash = System.Text.Encoding.UTF8.GetString(hash, 0, hash.Length);
-                passwordSalt = System.Text.Encoding.UTF8.GetString(salt, 0, salt.Length);
-            }
         }
 
         private bool VerifyPasswordHash(string password, string passwordHash, string passwordSalt)
