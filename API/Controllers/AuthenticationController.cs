@@ -42,9 +42,9 @@ namespace API.Controllers
                 }*/
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(LoginDto request)
+        public ActionResult<User> Register(LoginDto request)
         {
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            CreatePasswordHash(request.Password, out string passwordHash, out string passwordSalt);
 
             user.Firstname = request.Username;
             user.PasswordHash = passwordHash;
@@ -54,7 +54,7 @@ namespace API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(LoginDto request)
+        public ActionResult<string> Login(LoginDto request)
         {
             if (user.Firstname != request.Username)
             {
@@ -93,21 +93,26 @@ namespace API.Controllers
             return jwt;
         }
 
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        private void CreatePasswordHash(string password, out string passwordHash, out string passwordSalt)
         {
             using (var hmac = new HMACSHA512())
             {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                var salt = hmac.Key;
+                var hash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+
+                passwordHash = System.Text.Encoding.UTF8.GetString(hash, 0, hash.Length);
+                passwordSalt = System.Text.Encoding.UTF8.GetString(salt, 0, salt.Length);
             }
         }
 
-        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        private bool VerifyPasswordHash(string password, string passwordHash, string passwordSalt)
         {
-            using (var hmac = new HMACSHA512(passwordSalt))
+            var salt = System.Text.Encoding.UTF8.GetBytes(passwordSalt);
+            using (var hmac = new HMACSHA512(salt))
             {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                return computedHash.SequenceEqual(passwordHash);
+                var hash = System.Text.Encoding.UTF8.GetBytes(passwordHash);
+                return computedHash.SequenceEqual(hash);
             }
         }
     }

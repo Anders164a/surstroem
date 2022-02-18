@@ -5,6 +5,7 @@ using surstroem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -55,7 +56,8 @@ namespace API.Controllers
                     FirstName = a.Firstname,
                     LastName = a.Lastname,
                     Email = a.Email,
-                    Password = a.Password,
+                    PasswordHash = a.PasswordHash,
+                    PasswordSalt = a.PasswordSalt,
                     PhoneNumber = (int)a.PhoneNumber,
                     AddressId = (int)a.AddressId
                 });
@@ -104,7 +106,7 @@ namespace API.Controllers
 
         //api/Users
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] User userToCreate)
+        public async Task<IActionResult> CreateUser(string password, [FromBody] User userToCreate)
         {
             if (userToCreate == null)
             {
@@ -114,6 +116,12 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState);
             }
+
+            //kode til hash
+            CreatePasswordHash(password, out string passwordHash, out string passwordSalt);
+
+            userToCreate.PasswordHash = passwordHash;
+            userToCreate.PasswordSalt = passwordSalt;
 
             try
             {
@@ -127,7 +135,6 @@ namespace API.Controllers
 
             return CreatedAtAction("GetUser", new { id = userToCreate.Id }, userToCreate);
         }
-
 
         //api/Users/id
         [HttpPut("{id}")]
@@ -184,6 +191,19 @@ namespace API.Controllers
             }
 
             return NoContent();
+        }
+
+        private void CreatePasswordHash(string password, out string passwordHash, out string passwordSalt)
+        {
+            using (var hmac = new HMACSHA512())
+            {
+                var salt = hmac.Key;
+                var hash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+
+                // From byte array to string
+                passwordHash = System.Text.Encoding.UTF8.GetString(hash, 0, hash.Length);
+                passwordSalt = System.Text.Encoding.UTF8.GetString(salt, 0, salt.Length);
+            }
         }
     }
 }

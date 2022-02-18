@@ -617,9 +617,15 @@ namespace surstroem.Data
                     .HasMaxLength(50)
                     .HasColumnName("lastname");
 
-                entity.Property(e => e.Password)
-                    .HasMaxLength(60)
-                    .HasColumnName("password");
+                entity.Property(e => e.PasswordHash)
+                    .HasColumnType("varbinary(255)")
+                    .HasMaxLength(255)
+                    .HasColumnName("passwordHash");
+
+                entity.Property(e => e.PasswordSalt)
+                    .HasColumnType("varbinary(255)")
+                    .HasMaxLength(255)
+                    .HasColumnName("passwordSalt");
 
                 entity.Property(e => e.PhoneNumber)
                     .HasColumnType("int(15)")
