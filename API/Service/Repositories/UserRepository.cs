@@ -40,7 +40,7 @@ namespace API.Service.Repositories
 
         public async Task<ICollection<User>> GetUserContactInformation(int userId)
         {
-            return await _dbcontext.Users.Where(c => c.AddressId == userId)
+            return await _dbcontext.Users.Where(c => c.Id == userId)
                                 .Include(c => c.Address)
                                 .ThenInclude(s => s.PostalCode)
                                 .ThenInclude(d => d.Country)
