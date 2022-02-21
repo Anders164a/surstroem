@@ -10,7 +10,7 @@ namespace API.Service.Interfaces
     {
         Task<ICollection<User>> GetUsersByAddressId(int addresId);
         Task<ICollection<User>> GetUsersByOrderId(int orderId);
+        Task PutNewUserPassword(int userId, string passwordHash, string passwordSalt); 
         Task<ICollection<User>> GetUserContactInformation(int userId);
-        Task PutNewUserPassword(int userId, string passwordHash, string passwordSalt);
     }
 }

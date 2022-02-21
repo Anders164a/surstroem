@@ -27,8 +27,10 @@ namespace API.Controllers
         {
             if (!await _userRepository.entityExists(id))
                 return NotFound();
+
             var userDto = new UserDto();
             var user = await _userRepository.GetById(id);
+
             userDto.Id = user.Id;
             userDto.FirstName = user.Firstname;
             userDto.LastName = user.Lastname;
@@ -37,6 +39,7 @@ namespace API.Controllers
             userDto.PasswordSalt = user.PasswordSalt;
             userDto.PhoneNumber = (int)user.PhoneNumber;
             userDto.AddressId = (int)user.AddressId;
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -105,12 +108,27 @@ namespace API.Controllers
         {
             if (!await _userRepository.entityExists(userId))
                 return NotFound();
-            var user = await _userRepository.GetUserContactInformation(userId);
+            var chosenUser = await _userRepository.GetUserContactInformation(userId);
+
+            var userDto = new UserContactInfoDto();
+
+            userDto.FirstName = chosenUser.Firstname;
+            userDto.LastName = chosenUser.Lastname;
+            userDto.Email = chosenUser.Email;
+            userDto.PhoneNumber = (int)chosenUser.PhoneNumber;
+            userDto.StreetName = chosenUser.Address.StreetName;
+            userDto.HouseNumber = chosenUser.Address.HouseNumber;
+            userDto.Floor = chosenUser.Address.Floor;
+            userDto.Additional = chosenUser.Address.Additional;
+            userDto.PostalCode = chosenUser.Address.PostalCode.PostalCode1;
+            userDto.CityName = chosenUser.Address.PostalCode.CityName;
+            userDto.Country = chosenUser.Address.PostalCode.Country.Country1;
+
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(user);
+            return Ok(userDto);
         }
 
         //api/Users

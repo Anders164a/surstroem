@@ -38,23 +38,14 @@ namespace API.Service.Repositories
                 .ToListAsync();
         }
 
-        public async Task<ICollection<User>> GetUserContactInformation(int userId)
+        public async Task<User> GetUserContactInformation(int userId)
         {
             return await _dbcontext.Users.Where(c => c.Id == userId)
                                 .Include(c => c.Address)
                                 .ThenInclude(s => s.PostalCode)
                                 .ThenInclude(d => d.Country)
                                 .AsSplitQuery()
-                                /*.Include(c => c.Id)
-                                .Include(c => c.Firstname)
-                                .Include(c => c.Lastname)
-                                .Include(c => c.Email)
-                                .Include(c => c.PhoneNumber)
-                                .Include(c => c.Address)
-                                .ThenInclude(s => s.Floor)
-                                .Include(e => e.)
-                                .AsSplitQuery()*/
-                .ToListAsync();
+                .FirstOrDefaultAsync();
         }
 
         public async Task PutNewUserPassword(int userId, string passwordHash, string passwordSalt)
