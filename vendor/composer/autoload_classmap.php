@@ -639,7 +639,9 @@ return array(
     'TheSeer\\Tokenizer\\XMLSerializer' => $vendorDir . '/theseer/tokenizer/src/XMLSerializer.php',
     'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
     'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
-    'k' => $baseDir . '/php/classes/user/tests/k.php',
+    'classes\\category\\class\\category' => $baseDir . '/php/classes/category/class/category.php',
+    'classes\\category\\interface\\category_repository_interface' => $baseDir . '/php/classes/category/interface/category_repository_interface.php',
+    'classes\\category\\repository\\category_repository' => $baseDir . '/php/classes/category/repository/category_repository.php',
     'user\\user' => $baseDir . '/php/classes/user/user.php',
     'user_repository' => $baseDir . '/php/classes/user/repository/user_repository.php',
 );

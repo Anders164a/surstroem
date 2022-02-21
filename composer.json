@@ -5,7 +5,8 @@
     },
     "autoload": {
         "psr-4": {
-            "model\\": "php/models"
+            "model\\": "php/models",
+            "classes\\": "php/classes"
         },
         "classmap": [
             "php/classes"

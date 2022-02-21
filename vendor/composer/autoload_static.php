@@ -35,6 +35,10 @@ class ComposerStaticInited6eeb47dc3f333fa92eac343fa5987d
         array (
             'model\\' => 6,
         ),
+        'c' => 
+        array (
+            'classes\\' => 8,
+        ),
         'W' => 
         array (
             'Webmozart\\Assert\\' => 17,
@@ -93,6 +97,10 @@ class ComposerStaticInited6eeb47dc3f333fa92eac343fa5987d
         'model\\' => 
         array (
             0 => __DIR__ . '/../..' . '/php/models',
+        ),
+        'classes\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/php/classes',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -828,7 +836,9 @@ class ComposerStaticInited6eeb47dc3f333fa92eac343fa5987d
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
-        'k' => __DIR__ . '/../..' . '/php/classes/user/tests/k.php',
+        'classes\\category\\class\\category' => __DIR__ . '/../..' . '/php/classes/category/class/category.php',
+        'classes\\category\\interface\\category_repository_interface' => __DIR__ . '/../..' . '/php/classes/category/interface/category_repository_interface.php',
+        'classes\\category\\repository\\category_repository' => __DIR__ . '/../..' . '/php/classes/category/repository/category_repository.php',
         'user\\user' => __DIR__ . '/../..' . '/php/classes/user/user.php',
         'user_repository' => __DIR__ . '/../..' . '/php/classes/user/repository/user_repository.php',
     );
