@@ -1,6 +1,7 @@
 ﻿using API.Dtos;
 using API.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using surstroem.Data;
 using surstroem.Models;
 using System;
 using System.Collections.Generic;
@@ -199,6 +200,22 @@ namespace API.Controllers
             }
 
             return NoContent();
+        }
+
+        public async Task<IActionResult> ChangeUserPassword(int userId, string passwordHash, string passwordSalt)
+        {
+            try
+            {
+                await _userRepository.PutNewUserPassword(userId, passwordHash, passwordSalt);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.GetBaseException().Message);
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+
         }
 
         private void CreatePasswordHash(string password, out string passwordHash, out string passwordSalt)
