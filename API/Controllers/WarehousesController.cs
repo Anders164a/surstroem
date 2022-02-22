@@ -14,11 +14,9 @@ namespace API.Controllers
     public class WarehousesController : ControllerBase
     {
         private IWarehouseRepository _warehouseRepository;
-        private IEmployeeRepository _employeeRepository;
-        public WarehousesController(IWarehouseRepository warehouseRepository, IEmployeeRepository employeeRepository)
+        public WarehousesController(IWarehouseRepository warehouseRepository)
         {
             _warehouseRepository = warehouseRepository;
-            _employeeRepository = employeeRepository;
         }
 
         // GET: api/Warehouses/1
@@ -66,7 +64,7 @@ namespace API.Controllers
         {
             ICollection<Employee> employees;
 
-            employees = await _employeeRepository.GetEmployeesByWarehouse(warehouseId);
+            employees = await _warehouseRepository.GetEmployeesByWarehouse(warehouseId);
 
 
             if (!ModelState.IsValid)
