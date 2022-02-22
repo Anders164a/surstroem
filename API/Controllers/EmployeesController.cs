@@ -61,9 +61,9 @@ namespace API.Controllers
         }
 
         //api/Employees
-        [HttpGet]
+        [HttpGet("GetEmployeesWithWarehouseInfo")]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetEmployeesWithWarehouseInfoG()
+        public async Task<IActionResult> GetEmployeesWithWarehouseInfo()
         {
             var employees = await _employeeRepository.GetEmployeesWithWarehouseInfo();
 
