@@ -56,5 +56,13 @@ namespace API.Service.Repositories
             _dbcontext.Entry(user).Property(x => x.PasswordSalt).IsModified = true;
             await _dbcontext.SaveChangesAsync();
         }
+
+        public async Task PutNewUserAddress(int userId, int address)
+        {
+            var user = new User() { Id = userId, AddressId = address};
+            _dbcontext.Users.Attach(user);
+            _dbcontext.Entry(user).Property(x => x.AddressId).IsModified = true;
+            await _dbcontext.SaveChangesAsync();
+        }
     }
 }

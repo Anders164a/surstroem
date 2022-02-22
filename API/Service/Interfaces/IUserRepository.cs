@@ -12,5 +12,6 @@ namespace API.Service.Interfaces
         Task<ICollection<User>> GetUsersByOrderId(int orderId);
         Task<User> GetUserContactInformation(int userId);
         Task PutNewUserPassword(int userId, string passwordHash, string passwordSalt);
+        Task PutNewUserAddress(int userId, int address);
     }
 }

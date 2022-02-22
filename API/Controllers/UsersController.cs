@@ -225,15 +225,13 @@ namespace API.Controllers
         }
 
         //api/Users/id
-        [HttpPut("ChangePassword/{userId}")]
+        [HttpPut("ChangeUserPassword/{userId}")]
         public async Task<IActionResult> ChangeUserPassword(int userId, string password)
         {
 
             //kode til hash
             CreatePasswordHash(password, out string passwordHash, out string passwordSalt);
 
-            var PasswordHash = passwordHash;
-            var PasswordSalt = passwordSalt;
             try
             {
                 await _userRepository.PutNewUserPassword(userId, passwordHash, passwordSalt);
@@ -245,6 +243,23 @@ namespace API.Controllers
             }
 
             return NoContent();
+        }
+
+        //api/Users/id
+        [HttpPut("ChangeUserAddress/{userId}")]
+        public async Task<IActionResult> ChangeUserAddress(int userId, int address)
+        {
+            try
+            {
+                await _userRepository.PutNewUserAddress(userId, address);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.GetBaseException().Message);
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("AddressId changed to " + address);
         }
 
         private void CreatePasswordHash(string password, out string passwordHash, out string passwordSalt)
