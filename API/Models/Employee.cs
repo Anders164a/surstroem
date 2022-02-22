@@ -17,6 +17,8 @@ namespace surstroem.Models
         public int WarehouseId { get; set; }
         public int? WorkPhone { get; set; }
 
+        public virtual Warehouse Warehouse { get; set; }
+
         public virtual ICollection<EmployeeHasShift> EmployeeHasShifts { get; set; }
     }
 }

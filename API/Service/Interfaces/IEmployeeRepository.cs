@@ -8,6 +8,6 @@ namespace API.Service.Interfaces
 {
     public interface IEmployeeRepository : IGenericRepository<Employee>
     {
-        Task<ICollection<Employee>> GetEmployeesByWarehouse(int warehouseId);
+        Task<ICollection<Employee>> GetEmployeesWithWarehouseInfo();
     }
 }

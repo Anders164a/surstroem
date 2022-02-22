@@ -61,6 +61,21 @@ namespace API.Controllers
         }
 
         //api/Employees
+        [HttpGet]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetEmployeesWithWarehouseInfoG()
+        {
+            var employees = await _employeeRepository.GetEmployeesWithWarehouseInfo();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(employees);
+        }
+
+        //api/Employees
         [HttpPost]
         public async Task<IActionResult> CreateEmployee([FromBody] Employee EmployeeToCreate)
         {
