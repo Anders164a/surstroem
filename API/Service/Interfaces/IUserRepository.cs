@@ -13,5 +13,6 @@ namespace API.Service.Interfaces
         Task<User> GetUserContactInformation(int userId);
         Task PutNewUserPassword(int userId, string passwordHash, string passwordSalt);
         Task PutNewUserAddress(int userId, int address);
+        Task PutNewUserInfo(int userId, string firstName, string lastName, string email, int phoneNumber);
     }
 }

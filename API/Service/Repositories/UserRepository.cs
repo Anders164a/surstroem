@@ -64,5 +64,16 @@ namespace API.Service.Repositories
             _dbcontext.Entry(user).Property(x => x.AddressId).IsModified = true;
             await _dbcontext.SaveChangesAsync();
         }
+
+        public async Task PutNewUserInfo(int userId, string firstName, string lastName, string email, int phoneNumber)
+        {
+            var user = new User() { Id = userId, Firstname = firstName, Lastname = lastName, Email = email, PhoneNumber = phoneNumber };
+            _dbcontext.Users.Attach(user);
+            _dbcontext.Entry(user).Property(x => x.Firstname).IsModified = true;
+            _dbcontext.Entry(user).Property(x => x.Lastname).IsModified = true;
+            _dbcontext.Entry(user).Property(x => x.Email).IsModified = true;
+            _dbcontext.Entry(user).Property(x => x.PhoneNumber).IsModified = true;
+            await _dbcontext.SaveChangesAsync();
+        }
     }
 }

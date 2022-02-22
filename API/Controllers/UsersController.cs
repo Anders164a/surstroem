@@ -262,6 +262,23 @@ namespace API.Controllers
             return Ok("AddressId changed to " + address);
         }
 
+        //api/Users/id
+        [HttpPut("ChangeUserInfo/{userId}")]
+        public async Task<IActionResult> ChangeUserInfo(int userId, string firstName, string lastName, string email, int phoneNumber)
+        {
+            try
+            {
+                await _userRepository.PutNewUserInfo(userId, firstName, lastName, email, phoneNumber);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.GetBaseException().Message);
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
         private void CreatePasswordHash(string password, out string passwordHash, out string passwordSalt)
         {
             using (var hmac = new HMACSHA512())
