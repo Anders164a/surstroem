@@ -165,7 +165,7 @@ namespace API.Controllers
 
         //api/Users/id
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody] User updateUser)
+        public async Task<IActionResult> UpdateUser(int id, string newPassword, [FromBody] User updateUser)
         {
             if (updateUser == null)
             {
@@ -183,7 +183,11 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState);
             }
+            //kode til hash
+            CreatePasswordHash(newPassword, out string passwordHash, out string passwordSalt);
 
+            updateUser.PasswordHash = passwordHash;
+            updateUser.PasswordSalt = passwordSalt;
             try
             {
                 await _userRepository.Update(updateUser);
@@ -220,8 +224,16 @@ namespace API.Controllers
             return NoContent();
         }
 
-        public async Task<IActionResult> ChangeUserPassword(int userId, string passwordHash, string passwordSalt)
+        //api/Users/id
+        [HttpPut("ChangePassword/{userId}")]
+        public async Task<IActionResult> ChangeUserPassword(int userId, string password)
         {
+
+            //kode til hash
+            CreatePasswordHash(password, out string passwordHash, out string passwordSalt);
+
+            var PasswordHash = passwordHash;
+            var PasswordSalt = passwordSalt;
             try
             {
                 await _userRepository.PutNewUserPassword(userId, passwordHash, passwordSalt);
@@ -233,7 +245,6 @@ namespace API.Controllers
             }
 
             return NoContent();
-
         }
 
         private void CreatePasswordHash(string password, out string passwordHash, out string passwordSalt)

@@ -50,11 +50,11 @@ namespace API.Service.Repositories
 
         public async Task PutNewUserPassword(int userId, string passwordHash, string passwordSalt)
         {
-            /*var user = new User() { Id = userId, PasswordHash = passwordHash, PasswordSalt = passwordSalt};
+            var user = new User() { Id = userId, PasswordHash = passwordHash, PasswordSalt = passwordSalt};
             _dbcontext.Users.Attach(user);
             _dbcontext.Entry(user).Property(x => x.PasswordHash).IsModified = true;
             _dbcontext.Entry(user).Property(x => x.PasswordSalt).IsModified = true;
-            await Save();*/
+            await _dbcontext.SaveChangesAsync();
         }
     }
 }
