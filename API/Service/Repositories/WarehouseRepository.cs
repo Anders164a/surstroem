@@ -16,14 +16,5 @@ namespace API.Service.Repositories
         {
 
         }
-
-        public async Task<ICollection<Employee>> GetEmployeesByWarehouse(int warehouseId)
-        {
-            return await _dbcontext.Employees.Where(c => c.WarehouseId == warehouseId)
-                               .Include(c => c.Id)
-                                .Include(c => c.WarehouseId)
-                                .Include(c => c.WarehouseId)
-                .ToListAsync();
-        }
     }
 }

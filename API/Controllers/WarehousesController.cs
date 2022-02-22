@@ -59,20 +59,6 @@ namespace API.Controllers
             return Ok(warehouseDto);
         }
 
-        [HttpGet("EmployeesByWarehouse/{warehouseId}")]
-        public async Task<IActionResult> GetEmployeesByWarehouse(int warehouseId)
-        {
-            ICollection<Employee> employees;
-
-            employees = await _warehouseRepository.GetEmployeesByWarehouse(warehouseId);
-
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            return Ok(employees);
-        }
-
         //api/Warehouses
         [HttpPost]
         public async Task<IActionResult> CreateWarehouse([FromBody] Warehouse warehouseToCreate)
