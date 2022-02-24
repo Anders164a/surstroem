@@ -68,7 +68,7 @@ namespace API
             services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             //services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
-            //services.AddScoped<IReviewRepository, ReviewRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
             //services.AddScoped<IReviewOpinionRepository, ReviewOpinionRepository>();
             //services.AddScoped<IShiftRepository, ShiftRepository>();
             //services.AddScoped<IStockRepository, StockRepository>();
