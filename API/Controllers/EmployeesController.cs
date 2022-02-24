@@ -92,7 +92,6 @@ namespace API.Controllers
                     WarehouseCity = a.Warehouse.Address.PostalCode.CityName,
                     WarehouseCountry = a.Warehouse.Address.PostalCode.Country.Country1
                 });
-                Console.WriteLine(employeeDto);
             }*/
             return Ok(employees);
         }
