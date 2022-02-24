@@ -22,11 +22,7 @@ namespace API.Service.Repositories
             return await _dbcontext.Set<Employee>()
                 .Include(e => e.User)
                 .Include(c => c.Warehouse)
-                .Include(s => s.Warehouse.WarehouseType)
-                .Include(f => f.Warehouse.Address)
-                .Include(a => a.Warehouse.Address.PostalCode)
-                .Include(w => w.Warehouse.Address.PostalCode.Country)
-                //.AsSplitQuery()
+                .AsSplitQuery()
                 .ToListAsync();
         }
     }
