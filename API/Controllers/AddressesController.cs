@@ -35,7 +35,7 @@ namespace API.Controllers
         }
 
         //api/Address
-        [HttpGet, Authorize(Roles = "Normal")]
+        [HttpGet, Authorize(Roles = "Normal, Admin")]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetAddresses()
         {

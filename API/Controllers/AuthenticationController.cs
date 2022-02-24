@@ -46,6 +46,7 @@ namespace API.Controllers
             {
                 return BadRequest("Enter a Password");
             }
+            loginDto.Role = "Normal";
             users.Add(loginDto);
             return Ok("User registered");
         }
@@ -57,7 +58,7 @@ namespace API.Controllers
             {
                 if(request.Username == user.Username && request.Password == user.Password)
                 {
-                    string token = CreateToken(request);
+                    string token = CreateToken(user);
                     return Ok(token);
                 }
             }
@@ -71,11 +72,19 @@ namespace API.Controllers
 
         private string CreateToken(LoginDto loginDto)
         {
-            List<Claim> claims = new List<Claim>
+            List<Claim> claims = new List<Claim> { };
+
+            if (loginDto.Role == "Admin") 
             {
-                new Claim(ClaimTypes.Name, loginDto.Username),
-                new Claim(ClaimTypes.Role, "Normal")
-            };
+                claims.Add(new Claim(ClaimTypes.Name, loginDto.Username));
+                claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+            }
+            else
+            {
+                claims.Add(new Claim(ClaimTypes.Name, loginDto.Username));
+                claims.Add(new Claim(ClaimTypes.DateOfBirth, DateTime.Now.ToString()));
+                claims.Add(new Claim(ClaimTypes.Role, "Normal"));
+            }
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
                 _configuration.GetSection("AppSettings:Token").Value));
