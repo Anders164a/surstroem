@@ -19,14 +19,13 @@ namespace API.Service.Repositories
 
         public async Task<ICollection<Employee>> GetEmployeesWithWarehouseInfo()
         {
-            return await _dbcontext.Set<Employee>()
-                //.Include(x => x.User)
+            return await _dbcontext.Employees.Where(t => t.UserId == t.User.Id)
+                .Include(x => x.User)
                 .Include(c => c.Warehouse)
                 .Include(s => s.Warehouse.WarehouseType)
                 .Include(f => f.Warehouse.Address)
                 .Include(a => a.Warehouse.Address.PostalCode)
                 .Include(w => w.Warehouse.Address.PostalCode.Country)
-                .AsSplitQuery()
                 .ToListAsync();
         }
     }

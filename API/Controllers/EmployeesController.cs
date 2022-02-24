@@ -79,10 +79,10 @@ namespace API.Controllers
                 employeeDto.Add(new EmployeeWarehouseDto
                 {
                     EmployeeId = a.Id,
-                    //FirstName = a.User.Firstname,
-                    //LastName = a.User.Lastname,
+                    FirstName = a.User.Firstname,
+                    LastName = a.User.Lastname,
                     WorkPhone = (int)a.WorkPhone,
-                    //Email = a.User.Email,
+                    Email = a.User.Email,
                     Warehouse = a.Warehouse.Id,
                     WarehouseStreetName = a.Warehouse.Address.StreetName,
                     WarehouseHouseNumber = a.Warehouse.Address.HouseNumber,
