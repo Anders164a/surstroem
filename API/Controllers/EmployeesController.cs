@@ -72,7 +72,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-/*            var employeeDto = new List<EmployeeWarehouseDto>();
+            var employeeDto = new List<EmployeeWarehouseDto>();
 
             foreach (var a in employees)
             {
@@ -92,8 +92,8 @@ namespace API.Controllers
                     WarehouseCity = a.Warehouse.Address.PostalCode.CityName,
                     WarehouseCountry = a.Warehouse.Address.PostalCode.Country.Country1
                 });
-            }*/
-            return Ok(employees);
+            }
+            return Ok(employeeDto);
         }
 
         //api/Employees

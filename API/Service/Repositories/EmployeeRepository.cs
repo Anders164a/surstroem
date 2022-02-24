@@ -20,7 +20,7 @@ namespace API.Service.Repositories
         public async Task<ICollection<Employee>> GetEmployeesWithWarehouseInfo()
         {
             return await _dbcontext.Employees.Where(q => q.UserId == q.User.Id)
-                .Include(q => q.User)
+                .Include(x => x.User)
                 .Include(c => c.Warehouse)
                 .Include(s => s.Warehouse.WarehouseType)
                 .Include(f => f.Warehouse.Address)
