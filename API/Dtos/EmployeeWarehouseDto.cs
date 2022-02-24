@@ -8,10 +8,10 @@ namespace API.Dtos
     public class EmployeeWarehouseDto
     {
         public int EmployeeId { get; set; }
-        //public string FirstName { get; set; }
-        //public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public int WorkPhone { get; set; }
-        //public string Email { get; set; }
+        public string Email { get; set; }
         public int Warehouse { get; set; }
         public string WarehouseStreetName { get; set; }
         public string WarehouseHouseNumber { get; set; }
