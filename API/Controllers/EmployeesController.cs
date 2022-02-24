@@ -63,7 +63,7 @@ namespace API.Controllers
         //api/Employees
         [HttpGet("GetEmployeesWithWarehouseInfo")]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetEmployeesWithWarehouseInfo()
+        public async Task<IActionResult> GetEmployeesWithWarehouseInfos()
         {
             var employees = await _employeeRepository.GetEmployeesWithWarehouseInfo();
 
@@ -72,7 +72,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var employeeDto = new List<EmployeeWarehouseDto>();
+/*            var employeeDto = new List<EmployeeWarehouseDto>();
 
             foreach (var a in employees)
             {
@@ -92,8 +92,9 @@ namespace API.Controllers
                     WarehouseCity = a.Warehouse.Address.PostalCode.CityName,
                     WarehouseCountry = a.Warehouse.Address.PostalCode.Country.Country1
                 });
-            }
-            return Ok(employeeDto);
+                Console.WriteLine(employeeDto);
+            }*/
+            return Ok(employees);
         }
 
         //api/Employees
