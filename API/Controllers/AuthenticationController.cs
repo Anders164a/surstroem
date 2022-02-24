@@ -19,51 +19,62 @@ namespace API.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        public static User user = new User();
+        public static List<LoginDto> users = new List<LoginDto>();
         private readonly IConfiguration _configuration;
         //private readonly IUserService _userService;
 
         public AuthenticationController(IConfiguration configuration /*IUserService userService*/)
         {
+            LoginDto user = new LoginDto();
+            user.Username = "Administrator";
+            user.Password = "Admin123";
+            user.Role = "Admin";
+            users.Add(user);
             _configuration = configuration;
             //_userService = userService;
         }
 
-        /*        [HttpGet, Authorize]
-                public ActionResult<string> GetMe()
-                {
-                    var userName = _userService.GetMyName();
-                    return Ok(userName);
-
-                    //var userName = User?.Identity?.Name;
-                    //var userName2 = User.FindFirstValue(ClaimTypes.Name);
-                    //var role = User.FindFirstValue(ClaimTypes.Role);
-                    //return Ok(new { userName, userName2, role });
-                }*/
+        [HttpPost("RegisterUserInAPI")]
+        public ActionResult<string> RegisterUser(LoginDto loginDto)
+        {
+            //LoginDto user = new LoginDto();
+            if (loginDto.Username == null)
+            {
+                return BadRequest("Enter a Username");
+            }
+            if (loginDto.Password == null)
+            {
+                return BadRequest("Enter a Password");
+            }
+            users.Add(loginDto);
+            return Ok("User registered");
+        }
 
         [HttpPost("login")]
         public ActionResult<string> Login(LoginDto request)
         {
-            if (user.Firstname != request.Username)
+            foreach(var user in users)
             {
-                return BadRequest("User not found.");
+                if(request.Username == user.Username && request.Password == user.Password)
+                {
+                    string token = CreateToken(request);
+                    return Ok(token);
+                }
             }
 
-            if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+            return BadRequest("User not found.");
+            /*if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
                 return BadRequest("Wrong password.");
-            }
-
-            string token = CreateToken(user);
-            return Ok(token);
+            }*/
         }
 
-        private string CreateToken(User user)
+        private string CreateToken(LoginDto loginDto)
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Firstname),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim(ClaimTypes.Name, loginDto.Username),
+                new Claim(ClaimTypes.Role, "Normal")
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
@@ -73,7 +84,7 @@ namespace API.Controllers
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.Now.AddHours(12),
                 signingCredentials: creds);
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);

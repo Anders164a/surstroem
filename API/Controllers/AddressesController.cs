@@ -21,7 +21,7 @@ namespace API.Controllers
         }
 
         // GET: api/Addresss/1
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAddress(int id)
         {
             if (!await _addressRepository.entityExists(id))
@@ -35,7 +35,7 @@ namespace API.Controllers
         }
 
         //api/Address
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Normal")]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetAddresses()
         {

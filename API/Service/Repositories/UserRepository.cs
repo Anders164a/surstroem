@@ -75,5 +75,13 @@ namespace API.Service.Repositories
             _dbcontext.Entry(user).Property(x => x.PhoneNumber).IsModified = true;
             await _dbcontext.SaveChangesAsync();
         }
+
+        public async Task<User> GetUserByEmail(string userEmail)
+        {
+            return await _dbcontext.Users.Where(c => c.Email == userEmail)
+                                .Include(c => c.Address)
+                                .AsSplitQuery()
+                .FirstOrDefaultAsync();
+        }
     }
 }
