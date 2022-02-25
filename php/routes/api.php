@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'get_all_categories']);
+
+Route::post('/category', [App\Http\Controllers\CategoryController::class, 'store_category']);
+
+Route::put('/category', [App\Http\Controllers\CategoryController::class, 'update_category']);
+
