@@ -97,6 +97,44 @@ namespace API.Controllers
         }
 
         //api/Employees
+        [HttpGet("GetEmployeesContactInfo")]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetEmployeesContactInfo()
+        {
+            var employees = await _employeeRepository.GetEmployeesContactInfo();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var employeeDto = new List<EmployeeContactInfoDto>();
+
+            foreach (var a in employees)
+            {
+                employeeDto.Add(new EmployeeContactInfoDto
+                {
+                    EmployeeId = a.Id,
+                    FirstName = a.User.Firstname,
+                    LastName = a.User.Lastname,
+                    PhoneNumber = (int)a.User.PhoneNumber,
+                    WorkPhone = (int)a.WorkPhone,
+                    Email = a.User.Email,
+                    StreetName = a.User.Address.StreetName,
+                    HouseNumber = a.User.Address.HouseNumber,
+                    Floor = a.User.Address.Floor,
+                    Additional = a.User.Address.Additional,
+                    PostalCode = a.User.Address.PostalCode.PostalCode1,
+                    CityName = a.User.Address.PostalCode.CityName,
+                    Country = a.User.Address.PostalCode.Country.Country1,
+                    WareHouseId = a.Warehouse.Id,
+                    WareHouseType = a.Warehouse.WarehouseType.Type
+                });
+            }
+            return Ok(employeeDto);
+        }
+
+        //api/Employees
         [HttpPost]
         public async Task<IActionResult> CreateEmployee([FromBody] Employee EmployeeToCreate)
         {

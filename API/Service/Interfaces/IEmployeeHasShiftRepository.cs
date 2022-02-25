@@ -8,5 +8,6 @@ namespace API.Service.Interfaces
 {
     public interface IEmployeeHasShiftRepository : IGenericRepository<EmployeeHasShift>
     {
+        Task<EmployeeHasShift> GetAllShiftsByEmployeeId(int employeeId);
     }
 }
