@@ -64,7 +64,7 @@ namespace API
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             //services.AddScoped<IEmployeeHasShiftRepository, EmployeeHasShiftRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
-            //services.AddScoped<IOrderProductRepository, OrderProductRepository>();
+            services.AddScoped<IOrderProductRepository, OrderProductRepository>();
             services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             //services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
