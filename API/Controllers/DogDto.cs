@@ -9,8 +9,8 @@ namespace API.Controllers
     public class DogDto
     {
         [JsonProperty("message")]
-        public string message { get; set; }
+        public string Message { get; set; }
         [JsonProperty("status")]
-        public string status { get; set; }
+        public string Status { get; set; }
     }
 }
