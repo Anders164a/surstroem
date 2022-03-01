@@ -51,6 +51,38 @@ namespace API.Controllers
             }
             return Ok(orderProducts);
         }
+        
+                [HttpGet("GetWithName/{id}")]
+        public async Task<IActionResult> GetOrderProductWithName(int id) 
+        {
+            OrderProduct orderProduct;
+            OrderProductDto orderProductDto = new OrderProductDto();
+            DogDto dog = new DogDto(){};
+            HttpClient client = new HttpClient();
+            try
+            {
+                orderProduct = await _orderProductRepository.GetById(id);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.GetBaseException().Message);
+                return StatusCode(500, ModelState);
+            }
+            string url = "https://dog.ceo/api/breeds/image/random";// + orderProduct.ProductsId;
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                dog = await response.Content.ReadAsAsync<DogDto>();
+            }
+            orderProductDto.Id = orderProduct.Id;
+            orderProductDto.OrderId = orderProduct.OrderId;
+            orderProductDto.Price = orderProduct.Price;
+            orderProductDto.Quantity = orderProduct.Quantity;
+            orderProductDto.ProductName = dog.Message/*product.productTitle*/;
+            orderProductDto.ProductColor = dog.Status/*product.productColor*/;
+
+            return Ok(orderProductDto);
+        }
 
         //api/OrderProducts
         [HttpPost]
@@ -135,65 +167,5 @@ namespace API.Controllers
 
             return NoContent();
         }
-
-        [HttpGet("GetWithName/{id}")]
-        public async Task<IActionResult> GetOrderProductWithName(int id) 
-        {
-            OrderProduct orderProduct;
-            OrderProductDto orderProductDto = new OrderProductDto();
-            DogDto dog = new DogDto(){};
-            HttpClient client = new HttpClient();
-            try
-            {
-                orderProduct = await _orderProductRepository.GetById(id);
-            }
-            catch (Exception e)
-            {
-                ModelState.AddModelError("", e.GetBaseException().Message);
-                return StatusCode(500, ModelState);
-            }
-            string url = "https://dog.ceo/api/breeds/image/random";// + orderProduct.ProductsId;
-            HttpResponseMessage response = await client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
-            {
-                dog = await response.Content.ReadAsAsync<DogDto>();
-            }
-            orderProductDto.Id = orderProduct.Id;
-            orderProductDto.OrderId = orderProduct.OrderId;
-            orderProductDto.Price = orderProduct.Price;
-            orderProductDto.Quantity = orderProduct.Quantity;
-            orderProductDto.ProductName = dog.message/*product.productTitle*/;
-            orderProductDto.ProductColor = dog.status/*product.productColor*/;
-
-            return Ok(orderProductDto);
-        }
-
-        /*[HttpGet("GetUserContactInformations/{userId}")]
-        public async Task<IActionResult> GetUserContactInformationById(int userId)
-        {
-            if (!await _userRepository.entityExists(userId))
-                return NotFound();
-            var chosenUser = await _userRepository.GetUserContactInformation(userId);
-
-            var userDto = new UserContactInfoDto();
-
-            userDto.FirstName = chosenUser.Firstname;
-            userDto.LastName = chosenUser.Lastname;
-            userDto.Email = chosenUser.Email;
-            userDto.PhoneNumber = (int)chosenUser.PhoneNumber;
-            userDto.StreetName = chosenUser.Address.StreetName;
-            userDto.HouseNumber = chosenUser.Address.HouseNumber;
-            userDto.Floor = chosenUser.Address.Floor;
-            userDto.Additional = chosenUser.Address.Additional;
-            userDto.PostalCode = chosenUser.Address.PostalCode.PostalCode1;
-            userDto.CityName = chosenUser.Address.PostalCode.CityName;
-            userDto.Country = chosenUser.Address.PostalCode.Country.Country1;
-
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            return Ok(userDto);
-        }*/
     }
 }
