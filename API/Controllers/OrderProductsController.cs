@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace API.Controllers
 {
@@ -134,27 +136,36 @@ namespace API.Controllers
             return NoContent();
         }
 
-        [HttpGet("OrderProductsName/{id}")]
+        [HttpGet("GetWithName/{id}")]
         public async Task<IActionResult> GetOrderProductWithName(int id) 
         {
-            OrderProduct orderProduct = new OrderProduct();
+            OrderProduct orderProduct;
+            OrderProductDto orderProductDto = new OrderProductDto();
+            DogDto dog = new DogDto(){};
+            HttpClient client = new HttpClient();
             try
             {
-                orderProduct = await _orderProductRepository.GetOrderProductWithName(id);
+                orderProduct = await _orderProductRepository.GetById(id);
             }
             catch (Exception e)
             {
                 ModelState.AddModelError("", e.GetBaseException().Message);
                 return StatusCode(500, ModelState);
             }
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://localhost/api/Users/1");
-            OrderProductDto dto = new OrderProductDto();
-            var json = JsonConvert.DeserializeObject(response.ToString());
-            dto.ProductName = 
+            string url = "https://dog.ceo/api/breeds/image/random";// + orderProduct.ProductsId;
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                dog = await response.Content.ReadAsAsync<DogDto>();
+            }
+            orderProductDto.Id = orderProduct.Id;
+            orderProductDto.OrderId = orderProduct.OrderId;
+            orderProductDto.Price = orderProduct.Price;
+            orderProductDto.Quantity = orderProduct.Quantity;
+            orderProductDto.ProductName = dog.message/*product.productTitle*/;
+            orderProductDto.ProductColor = dog.status/*product.productColor*/;
 
-
-            return Ok();
+            return Ok(orderProductDto);
         }
 
         /*[HttpGet("GetUserContactInformations/{userId}")]
