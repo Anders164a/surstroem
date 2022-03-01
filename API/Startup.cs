@@ -62,7 +62,7 @@ namespace API
             //services.AddScoped<IDeliveryStateRepository, DeliveryStateRepository>();
             //services.AddScoped<IDeliveryTypeRepository, DeliveryTypeRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            //services.AddScoped<IEmployeeHasShiftRepository, EmployeeHasShiftRepository>();
+            services.AddScoped<IEmployeeHasShiftRepository, EmployeeHasShiftRepository>();
             //services.AddScoped<IOrderRepository, OrderRepository>();
             //services.AddScoped<IOrderProductRepository, OrderProductRepository>();
             services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
@@ -70,7 +70,7 @@ namespace API
             //services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
             //services.AddScoped<IReviewRepository, ReviewRepository>();
             //services.AddScoped<IReviewOpinionRepository, ReviewOpinionRepository>();
-            //services.AddScoped<IShiftRepository, ShiftRepository>();
+            services.AddScoped<IShiftRepository, ShiftRepository>();
             //services.AddScoped<IStockRepository, StockRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IWarehouseRepository, WarehouseRepository>();

@@ -53,14 +53,37 @@ namespace API.Controllers
                 EmployeeHasShiftDto.Add(new EmployeeShiftsDto
                 {
                     EmployeeId = a.EmployeeId,
-                    FirstName = a.Employee.User.Firstname,
-                    LastName = a.Employee.User.Lastname,
-                    Email = a.Employee.User.Email,
-                    ShiftDate = a.Date,
-                    ShiftStart = a.Shifts.ShiftStart,
-                    ShiftEnd = a.Shifts.ShiftEnd
+                    ShiftDate = a.Date
                 });
             }
+            return Ok(EmployeeHasShiftDto);
+        }
+
+        //api/EmployeeHasShifts
+        [HttpGet("{employeeId}")]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetAllShiftsByEmployeeId(int employeeId)
+        {
+            var EmployeeHasShifts = await _employeeHasShiftRepository.GetAllShiftsByEmployeeId(employeeId);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var EmployeeHasShiftDto = new List<EmployeeShiftsDto>();
+
+            EmployeeHasShiftDto.Add(new EmployeeShiftsDto
+            {
+                EmployeeId = EmployeeHasShifts.EmployeeId,
+                FirstName = EmployeeHasShifts.Employee.User.Firstname,
+                LastName = EmployeeHasShifts.Employee.User.Lastname,
+                Email = EmployeeHasShifts.Employee.User.Email,
+                ShiftDate = EmployeeHasShifts.Date,
+                ShiftStart = EmployeeHasShifts.Shifts.ShiftStart,
+                ShiftEnd = EmployeeHasShifts.Shifts.ShiftEnd
+            });
+            
             return Ok(EmployeeHasShiftDto);
         }
 
