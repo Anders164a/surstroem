@@ -60,7 +60,7 @@ namespace API.Controllers
         }
 
         //api/EmployeeHasShifts
-        [HttpGet("{employeeId}")]
+        [HttpGet("GetAllShiftsByEmployeeId/{employeeId}")]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetAllShiftsByEmployeeId(int employeeId)
         {

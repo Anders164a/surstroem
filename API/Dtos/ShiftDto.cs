@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace API.Dtos
 {
-    public class PostalCodeDto
+    public class ShiftDto
     {
         public int Id { get; set; }
-        public string Postal { get; set; }
-        public string City { get; set; }
-        public int CountryId { get; set; }
+        public int WarehouseId { get; set; }
+        public DateTime ShiftStart { get; set; }
+        public DateTime ShiftEnd { get; set; }
     }
 }
