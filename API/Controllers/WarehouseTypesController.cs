@@ -47,12 +47,12 @@ namespace API.Controllers
 
             var warehouseTypeDto = new List<WarehouseTypeDto>();
 
-            foreach (var a in WarehouseTypes)
+            foreach (var type in WarehouseTypes)
             {
                 warehouseTypeDto.Add(new WarehouseTypeDto
                 {
-                    Id = a.Id,
-                    Type = a.Type
+                    Id = type.Id,
+                    Type = type.Type
                 });
             }
             return Ok(warehouseTypeDto);

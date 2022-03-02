@@ -48,14 +48,14 @@ namespace API.Controllers
 
             var ShiftDto = new List<ShiftDto>();
 
-            foreach (var a in Shifts)
+            foreach (var shift in Shifts)
             {
                 ShiftDto.Add(new ShiftDto
                 {
-                    Id = a.Id,
-                    WarehouseId = a.WarehouseId,
-                    ShiftStart = a.ShiftStart,
-                    ShiftEnd = a.ShiftEnd
+                    Id = shift.Id,
+                    WarehouseId = shift.WarehouseId,
+                    ShiftStart = shift.ShiftStart,
+                    ShiftEnd = shift.ShiftEnd
                 });
             }
             return Ok(ShiftDto);
