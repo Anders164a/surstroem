@@ -47,14 +47,14 @@ namespace API.Controllers
 
             var postalCodeDto = new List<PostalCodeDto>();
 
-            foreach (var a in postalCodes)
+            foreach (var postalCode in postalCodes)
             {
                 postalCodeDto.Add(new PostalCodeDto
                 {
-                    Id = a.Id,
-                    Postal = a.PostalCode1,
-                    City = a.CityName,
-                    CountryId = (int)a.CountryId
+                    Id = postalCode.Id,
+                    Postal = postalCode.PostalCode1,
+                    City = postalCode.CityName,
+                    CountryId = (int)postalCode.CountryId
                 });
             }
             return Ok(postalCodeDto);

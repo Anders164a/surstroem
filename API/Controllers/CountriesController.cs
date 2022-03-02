@@ -47,12 +47,12 @@ namespace API.Controllers
 
             var CountryDto = new List<CountryDto>();
 
-            foreach (var a in Countrys)
+            foreach (var country in Countrys)
             {
                 CountryDto.Add(new CountryDto
                 {
-                    Id = a.Id,
-                    Country = a.Country1
+                    Id = country.Id,
+                    Country = country.Country1
                 });
             }
             return Ok(CountryDto);
