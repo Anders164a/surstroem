@@ -48,12 +48,12 @@ namespace API.Controllers
 
             var EmployeeHasShiftDto = new List<EmployeeShiftsDto>();
 
-            foreach (var a in EmployeeHasShifts)
+            foreach (var employee in EmployeeHasShifts)
             {
                 EmployeeHasShiftDto.Add(new EmployeeShiftsDto
                 {
-                    EmployeeId = a.EmployeeId,
-                    ShiftDate = a.Date
+                    EmployeeId = employee.EmployeeId,
+                    ShiftDate = employee.Date
                 });
             }
             return Ok(EmployeeHasShiftDto);

@@ -47,14 +47,14 @@ namespace API.Controllers
 
             var employeeDto = new List<EmployeeDto>();
 
-            foreach (var a in employees)
+            foreach (var employee in employees)
             {
                 employeeDto.Add(new EmployeeDto
                 {
-                    Id = a.Id,
-                    UserId = a.UserId,
-                    WarehouseId = a.WarehouseId,
-                    WorkPhone = (int)a.WorkPhone
+                    Id = employee.Id,
+                    UserId = employee.UserId,
+                    WarehouseId = employee.WarehouseId,
+                    WorkPhone = (int)employee.WorkPhone
                 });
             }
             return Ok(employeeDto);
@@ -74,23 +74,23 @@ namespace API.Controllers
 
             var employeeDto = new List<EmployeeWarehouseDto>();
 
-            foreach (var a in employees)
+            foreach (var employee in employees)
             {
                 employeeDto.Add(new EmployeeWarehouseDto
                 {
-                    EmployeeId = a.Id,
-                    FirstName = a.User.Firstname,
-                    LastName = a.User.Lastname,
-                    WorkPhone = (int)a.WorkPhone,
-                    Email = a.User.Email,
-                    Warehouse = a.Warehouse.Id,
-                    WarehouseStreetName = a.Warehouse.Address.StreetName,
-                    WarehouseHouseNumber = a.Warehouse.Address.HouseNumber,
-                    WarehouseFloor = a.Warehouse.Address.Floor,
-                    WarehouseAdditional = a.Warehouse.Address.Additional,
-                    WarehousePostal = a.Warehouse.Address.PostalCode.PostalCode1,
-                    WarehouseCity = a.Warehouse.Address.PostalCode.CityName,
-                    WarehouseCountry = a.Warehouse.Address.PostalCode.Country.Country1
+                    EmployeeId = employee.Id,
+                    FirstName = employee.User.Firstname,
+                    LastName = employee.User.Lastname,
+                    WorkPhone = (int)employee.WorkPhone,
+                    Email = employee.User.Email,
+                    Warehouse = employee.Warehouse.Id,
+                    WarehouseStreetName = employee.Warehouse.Address.StreetName,
+                    WarehouseHouseNumber = employee.Warehouse.Address.HouseNumber,
+                    WarehouseFloor = employee.Warehouse.Address.Floor,
+                    WarehouseAdditional = employee.Warehouse.Address.Additional,
+                    WarehousePostal = employee.Warehouse.Address.PostalCode.PostalCode1,
+                    WarehouseCity = employee.Warehouse.Address.PostalCode.CityName,
+                    WarehouseCountry = employee.Warehouse.Address.PostalCode.Country.Country1
                 });
             }
             return Ok(employeeDto);
@@ -110,25 +110,25 @@ namespace API.Controllers
 
             var employeeDto = new List<EmployeeContactInfoDto>();
 
-            foreach (var a in employees)
+            foreach (var employee in employees)
             {
                 employeeDto.Add(new EmployeeContactInfoDto
                 {
-                    EmployeeId = a.Id,
-                    FirstName = a.User.Firstname,
-                    LastName = a.User.Lastname,
-                    PhoneNumber = (int)a.User.PhoneNumber,
-                    WorkPhone = (int)a.WorkPhone,
-                    Email = a.User.Email,
-                    StreetName = a.User.Address.StreetName,
-                    HouseNumber = a.User.Address.HouseNumber,
-                    Floor = a.User.Address.Floor,
-                    Additional = a.User.Address.Additional,
-                    PostalCode = a.User.Address.PostalCode.PostalCode1,
-                    CityName = a.User.Address.PostalCode.CityName,
-                    Country = a.User.Address.PostalCode.Country.Country1,
-                    WareHouseId = a.Warehouse.Id,
-                    WareHouseType = a.Warehouse.WarehouseType.Type
+                    EmployeeId = employee.Id,
+                    FirstName = employee.User.Firstname,
+                    LastName = employee.User.Lastname,
+                    PhoneNumber = (int)employee.User.PhoneNumber,
+                    WorkPhone = (int)employee.WorkPhone,
+                    Email = employee.User.Email,
+                    StreetName = employee.User.Address.StreetName,
+                    HouseNumber = employee.User.Address.HouseNumber,
+                    Floor = employee.User.Address.Floor,
+                    Additional = employee.User.Address.Additional,
+                    PostalCode = employee.User.Address.PostalCode.PostalCode1,
+                    CityName = employee.User.Address.PostalCode.CityName,
+                    Country = employee.User.Address.PostalCode.Country.Country1,
+                    WareHouseId = employee.Warehouse.Id,
+                    WareHouseType = employee.Warehouse.WarehouseType.Type
                 });
             }
             return Ok(employeeDto);
