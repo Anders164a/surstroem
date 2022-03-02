@@ -18,6 +18,7 @@ namespace surstroem.Models
         public int? WorkPhone { get; set; }
 
         public virtual Warehouse Warehouse { get; set; }
+        public virtual User User { get; set; }
 
         public virtual ICollection<EmployeeHasShift> EmployeeHasShifts { get; set; }
     }

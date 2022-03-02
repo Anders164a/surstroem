@@ -1,6 +1,7 @@
 ﻿using API.Dtos;
 using API.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using surstroem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,127 +19,127 @@ namespace API.Controllers
             _countryRepository = countryRepository;
         }
 
-        /*        // GET: api/CreditCards/1
-                [HttpGet("{id}")]
-                public async Task<IActionResult> GetCreditCard(int id)
-                {
-                    if (!await _creditCardRepository.entityExists(id))
-                        return NotFound();
-                    var product = await _creditCardRepository.GetById(id);
+        // GET: api/Countrys/1
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCountry(int id)
+        {
+            if (!await _countryRepository.entityExists(id))
+                return NotFound();
+            var product = await _countryRepository.GetById(id);
 
-                    if (!ModelState.IsValid)
-                        return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-                    return Ok(product);
-                }*/
+            return Ok(product);
+        }
 
-        //api/Address
+        //api/Countries
         [HttpGet]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetCountries()
         {
-            var countries = await _countryRepository.GetAllAsync();
+            var Countrys = await _countryRepository.GetAllAsync();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var countryDto = new List<CountryDto>();
+            var CountryDto = new List<CountryDto>();
 
-            foreach (var a in countries)
+            foreach (var country in Countrys)
             {
-                countryDto.Add(new CountryDto
+                CountryDto.Add(new CountryDto
                 {
-                    Id = a.Id,
-                    Country = a.Country1
+                    Id = country.Id,
+                    Country = country.Country1
                 });
             }
-            return Ok(countryDto);
+            return Ok(CountryDto);
         }
-        /*
-                //api/CreditCards
-                [HttpPost]
-                public async Task<IActionResult> CreateCreditCard([FromBody] CreditCard creditCardToCreate)
-                {
-                    if (creditCardToCreate == null)
-                    {
-                        return BadRequest(ModelState);
-                    }
-                    if (!ModelState.IsValid)
-                    {
-                        return BadRequest(ModelState);
-                    }
 
-                    try
-                    {
-                        await _creditCardRepository.Insert(creditCardToCreate);
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", e.GetBaseException().Message);
-                        return StatusCode(500, ModelState);
-                    }
+        //api/Countrys
+        [HttpPost]
+        public async Task<IActionResult> CreateCountry([FromBody] Country CountryToCreate)
+        {
+            if (CountryToCreate == null)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-                    return CreatedAtAction("GetCreditCard", new { id = creditCardToCreate.Id }, creditCardToCreate);
-                }
+            try
+            {
+                await _countryRepository.Insert(CountryToCreate);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.GetBaseException().Message);
+                return StatusCode(500, ModelState);
+            }
 
-
-                //api/CreditCards/id
-                [HttpPut("{id}")]
-                public async Task<IActionResult> UpdateCreditCard(int id, [FromBody] CreditCard updateCreditCard)
-                {
-                    if (updateCreditCard == null)
-                    {
-                        return BadRequest(ModelState);
-                    }
-                    if (id != updateCreditCard.Id)
-                    {
-                        return BadRequest(ModelState);
-                    }
-                    if (!await _creditCardRepository.entityExists(id))
-                    {
-                        return NotFound();
-                    }
-                    if (!ModelState.IsValid)
-                    {
-                        return BadRequest(ModelState);
-                    }
-
-                    try
-                    {
-                        await _creditCardRepository.Update(updateCreditCard);
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", e.GetBaseException().Message);
-                        return StatusCode(500, ModelState);
-                    }
-
-                    return NoContent();
-                }
+            return CreatedAtAction("GetCountry", new { id = CountryToCreate.Id }, CountryToCreate);
+        }
 
 
-                // DELETE: api/CreditCards/3
-                [HttpDelete("{id}")]
-                public async Task<IActionResult> DeleteCreditCard(int id)
-                {
-                    if (!await _creditCardRepository.entityExists(id))
-                        return NotFound();
-                    if (!ModelState.IsValid)
-                        return BadRequest(ModelState);
+        //api/Countrys/id
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCountry(int id, [FromBody] Country updateCountry)
+        {
+            if (updateCountry == null)
+            {
+                return BadRequest(ModelState);
+            }
+            if (id != updateCountry.Id)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!await _countryRepository.entityExists(id))
+            {
+                return NotFound();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-                    try
-                    {
-                        await _creditCardRepository.Delete(id);
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", e.GetBaseException().Message);
-                        return StatusCode(500, ModelState);
-                    }
+            try
+            {
+                await _countryRepository.Update(updateCountry);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.GetBaseException().Message);
+                return StatusCode(500, ModelState);
+            }
 
-                    return NoContent();
-                }*/
+            return NoContent();
+        }
+
+
+        // DELETE: api/Countrys/3
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCountry(int id)
+        {
+            if (!await _countryRepository.entityExists(id))
+                return NotFound();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                await _countryRepository.Delete(id);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.GetBaseException().Message);
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
     }
 }

@@ -48,16 +48,16 @@ namespace API.Controllers
 
             var addressDto = new List<AddressDto>();
 
-            foreach (var a in addresses)
+            foreach (var address in addresses)
             {
                 addressDto.Add(new AddressDto
                 {
-                    Id = a.Id,
-                    StreetName = a.StreetName,
-                    HouseNumber = a.HouseNumber,
-                    Postal = (int)a.PostalCodeId,
-                    Floor = a.Floor,
-                    Additional = a.Additional
+                    Id = address.Id,
+                    StreetName = address.StreetName,
+                    HouseNumber = address.HouseNumber,
+                    Postal = (int)address.PostalCodeId,
+                    Floor = address.Floor,
+                    Additional = address.Additional
                 });
             }
             return Ok(addressDto);

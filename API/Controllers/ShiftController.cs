@@ -1,5 +1,6 @@
 ﻿using API.Dtos;
 using API.Service.Interfaces;
+using API.Service.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using surstroem.Models;
 using System;
@@ -11,21 +12,21 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostalCodesController : ControllerBase
+    public class ShiftController : ControllerBase
     {
-        private IPostalCodeRepository _postalCodeRepository;
-        public PostalCodesController(IPostalCodeRepository postalCodeRepository)
+        private IShiftRepository _shiftRepository;
+        public ShiftController(IShiftRepository shiftRepository)
         {
-            _postalCodeRepository = postalCodeRepository;
+            _shiftRepository = shiftRepository;
         }
 
-        // GET: api/PostalCodes/1
+        // GET: api/Shifts/1
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPostalCode(int id)
+        public async Task<IActionResult> GetShift(int id)
         {
-            if (!await _postalCodeRepository.entityExists(id))
+            if (!await _shiftRepository.entityExists(id))
                 return NotFound();
-            var product = await _postalCodeRepository.GetById(id);
+            var product = await _shiftRepository.GetById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -33,38 +34,38 @@ namespace API.Controllers
             return Ok(product);
         }
 
-        //api/Address
+        //api/Shifts
         [HttpGet]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetPostalCodes()
+        public async Task<IActionResult> GetShifts()
         {
-            var postalCodes = await _postalCodeRepository.GetAllAsync();
+            var Shifts = await _shiftRepository.GetAllAsync();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var postalCodeDto = new List<PostalCodeDto>();
+            var ShiftDto = new List<ShiftDto>();
 
-            foreach (var postalCode in postalCodes)
+            foreach (var a in Shifts)
             {
-                postalCodeDto.Add(new PostalCodeDto
+                ShiftDto.Add(new ShiftDto
                 {
-                    Id = postalCode.Id,
-                    Postal = postalCode.PostalCode1,
-                    City = postalCode.CityName,
-                    CountryId = (int)postalCode.CountryId
+                    Id = a.Id,
+                    WarehouseId = a.WarehouseId,
+                    ShiftStart = a.ShiftStart,
+                    ShiftEnd = a.ShiftEnd
                 });
             }
-            return Ok(postalCodeDto);
+            return Ok(ShiftDto);
         }
 
-        //api/PostalCodes
+        //api/Shifts
         [HttpPost]
-        public async Task<IActionResult> CreatePostalCode([FromBody] PostalCode PostalCodeToCreate)
+        public async Task<IActionResult> CreateShift([FromBody] Shift ShiftToCreate)
         {
-            if (PostalCodeToCreate == null)
+            if (ShiftToCreate == null)
             {
                 return BadRequest(ModelState);
             }
@@ -75,7 +76,7 @@ namespace API.Controllers
 
             try
             {
-                await _postalCodeRepository.Insert(PostalCodeToCreate);
+                await _shiftRepository.Insert(ShiftToCreate);
             }
             catch (Exception e)
             {
@@ -83,23 +84,23 @@ namespace API.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtAction("GetPostalCode", new { id = PostalCodeToCreate.Id }, PostalCodeToCreate);
+            return CreatedAtAction("GetShift", new { id = ShiftToCreate.Id }, ShiftToCreate);
         }
 
 
-        //api/PostalCodes/id
+        //api/Shifts/id
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePostalCode(int id, [FromBody] PostalCode updatePostalCode)
+        public async Task<IActionResult> UpdateShift(int id, [FromBody] Shift updateShift)
         {
-            if (updatePostalCode == null)
+            if (updateShift == null)
             {
                 return BadRequest(ModelState);
             }
-            if (id != updatePostalCode.Id)
+            if (id != updateShift.Id)
             {
                 return BadRequest(ModelState);
             }
-            if (!await _postalCodeRepository.entityExists(id))
+            if (!await _shiftRepository.entityExists(id))
             {
                 return NotFound();
             }
@@ -110,7 +111,7 @@ namespace API.Controllers
 
             try
             {
-                await _postalCodeRepository.Update(updatePostalCode);
+                await _shiftRepository.Update(updateShift);
             }
             catch (Exception e)
             {
@@ -122,18 +123,18 @@ namespace API.Controllers
         }
 
 
-        // DELETE: api/PostalCodes/3
+        // DELETE: api/Shifts/3
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePostalCode(int id)
+        public async Task<IActionResult> DeleteShift(int id)
         {
-            if (!await _postalCodeRepository.entityExists(id))
+            if (!await _shiftRepository.entityExists(id))
                 return NotFound();
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                await _postalCodeRepository.Delete(id);
+                await _shiftRepository.Delete(id);
             }
             catch (Exception e)
             {
