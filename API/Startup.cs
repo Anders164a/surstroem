@@ -55,17 +55,17 @@ namespace API
                 });
 
             services.AddScoped<IColorRepository, ColorRepository>();
-            //services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IBrandRepository, BrandRepository>();
             //services.AddScoped<ICategoryRepository, CategoryRepository>();
-            //services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
             //services.AddScoped<IDeliveryStateRepository, DeliveryStateRepository>();
             //services.AddScoped<IDeliveryTypeRepository, DeliveryTypeRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IEmployeeHasShiftRepository, EmployeeHasShiftRepository>();
             //services.AddScoped<IOrderRepository, OrderRepository>();
             //services.AddScoped<IOrderProductRepository, OrderProductRepository>();
-            //services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
+            services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             //services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();
