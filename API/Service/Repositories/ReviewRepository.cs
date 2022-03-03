@@ -1,4 +1,5 @@
 ﻿using API.Service.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using surstroem.Data;
 using surstroem.Models;
 using System;
@@ -14,6 +15,13 @@ namespace API.Service.Repositories
             : base(dbcontext)
         {
 
+        }
+
+        public async Task<ICollection<Review>> GetReviewsByProductId(int productId)
+        {
+            return await _dbcontext.Reviews.Where(c => c.ProductId == productId)
+                                    .AsSplitQuery()
+                    .ToListAsync();
         }
     }
 }
