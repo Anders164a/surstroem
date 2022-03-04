@@ -20,7 +20,6 @@ namespace API.Service.Repositories
         public async Task<ICollection<Review>> GetReviewsByProductId(int productId)
         {
             return await _dbcontext.Reviews.Where(c => c.ProductId == productId)
-                                    .AsSplitQuery()
                     .ToListAsync();
         }
     }
