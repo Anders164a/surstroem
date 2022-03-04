@@ -50,9 +50,9 @@ namespace API.Controllers
 
         //api/ReviewOpinions
         [HttpPost]
-        public async Task<IActionResult> CreateReviewOpinion([FromBody] ReviewOpinion ReviewOpinionsToCreate)
+        public async Task<IActionResult> CreateReviewOpinion([FromBody] ReviewOpinion reviewOpinionToCreate)
         {
-            if (ReviewOpinionsToCreate == null)
+            if (reviewOpinionToCreate == null)
             {
                 return BadRequest(ModelState);
             }
@@ -63,7 +63,7 @@ namespace API.Controllers
 
             try
             {
-                await _reviewOpinionRepository.Insert(ReviewOpinionsToCreate);
+                await _reviewOpinionRepository.Insert(reviewOpinionToCreate);
             }
             catch (Exception e)
             {
@@ -71,9 +71,32 @@ namespace API.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtAction("GetReviewOpinions", new { id = ReviewOpinionsToCreate.Id }, ReviewOpinionsToCreate);
+            return CreatedAtAction("GetReviewOpinions", new { id = reviewOpinionToCreate.Id }, reviewOpinionToCreate);
         }
 
+        [HttpPatch]
+        public async Task<IActionResult> PatchReviewOpinion([FromBody] ReviewOpinion reviewOpinionToPatch) 
+        {
+            if (reviewOpinionToPatch == null)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                reviewOpinionToPatch.Id = await _reviewOpinionRepository.GetROByUserIdAndReviewId(reviewOpinionToPatch.UserId, reviewOpinionToPatch.ReviewId);
+                await _reviewOpinionRepository.Update(reviewOpinionToPatch);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.GetBaseException().Message);
+                return StatusCode(500, ModelState);
+            }
+            return Ok();
+        }
 
         //api/ReviewOpinions/id
         [HttpPut("{id}")]
@@ -128,7 +151,7 @@ namespace API.Controllers
                 ModelState.AddModelError("", e.GetBaseException().Message);
                 return StatusCode(500, ModelState);
             }
-
+             
             return NoContent();
         }
     }

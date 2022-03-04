@@ -48,6 +48,20 @@ namespace API.Controllers
             return Ok(reviews);
         }
 
+        //api/Review
+        [HttpGet("ReviewProduct/{id}")]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetReviewsByProduct(int id)
+        {
+            var reviews = await _reviewRepository.GetReviewsByProductId(id);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(reviews);
+        }
+
         //api/Reviews
         [HttpPost]
         public async Task<IActionResult> CreateReview([FromBody] Review creditCardToCreate)
