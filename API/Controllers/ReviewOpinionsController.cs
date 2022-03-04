@@ -88,14 +88,7 @@ namespace API.Controllers
             try
             {
                 reviewOpinionToPatch.Id = await _reviewOpinionRepository.GetROByUserIdAndReviewId(reviewOpinionToPatch.UserId, reviewOpinionToPatch.ReviewId);
-                if (reviewOpinionToPatch.IsLiked == false && reviewOpinionToPatch.IsDisliked == false) 
-                {
-                    await _reviewOpinionRepository.Delete(reviewOpinionToPatch.Id);
-                }
-                else 
-                {
-                    await _reviewOpinionRepository.Update(reviewOpinionToPatch);
-                }
+                await _reviewOpinionRepository.Update(reviewOpinionToPatch);
             }
             catch (Exception e)
             {
