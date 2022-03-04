@@ -83,14 +83,7 @@ namespace API.Controllers
                     LastName = employee.User.Lastname,
                     WorkPhone = (int)employee.WorkPhone,
                     Email = employee.User.Email,
-                    Warehouse = employee.Warehouse.Id,
-                    WarehouseStreetName = employee.Warehouse.Address.StreetName,
-                    WarehouseHouseNumber = employee.Warehouse.Address.HouseNumber,
-                    WarehouseFloor = employee.Warehouse.Address.Floor,
-                    WarehouseAdditional = employee.Warehouse.Address.Additional,
-                    WarehousePostal = employee.Warehouse.Address.PostalCode.PostalCode1,
-                    WarehouseCity = employee.Warehouse.Address.PostalCode.CityName,
-                    WarehouseCountry = employee.Warehouse.Address.PostalCode.Country.Country1
+                    WarehouseInfoDto = new WarehouseInfoDto(employee.Warehouse.Address.StreetName)
                 });
             }
             return Ok(employeeDto);
