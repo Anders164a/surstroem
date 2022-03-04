@@ -28,15 +28,6 @@ namespace API.Service.Repositories
                 .ToListAsync();
         }
 
-        public async Task<ICollection<User>> GetUsersByOrderId(int addressId)
-        {
-            return await _dbcontext.Users.Where(c => c.AddressId == addressId)
-                               .Include(c => c.Id)
-                               .Include(c => c.Firstname)
-                               .Include(c => c.Lastname)
-                               .Include(c => c.Address)
-                .ToListAsync();
-        }
 
         public async Task<User> GetUserContactInformation(int userId)
         {

@@ -16,5 +16,10 @@ namespace API.Service.Repositories
         {
 
         }
+
+        public async Task<ICollection<Warehouse>> GetAllWarehouses()
+        {
+
+        }
     }
 }

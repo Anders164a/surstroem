@@ -90,19 +90,6 @@ namespace API.Controllers
             return Ok(users);
         }
 
-        [HttpGet("GetUsersByOrderId/{orderId}")]
-        public async Task<IActionResult> GetUsersByOrderId(int orderId)
-        {
-            ICollection<User> users;
-
-            users = await _userRepository.GetUsersByOrderId(orderId);
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            return Ok(users);
-        }
-
         [HttpGet("GetUserContactInformations/{userId}")]
         public async Task<IActionResult> GetUserContactInformationById(int userId)
         {
