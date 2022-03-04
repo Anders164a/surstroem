@@ -247,11 +247,11 @@ namespace API.Controllers
 
         //api/Users/id
         [HttpPut("ChangeUserAddress/{userId}")]
-        public async Task<IActionResult> ChangeUserAddress(int userId, int address)
+        public async Task<IActionResult> ChangeUserAddress(int userId, int addressId)
         {
             try
             {
-                await _userRepository.PutNewUserAddress(userId, address);
+                await _userRepository.PutNewUserAddress(userId, addressId);
             }
             catch (Exception e)
             {
@@ -259,7 +259,7 @@ namespace API.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return Ok("AddressId changed to " + address);
+            return Ok("AddressId changed to " + addressId);
         }
 
         //api/Users/id

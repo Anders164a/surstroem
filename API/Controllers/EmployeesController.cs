@@ -25,12 +25,12 @@ namespace API.Controllers
         {
             if (!await _employeeRepository.entityExists(id))
                 return NotFound();
-            var product = await _employeeRepository.GetById(id);
+            var employee = await _employeeRepository.GetById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(product);
+            return Ok(employee);
         }
 
         //api/Employees
