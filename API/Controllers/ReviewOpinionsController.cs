@@ -87,7 +87,20 @@ namespace API.Controllers
             }
             try
             {
-                await _reviewOpinionRepository.g(reviewOpinionToCreate);
+                reviewOpinionToPatch.Id = await _reviewOpinionRepository.GetROByUserIdAndReviewId(reviewOpinionToPatch.UserId, reviewOpinionToPatch.ReviewId);
+                if (reviewOpinionToPatch.IsLiked == false && reviewOpinionToPatch.IsDisliked == false) 
+                {
+                    await _reviewOpinionRepository.Delete(reviewOpinionToPatch.Id);
+                }
+                else 
+                {
+                    await _reviewOpinionRepository.Update(reviewOpinionToPatch);
+                }
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.GetBaseException().Message);
+                return StatusCode(500, ModelState);
             }
             return Ok();
         }
@@ -145,7 +158,7 @@ namespace API.Controllers
                 ModelState.AddModelError("", e.GetBaseException().Message);
                 return StatusCode(500, ModelState);
             }
-
+             
             return NoContent();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using API.Service.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using surstroem.Data;
 using surstroem.Models;
 using System;
@@ -14,6 +15,19 @@ namespace API.Service.Repositories
             : base(dbcontext)
         {
 
+        }
+
+        public async Task<int> GetROByUserIdAndReviewId(int userId, int reviewId)
+        {
+            var result = await _dbcontext.ReviewOpinions.Where(c => c.UserId == userId && c.ReviewId == reviewId).FirstOrDefaultAsync();
+            if(result != null) 
+            {
+                return result.Id;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }
