@@ -14,11 +14,6 @@ namespace API.Dtos
         public int WorkPhone { get; set; }
         public string Email { get; set; }
         
-        WarehouseInfoDto WarehouseDto { get; set; }
-
-        public EmployeeWarehouseDto(Warehouse warehouse)
-        {
-            warehouse.Address.StreetName = WarehouseDto.WarehouseStreetName;
-        }
+        public WarehouseInfoDto WarehouseInfos { get; set; }
     }
 }

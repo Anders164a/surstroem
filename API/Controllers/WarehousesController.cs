@@ -14,9 +14,11 @@ namespace API.Controllers
     public class WarehousesController : ControllerBase
     {
         private IWarehouseRepository _warehouseRepository;
-        public WarehousesController(IWarehouseRepository warehouseRepository)
+        private IEmployeeRepository _employeeRepository;
+        public WarehousesController(IWarehouseRepository warehouseRepository, IEmployeeRepository employeeRepository)
         {
             _warehouseRepository = warehouseRepository;
+            _employeeRepository = employeeRepository;
         }
 
         // GET: api/Warehouses/1
@@ -57,6 +59,30 @@ namespace API.Controllers
                 });
             }
             return Ok(warehouseDto);
+        }
+
+        //api/Warehouses
+        [HttpGet("GetWarehouseInfo")]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetWareHouseInfo()
+        {
+            var employees = await _employeeRepository.GetEmployeesWithWarehouseInfo();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var warehousesInfoDto = new List<EmployeeWarehouseDto>();
+
+            foreach (var employee in employees)
+            {
+                warehousesInfoDto.Add(new EmployeeWarehouseDto
+                {
+                    WarehouseInfos = new WarehouseInfoDto(employee)
+                });
+            }
+            return Ok(warehousesInfoDto);
         }
 
         //api/Warehouses
