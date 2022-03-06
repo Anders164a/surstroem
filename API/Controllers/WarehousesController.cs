@@ -14,11 +14,9 @@ namespace API.Controllers
     public class WarehousesController : ControllerBase
     {
         private IWarehouseRepository _warehouseRepository;
-        private IEmployeeRepository _employeeRepository;
-        public WarehousesController(IWarehouseRepository warehouseRepository, IEmployeeRepository employeeRepository)
+        public WarehousesController(IWarehouseRepository warehouseRepository)
         {
             _warehouseRepository = warehouseRepository;
-            _employeeRepository = employeeRepository;
         }
 
         // GET: api/Warehouses/1
@@ -62,27 +60,35 @@ namespace API.Controllers
         }
 
         //api/Warehouses
-        [HttpGet("GetWarehouseInfo")]
+        [HttpGet("GetWarehousesFullInfo")]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetWareHouseInfo()
+        public async Task<IActionResult> GetWarehouseFullInfo()
         {
-            var employees = await _employeeRepository.GetEmployeesWithWarehouseInfo();
+            var warehouses = await _warehouseRepository.GetWarehouseFullInfo();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var warehousesInfoDto = new List<EmployeeWarehouseDto>();
+            var warehouseDto = new List<WarehouseInfoDto>();
 
-            foreach (var employee in employees)
+            foreach (var warehouse in warehouses)
             {
-                warehousesInfoDto.Add(new EmployeeWarehouseDto
+                warehouseDto.Add(new WarehouseInfoDto
                 {
-                    WarehouseInfos = new WarehouseInfoDto(employee)
+                    WarehouseId = warehouse.Id,
+                    WarehouseType = warehouse.WarehouseType.Type,
+                    WarehouseStreetName = warehouse.Address.StreetName,
+                    WarehouseHouseNumber = warehouse.Address.HouseNumber,
+                    WarehouseFloor = warehouse.Address.Floor,
+                    WarehouseAdditional = warehouse.Address.Additional,
+                    WarehousePostal = warehouse.Address.PostalCode.PostalCode1,
+                    WarehouseCity = warehouse.Address.PostalCode.CityName,
+                    WarehouseCountry = warehouse.Address.PostalCode.Country.Country1
                 });
             }
-            return Ok(warehousesInfoDto);
+            return Ok(warehouseDto);
         }
 
         //api/Warehouses

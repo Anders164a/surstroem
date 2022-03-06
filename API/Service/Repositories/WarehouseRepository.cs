@@ -16,5 +16,15 @@ namespace API.Service.Repositories
         {
 
         }
+
+        public async Task<ICollection<Warehouse>> GetWarehouseFullInfo()
+        {
+            return await _dbcontext.Set<Warehouse>()
+                    .Include(f => f.Address)
+                    .Include(w => w.Address.PostalCode)
+                    .Include(s => s.Address.PostalCode.Country)
+                    .Include(a => a.WarehouseType)
+                    .ToListAsync();
+        }
     }
 }

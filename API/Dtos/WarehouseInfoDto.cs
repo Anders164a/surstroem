@@ -16,10 +16,17 @@ namespace API.Dtos
         public string WarehousePostal { get; set; }
         public string WarehouseCity { get; set; }
         public string WarehouseCountry { get; set; }
+        public string WarehouseType { get; set; }
+
+        public WarehouseInfoDto()
+        {
+
+        }
 
         public WarehouseInfoDto(Employee emp)
         {
             WarehouseId = emp.Warehouse.Id;
+            WarehouseType = emp.Warehouse.WarehouseType.Type;
             WarehouseStreetName = emp.Warehouse.Address.StreetName;
             WarehouseHouseNumber = emp.Warehouse.Address.HouseNumber;
             WarehouseFloor = emp.Warehouse.Address.Floor;

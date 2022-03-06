@@ -8,5 +8,6 @@ namespace API.Service.Interfaces
 {
     public interface IWarehouseRepository : IGenericRepository<Warehouse>
     {
+        Task<ICollection<Warehouse>> GetWarehouseFullInfo();
     }
 }
