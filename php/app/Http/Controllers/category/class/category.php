@@ -1,9 +1,6 @@
 <?php
 namespace App\Http\Controllers\category\class;
 
-use App\Http\Controllers\category\repository\category_repository;
-use Illuminate\Database\Eloquent\Collection;
-
 class category
 {
     private int $id;

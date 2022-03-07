@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\could_not_delete_exception;
 use App\Exceptions\form_not_filled_correctly;
 use App\Exceptions\integer_not_allowed_null;
 use App\Http\Controllers\category\class\category_sort;
 use App\Http\Controllers\category\repository\category_repository;
+use App\Http\Controllers\category\repository\exception\category_not_found_exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -18,7 +19,7 @@ class CategoryController extends Controller
         //$this->middleware('check.auth:users.edit')->only('edit');
     }
 
-    public function get_all_categories()
+    public function get_all()
     {
         $category_repo = new category_repository();
         $all_categories = $category_repo->get_categories()->toArray();
@@ -29,7 +30,25 @@ class CategoryController extends Controller
         return json_encode($sorted_categories, JSON_FORCE_OBJECT);
     }
 
-    public function store_category(Request $request) {
+    public function get_category(int $id): object {
+        if (empty($id)) {
+            throw integer_not_allowed_null::integer_not_null();
+        }
+
+        $category_repo = new category_repository();
+        return $category_repo->get_category($id);
+    }
+
+    public function get_categories_by_parent_id(Request $request): Collection {
+        if (empty($request->parent_id)) {
+            throw form_not_filled_correctly::form_does_not_fulfill_requirements();
+        }
+
+        $category_repo = new category_repository();
+        return $category_repo->get_categories_by_parent_id($request->parent_id);
+    }
+
+    public function store(Request $request) {
         if (empty($request->category)) {
             throw form_not_filled_correctly::form_does_not_fulfill_requirements();
         }
@@ -43,10 +62,10 @@ class CategoryController extends Controller
 
     /**
      * @throws form_not_filled_correctly
-     * @throws \classes\category\repository\exception\category_not_found_exception
+     * @throws category_not_found_exception
      * @throws integer_not_allowed_null
      */
-    public function update_category() {
+    public function update() {
         parse_str(file_get_contents('php://input'), $_PUT);
 
         if (empty($_PUT['id'])) {
@@ -67,5 +86,20 @@ class CategoryController extends Controller
         $category->update();
 
         return json_encode($category);
+    }
+
+    public function destroy(Request $request): void
+    {
+        try {
+            if (empty($request->id)) {
+                throw integer_not_allowed_null::integer_not_null();
+            }
+
+            $category_repo = new category_repository();
+
+            $category_repo->delete_category($request->id);
+        } catch (could_not_delete_exception $e) {
+            throw $e;
+        }
     }
 }
