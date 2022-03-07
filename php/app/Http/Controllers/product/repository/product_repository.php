@@ -44,7 +44,29 @@ class product_repository implements product_repository_interface
         return product_factory::make($new_product);
     }
 
-    public function get_product(int $param, string $column = 'id'): Collection {
+    public function get_product(int $product_id): object {
+        $product = \App\Models\product::query()
+            ->with([
+                'brand' => function($query) {
+                    $query->select('id','name');
+                },
+                'color' => function($query) {
+                    $query->select('id','name');
+                },
+                'warranty_period' => function($query) {
+                    $query->select('id', 'warranty_type', 'warranty_period');
+                }])
+            ->where('id', '=', $product_id)
+            ->first();
+
+        if ($product === null) {
+            throw product_not_found_exception::product_not_found();
+        }
+
+        return $product;
+    }
+
+    public function get_products_from_column(int $param, string $column = 'id'): Collection {
         $product = \App\Models\product::query()
             ->with([
                 'brand' => function($query) {
