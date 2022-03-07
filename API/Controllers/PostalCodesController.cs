@@ -54,7 +54,34 @@ namespace API.Controllers
                     Id = postalCode.Id,
                     Postal = postalCode.PostalCode1,
                     City = postalCode.CityName,
-                    CountryId = (int)postalCode.CountryId
+                    Country = new CountryDto(postalCode)
+                });
+            }
+            return Ok(postalCodeDto);
+        }
+
+        //api/Address
+        [HttpGet("WithAllInfo")]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetPostalCodesWithAllInfo()
+        {
+            var postalCodes = await _postalCodeRepository.GetPostalsWithAllInfo();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var postalCodeDto = new List<PostalCodeDto>();
+
+            foreach (var postalCode in postalCodes)
+            {
+                postalCodeDto.Add(new PostalCodeDto
+                {
+                    Id = postalCode.Id,
+                    Postal = postalCode.PostalCode1,
+                    City = postalCode.CityName,
+                    Country = new CountryDto(postalCode)
                 });
             }
             return Ok(postalCodeDto);

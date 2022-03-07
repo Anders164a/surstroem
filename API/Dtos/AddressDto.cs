@@ -11,8 +11,9 @@ namespace API.Dtos
         public int Id { get; set; }
         public string StreetName { get; set; }
         public string HouseNumber { get; set; }
-        public int Postal { get; set; }
         public string Floor { get; set; }
         public string Additional { get; set; }
+
+        public PostalCodeDto PostalCodeDto { get; set; }
     }
 }
