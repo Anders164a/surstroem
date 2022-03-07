@@ -39,7 +39,7 @@ class ProductController extends Controller
         }
 
         $product_repo = new product_repository();
-        return $product_repo->get_product($request->brand_id, 'brand_id');
+        return $product_repo->get_products_from_column($request->brand_id, 'brand_id');
     }
 
     public function get_products_from_color_id(Request $request) {
@@ -48,7 +48,7 @@ class ProductController extends Controller
         }
 
         $product_repo = new product_repository();
-        return $product_repo->get_product($request->color_id, 'color_id');
+        return $product_repo->get_products_from_column($request->color_id, 'color_id');
     }
 
     public function store(Request $request) {
