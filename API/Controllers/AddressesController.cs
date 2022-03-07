@@ -45,22 +45,7 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            var addressDto = new List<AddressDto>();
-
-            foreach (var address in addresses)
-            {
-                addressDto.Add(new AddressDto
-                {
-                    Id = address.Id,
-                    StreetName = address.StreetName,
-                    HouseNumber = address.HouseNumber,
-                    //PostalCodeDto = (int)address.PostalCodeId,
-                    Floor = address.Floor,
-                    Additional = address.Additional
-                });
-            }
-            return Ok(addressDto);
+            return Ok(addresses);
         }
 
         [HttpGet("GetAllAddressInfo")]
