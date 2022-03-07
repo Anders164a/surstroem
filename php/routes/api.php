@@ -24,3 +24,17 @@ Route::post('/category', [App\Http\Controllers\CategoryController::class, 'store
 
 Route::put('/category', [App\Http\Controllers\CategoryController::class, 'update_category']);
 
+Route::get('/products', [App\Http\Controllers\ProductController::class, 'get_all']);
+
+Route::get('/product/{id}', [App\Http\Controllers\ProductController::class, 'get_product']);
+
+Route::get('/product_brand_id', [App\Http\Controllers\ProductController::class, 'get_products_from_brand_id']);
+
+Route::get('/product_color_id', [App\Http\Controllers\ProductController::class, 'get_products_from_color_id']);
+
+Route::post('/product', [App\Http\Controllers\ProductController::class, 'store']);
+
+Route::put('/product', [App\Http\Controllers\ProductController::class, 'update']);
+
+Route::delete('/product', [App\Http\Controllers\ProductController   ::class, 'destroy']);
+
