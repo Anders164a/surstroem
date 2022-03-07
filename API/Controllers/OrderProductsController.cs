@@ -57,7 +57,8 @@ namespace API.Controllers
         {
             OrderProduct orderProduct;
             OrderProductDto orderProductDto = new OrderProductDto();
-            DogDto dog = new DogDto(){};
+            ProductDto product = new ProductDto();
+            //DogDto dog = new DogDto(){};
             HttpClient client = new HttpClient();
             try
             {
@@ -68,18 +69,18 @@ namespace API.Controllers
                 ModelState.AddModelError("", e.GetBaseException().Message);
                 return StatusCode(500, ModelState);
             }
-            string url = "https://dog.ceo/api/breeds/image/random";// + orderProduct.ProductsId;
+            string url = "http://10.130.54.110/api/product/1";// + orderProduct.ProductsId;
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
-                dog = await response.Content.ReadAsAsync<DogDto>();
+                product = await response.Content.ReadAsAsync<ProductDto>();
             }
             orderProductDto.Id = orderProduct.Id;
             orderProductDto.OrderId = orderProduct.OrderId;
             orderProductDto.Price = orderProduct.Price;
             orderProductDto.Quantity = orderProduct.Quantity;
-            orderProductDto.ProductName = dog.Message/*product.productTitle*/;
-            orderProductDto.ProductColor = dog.Status/*product.productColor*/;
+            orderProductDto.ProductName = product.Title;
+            orderProductDto.ProductColor = product.ColorId;
 
             return Ok(orderProductDto);
         }
