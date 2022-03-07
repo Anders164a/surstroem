@@ -1,5 +1,6 @@
 ﻿using API.Service.Interfaces;
 using API.Service.Repositories;
+using Microsoft.EntityFrameworkCore;
 using surstroem.Data;
 using surstroem.Models;
 using System;
@@ -15,6 +16,14 @@ namespace API.Service.Repositories
             : base(dbcontext)
         {
 
+        }
+
+        public async Task<ICollection<Address>> GetAddressWithAllInfo()
+        {
+            return await _dbcontext.Set<Address>()
+                    .Include(q => q.PostalCode)
+                    .Include(e => e.PostalCode.Country)
+                    .ToListAsync();
         }
     }
 }

@@ -9,6 +9,6 @@ namespace API.Service.Interfaces
 {
     public interface IAddressRepository : IGenericRepository<Address>
     {
-
+        Task<ICollection<Address>> GetAddressWithAllInfo();
     }
 }

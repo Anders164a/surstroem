@@ -8,5 +8,6 @@ namespace API.Service.Interfaces
 {
     public interface IPostalCodeRepository : IGenericRepository<PostalCode>
     {
+        Task<ICollection<PostalCode>> GetPostalsWithAllInfo();
     }
 }
