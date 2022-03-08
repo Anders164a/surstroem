@@ -1,6 +1,5 @@
 ﻿using API.Dtos;
 using API.Service.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using surstroem.Models;
 using System;
@@ -8,9 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Text;
 
 namespace API.Controllers
 {
@@ -52,7 +49,7 @@ namespace API.Controllers
             return Ok(orderProducts);
         }
         
-        [HttpGet("GetListByOrder/{orderId}")]
+        [HttpGet("GetListOfProductsByOrder/{orderId}")]
         public async Task<IActionResult> GetOrderProductsByOrderId(int orderId) 
         {
             var orderProductDtos = new List<OrderProductDto>();
@@ -81,11 +78,10 @@ namespace API.Controllers
 
             foreach(var orderProduct in orderProducts) 
             {
-                ProductDto prodName = (ProductDto)products.Select(p => p.Id == orderProduct.ProductsId);
+                ProductDto prodName = products.First(q => q.Id == orderProduct.ProductsId);
                 orderProductDtos.Add(new OrderProductDto
                 {
                     Id = orderProduct.Id,
-                    OrderId = orderProduct.OrderId,
                     Price = orderProduct.Price,
                     Quantity = orderProduct.Quantity,
                     ProductName = prodName.Title
