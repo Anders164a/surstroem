@@ -8,5 +8,6 @@ namespace API.Service.Interfaces
 {
     public interface IOrderProductRepository : IGenericRepository<OrderProduct>
     {
+        Task<ICollection<OrderProduct>> GetOrderProductsByOrderId(int orderId);
     }
 }
