@@ -70,13 +70,12 @@ namespace API.Controllers
                     User = review.User.Firstname,
                     Star = review.Star,
                     Comment = review.Comment,
-                    ProductId = review.ProductId
                 });
             }
             return Ok(reviewDto);
         }
 
-        /*[HttpGet("ReviewByUser/{id}")]
+        [HttpGet("ReviewByUser/{id}")]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetReviewsByUser(int id)
         {
@@ -87,21 +86,20 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var reviewDto = new List<ReviewForProductDto>();
+            var reviewDto = new List<ReviewByUserDto>();
 
             foreach (var review in reviews)
             {
-                reviewDto.Add(new ReviewForProductDto
+                reviewDto.Add(new ReviewByUserDto
                 {
                     Id = review.Id,
-                    User = review.User.Firstname,
+                    Product = review.User.Firstname,
                     Star = review.Star,
                     Comment = review.Comment,
-                    ProductId = review.ProductId
                 });
             }
             return Ok(reviewDto);
-        }*/
+        }
 
         //api/Reviews
         [HttpPost]

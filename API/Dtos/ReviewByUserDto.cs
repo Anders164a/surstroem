@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace API.Dtos
 {
-    public class ReviewForProductDto
+    public class ReviewByUserDto
     {
         public int Id { get; set; }
-        public string User { get; set; }
+        public string Product { get; set; }
         public double Star { get; set; }
         public string Comment { get; set; }
     }
