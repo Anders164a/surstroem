@@ -18,5 +18,11 @@ namespace API.Dtos
             Id = postal.Country.Id;
             Country = postal.Country.Country1;
         }
+
+        public CountryDto(Employee employee)
+        {
+            Id = employee.User.Address.PostalCode.Country.Id;
+            Country = employee.User.Address.PostalCode.Country.Country1;
+        }
     }
 }

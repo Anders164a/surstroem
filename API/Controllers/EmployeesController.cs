@@ -108,20 +108,10 @@ namespace API.Controllers
                 employeeDto.Add(new EmployeeContactInfoDto
                 {
                     EmployeeId = employee.Id,
-                    FirstName = employee.User.Firstname,
-                    LastName = employee.User.Lastname,
-                    PhoneNumber = (int)employee.User.PhoneNumber,
                     WorkPhone = (int)employee.WorkPhone,
-                    Email = employee.User.Email,
-                    StreetName = employee.User.Address.StreetName,
-                    HouseNumber = employee.User.Address.HouseNumber,
-                    Floor = employee.User.Address.Floor,
-                    Additional = employee.User.Address.Additional,
-                    PostalCode = employee.User.Address.PostalCode.PostalCode1,
-                    CityName = employee.User.Address.PostalCode.CityName,
-                    Country = employee.User.Address.PostalCode.Country.Country1,
-                    WareHouseId = employee.Warehouse.Id,
-                    WareHouseType = employee.Warehouse.WarehouseType.Type
+                    UserInfo = new UserBasicInfoDto(employee),
+                    AddressInfo = new EmployeeAddressDto(employee),
+                    WarehouseInfos = new WarehouseInfoDto(employee)
                 });
             }
             return Ok(employeeDto);
