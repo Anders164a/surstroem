@@ -27,6 +27,18 @@ class category_repository implements category_repository_interface
         return category_factory::make($new_category);
     }
 
+    public function update_category(array $_PUT): object {
+        $category = $this->get_category($_PUT['id']);
+
+        $parent_id = empty($_PUT['parent_category_id']) ? NULL : $_PUT['parent_category_id'];
+
+        $category['category'] = $_PUT['category'];
+        $category->parent_category_id = $parent_id;
+        $category->update();
+
+        return $this->get_category($category->id);
+    }
+
     public function get_category(int $category_id): object {
         $category = \App\Models\category::query()
             ->with(['parent_category' => function ($query) {

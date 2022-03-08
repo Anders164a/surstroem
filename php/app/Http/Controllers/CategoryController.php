@@ -76,14 +76,8 @@ class CategoryController extends Controller
             throw form_not_filled_correctly::form_does_not_fulfill_requirements();
         }
 
-        $parent_id = empty($_PUT['parent_category_id']) ? NULL : $_PUT['parent_category_id'];
-
         $category_repo = new category_repository();
-        $category = $category_repo->get_category($_PUT['id']);
-
-        $category['category'] = $_PUT['category'];
-        $category->parent_category_id = $parent_id;
-        $category->update();
+        $category = $category_repo->update_category($_PUT);
 
         return json_encode($category);
     }
