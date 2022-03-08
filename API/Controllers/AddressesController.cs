@@ -26,12 +26,12 @@ namespace API.Controllers
         {
             if (!await _addressRepository.entityExists(id))
                 return NotFound();
-            var product = await _addressRepository.GetById(id);
+            var address = await _addressRepository.GetById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(product);
+            return Ok(address);
         }
 
         //api/Address
@@ -61,8 +61,8 @@ namespace API.Controllers
             var addressDto = new List<AddressDto>();
 
             foreach (var address in addresses)
-                {
-                    addressDto.Add(new AddressDto
+            {
+                addressDto.Add(new AddressDto
                 {
                     Id = address.Id,
                     StreetName = address.StreetName,

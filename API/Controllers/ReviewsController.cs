@@ -76,7 +76,7 @@ namespace API.Controllers
             return Ok(reviewDto);
         }
 
-        [HttpGet("ReviewByUser/{id}")]
+        /*[HttpGet("ReviewByUser/{id}")]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetReviewsByUser(int id)
         {
@@ -101,7 +101,7 @@ namespace API.Controllers
                 });
             }
             return Ok(reviewDto);
-        }
+        }*/
 
         //api/Reviews
         [HttpPost]
