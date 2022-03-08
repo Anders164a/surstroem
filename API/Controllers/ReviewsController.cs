@@ -21,7 +21,7 @@ namespace API.Controllers
         }
 
         // GET: api/Reviews/1
-        [HttpGet("{id}"), Authorize(Roles = "Admin")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetReview(int id)
         {
             if (!await _reviewRepository.entityExists(id))
@@ -35,7 +35,7 @@ namespace API.Controllers
         }
 
         //api/Review
-        [HttpGet, Authorize(Roles = "Normal, Admin")]
+        [HttpGet/*, Authorize(Roles = "Normal, Admin")*/]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetReviews()
         {
@@ -49,7 +49,7 @@ namespace API.Controllers
         }
 
         //api/Review
-        [HttpGet("ReviewProduct/{id}")]
+        [HttpGet("ReviewByProduct/{id}")]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetReviewsByProduct(int id)
         {
@@ -59,7 +59,48 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            return Ok(reviews);
+
+            var reviewDto = new List<ReviewForProductDto>();
+
+            foreach (var review in reviews)
+            {
+                reviewDto.Add(new ReviewForProductDto
+                {
+                    Id = review.Id,
+                    User = review.User.Firstname,
+                    Star = review.Star,
+                    Comment = review.Comment,
+                    ProductId = review.ProductId
+                });
+            }
+            return Ok(reviewDto);
+        }
+
+        [HttpGet("ReviewByUser/{id}")]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetReviewsByUser(int id)
+        {
+            var reviews = await _reviewRepository.GetReviewsByUserId(id);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var reviewDto = new List<ReviewForProductDto>();
+
+            foreach (var review in reviews)
+            {
+                reviewDto.Add(new ReviewForProductDto
+                {
+                    Id = review.Id,
+                    User = review.User.Firstname,
+                    Star = review.Star,
+                    Comment = review.Comment,
+                    ProductId = review.ProductId
+                });
+            }
+            return Ok(reviewDto);
         }
 
         //api/Reviews
