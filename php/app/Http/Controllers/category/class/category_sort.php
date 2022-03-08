@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\category\class;
 
 use Collator;
-use Illuminate\Database\Eloquent\Collection;
 
 class category_sort
 {

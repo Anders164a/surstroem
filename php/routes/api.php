@@ -18,11 +18,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'get_all_categories']);
+Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'get_all']);
 
-Route::post('/category', [App\Http\Controllers\CategoryController::class, 'store_category']);
+Route::get('/category/{id}', [App\Http\Controllers\CategoryController::class, 'get_category']);
 
-Route::put('/category', [App\Http\Controllers\CategoryController::class, 'update_category']);
+Route::get('/category', [App\Http\Controllers\CategoryController::class, 'get_categories_by_parent_id']);
+
+Route::post('/category', [App\Http\Controllers\CategoryController::class, 'store']);
+
+Route::put('/category', [App\Http\Controllers\CategoryController::class, 'update']);
+
+Route::delete('/category', [App\Http\Controllers\CategoryController::class, 'destroy']);
 
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'get_all']);
 
@@ -36,5 +42,5 @@ Route::post('/product', [App\Http\Controllers\ProductController::class, 'store']
 
 Route::put('/product', [App\Http\Controllers\ProductController::class, 'update']);
 
-Route::delete('/product', [App\Http\Controllers\ProductController   ::class, 'destroy']);
+Route::delete('/product', [App\Http\Controllers\ProductController::class, 'destroy']);
 
