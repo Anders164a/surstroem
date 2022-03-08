@@ -96,6 +96,11 @@ namespace API.Controllers
             
             var reviews = await _reviewRepository.GetReviewsByUserId(id);
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             foreach (var review in reviews)
             {
                 ProductDto productName = products.First(q => q.Id == review.ProductId);
