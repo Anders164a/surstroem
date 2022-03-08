@@ -25,7 +25,7 @@ namespace API.Controllers
         }
 
         // GET: api/OrderProducts/1
-        [HttpGet("{id}"), Authorize(Roles = "Admin")]
+        [HttpGet("{id}")/*, Authorize(Roles = "Admin")*/]
         public async Task<IActionResult> GetOrderProduct(int id)
         {
             if (!await _orderProductRepository.entityExists(id))
@@ -39,12 +39,12 @@ namespace API.Controllers
         }
 
         //api/OrderProduct
-        [HttpGet, Authorize(Roles = "Normal, Admin")]
+        [HttpGet/*, Authorize(Roles = "Normal, Admin")*/]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetOrderProducts()
         {
             var orderProducts = await _orderProductRepository.GetAllAsync();
-
+            var example = JsonConvert.SerializeObject(orderProducts);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -52,37 +52,46 @@ namespace API.Controllers
             return Ok(orderProducts);
         }
         
-                [HttpGet("GetWithName/{id}")]
-        public async Task<IActionResult> GetOrderProductWithName(int id) 
+        [HttpGet("GetListByOrder/{orderId}")]
+        public async Task<IActionResult> GetOrderProductsByOrderId(int orderId) 
         {
-            OrderProduct orderProduct;
-            OrderProductDto orderProductDto = new OrderProductDto();
-            ProductDto product = new ProductDto();
-            //DogDto dog = new DogDto(){};
+            var orderProductDtos = new List<OrderProductDto>();
+            var products = new List<ProductDto>();
             HttpClient client = new HttpClient();
+
+            var orderProducts = await _orderProductRepository.GetOrderProductsByOrderId(orderId);
+
+
             try
             {
-                orderProduct = await _orderProductRepository.GetById(id);
             }
             catch (Exception e)
             {
                 ModelState.AddModelError("", e.GetBaseException().Message);
                 return StatusCode(500, ModelState);
             }
-            string url = "http://10.130.54.110/api/product/1";// + orderProduct.ProductsId;
+            
+            string url = "http://10.130.54.110/api/products/";
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
-                product = await response.Content.ReadAsAsync<ProductDto>();
+                var jsonString = await response.Content.ReadAsStringAsync();
+                products = JsonConvert.DeserializeObject<List<ProductDto>>(jsonString);
             }
-            orderProductDto.Id = orderProduct.Id;
-            orderProductDto.OrderId = orderProduct.OrderId;
-            orderProductDto.Price = orderProduct.Price;
-            orderProductDto.Quantity = orderProduct.Quantity;
-            orderProductDto.ProductName = product.Title;
-            orderProductDto.ProductColor = product.ColorId;
 
-            return Ok(orderProductDto);
+            foreach(var orderProduct in orderProducts) 
+            {
+                ProductDto prodName = (ProductDto)products.Select(p => p.Id == orderProduct.ProductsId);
+                orderProductDtos.Add(new OrderProductDto
+                {
+                    Id = orderProduct.Id,
+                    OrderId = orderProduct.OrderId,
+                    Price = orderProduct.Price,
+                    Quantity = orderProduct.Quantity,
+                    ProductName = prodName.Title
+                });
+            }
+            return Ok(orderProductDtos);
         }
 
         //api/OrderProducts

@@ -16,5 +16,11 @@ namespace API.Service.Repositories
         {
 
         }
+
+        public async Task<ICollection<OrderProduct>> GetOrderProductsByOrderId(int orderId)
+        {
+            return await _dbcontext.OrderProducts.Where(c => c.OrderId == orderId)
+                .ToListAsync();
+        }
     }
 }
