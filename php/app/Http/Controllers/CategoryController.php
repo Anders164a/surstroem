@@ -27,7 +27,7 @@ class CategoryController extends Controller
         $sort = new category_sort();
         $sorted_categories = $sort->sort($all_categories, 'asc', 'category');
 
-        return json_encode($sorted_categories, JSON_FORCE_OBJECT);
+        return json_encode($sorted_categories);
     }
 
     public function get_category(int $id): object {
