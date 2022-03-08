@@ -27,12 +27,12 @@ namespace API.Controllers
         {
             if (!await _orderProductRepository.entityExists(id))
                 return NotFound();
-            var product = await _orderProductRepository.GetById(id);
+            var orderProduct = await _orderProductRepository.GetById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(product);
+            return Ok(orderProduct);
         }
 
         //api/OrderProduct
@@ -41,7 +41,6 @@ namespace API.Controllers
         public async Task<IActionResult> GetOrderProducts()
         {
             var orderProducts = await _orderProductRepository.GetAllAsync();
-            var example = JsonConvert.SerializeObject(orderProducts);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
