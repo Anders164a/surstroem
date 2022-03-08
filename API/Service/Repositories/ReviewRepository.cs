@@ -26,7 +26,7 @@ namespace API.Service.Repositories
 
         public async Task<ICollection<Review>> GetReviewsByUserId(int userId)
         {
-            return await _dbcontext.Reviews.Where(c => c.ProductId == userId)
+            return await _dbcontext.Reviews.Where(c => c.UserId == userId)
                     .ToListAsync();
         }
     }

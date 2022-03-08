@@ -2,10 +2,12 @@
 using API.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using surstroem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -70,16 +72,28 @@ namespace API.Controllers
                     User = review.User.Firstname,
                     Star = review.Star,
                     Comment = review.Comment,
-                    ProductId = review.ProductId
                 });
             }
             return Ok(reviewDto);
         }
 
-        /*[HttpGet("ReviewByUser/{id}")]
+        [HttpGet("ReviewByUser/{id}")]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetReviewsByUser(int id)
         {
+            var reviewDto = new List<ReviewByUserDto>();
+            var products = new List<ProductDto>();
+            
+            HttpClient client = new HttpClient();
+
+            string url = "http://10.130.54.110/api/products/";
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                products = JsonConvert.DeserializeObject<List<ProductDto>>(jsonString);
+            }
+            
             var reviews = await _reviewRepository.GetReviewsByUserId(id);
 
             if (!ModelState.IsValid)
@@ -87,21 +101,19 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var reviewDto = new List<ReviewForProductDto>();
-
             foreach (var review in reviews)
             {
-                reviewDto.Add(new ReviewForProductDto
+                ProductDto productName = products.First(q => q.Id == review.ProductId);
+                reviewDto.Add(new ReviewByUserDto
                 {
                     Id = review.Id,
-                    User = review.User.Firstname,
+                    Product = productName.Title,
                     Star = review.Star,
-                    Comment = review.Comment,
-                    ProductId = review.ProductId
+                    Comment = review.Comment
                 });
             }
             return Ok(reviewDto);
-        }*/
+        }
 
         //api/Reviews
         [HttpPost]
