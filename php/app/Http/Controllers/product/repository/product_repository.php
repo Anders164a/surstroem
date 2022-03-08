@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 class product_repository implements product_repository_interface
 {
     public function get_products(): Collection {
-        return \App\Models\product::query()->leftJoin('colors', 'colors.id', '=', 'products.color_id')
-            ->join('brands', 'brands.id', '=', 'products.brand_id')
+        return \App\Models\product::query()
             ->with([
                 'brand' => function($query) {
                     $query->select('id','name');

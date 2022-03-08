@@ -21,7 +21,7 @@ class ProductController extends Controller
         $product_repo = new product_repository();
         $all_products = $product_repo->get_products();
 
-        return json_encode($all_products, JSON_FORCE_OBJECT);
+        return json_encode($all_products);
     }
 
     public function get_product($id): object {
