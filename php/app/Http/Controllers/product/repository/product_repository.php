@@ -43,6 +43,28 @@ class product_repository implements product_repository_interface
         return product_factory::make($new_product);
     }
 
+    public function update_product(array $_PUT): object
+    {
+        $product = $this->get_product($_PUT['id']);
+
+        $price = floatval($_PUT['price']);
+
+        $product->product_title = $_PUT['title'];
+        $product->short_description = $_PUT['short_description'] ?? null;
+        $product->description = $_PUT['description'] ?? null;
+        $product->price = $price;
+        $product->weight = $_PUT['weight'] ?? null;
+        $product->width = $_PUT['width'] ?? null;
+        $product->length = $_PUT['length'] ?? null;
+        $product->height = $_PUT['height'] ?? null;
+        $product->warranty_period_id = $_PUT['warranty_period_id'] ?? null;
+        $product->color_id = $_PUT['color_id'] ?? null;
+        $product->brand_id = $_PUT['brand_id'];
+        $product->update();
+
+        return $this->get_product($product->id);
+    }
+
     public function get_product(int $product_id): object {
         $product = \App\Models\product::query()
             ->with([

@@ -80,23 +80,8 @@ class ProductController extends Controller
             throw form_not_filled_correctly::form_does_not_fulfill_requirements();
         }
 
-        $price = floatval($_PUT['price']);
-
         $product_repo = new product_repository();
-        $product = $product_repo->get_product($_PUT['id']);
-
-        $product->product_title = $_PUT['title'];
-        $product->short_description = $_PUT['short_description'] ?? null;
-        $product->description = $_PUT['description'] ?? null;
-        $product->price = $price;
-        $product->weight = $_PUT['weight'] ?? null;
-        $product->width = $_PUT['width'] ?? null;
-        $product->length = $_PUT['length'] ?? null;
-        $product->height = $_PUT['height'] ?? null;
-        $product->warranty_period_id = $_PUT['warranty_period_id'] ?? null;
-        $product->color_id = $_PUT['color_id'] ?? null;
-        $product->brand_id = $_PUT['brand_id'];
-        $product->update();
+        $product = $product_repo->update_product($_PUT);
 
         return json_encode($product);
     }
