@@ -104,7 +104,7 @@ namespace API.Controllers
                     Id = review.Id,
                     Product = productName.Title,
                     Star = review.Star,
-                    Comment = review.Comment,
+                    Comment = review.Comment
                 });
             }
             return Ok(reviewDto);
