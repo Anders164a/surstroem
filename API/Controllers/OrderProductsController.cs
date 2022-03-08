@@ -58,16 +58,11 @@ namespace API.Controllers
 
             var orderProducts = await _orderProductRepository.GetOrderProductsByOrderId(orderId);
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            try
-            {
-            }
-            catch (Exception e)
-            {
-                ModelState.AddModelError("", e.GetBaseException().Message);
-                return StatusCode(500, ModelState);
-            }
-            
             string url = "http://10.130.54.110/api/products/";
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
@@ -78,13 +73,13 @@ namespace API.Controllers
 
             foreach(var orderProduct in orderProducts) 
             {
-                ProductDto prodName = products.First(q => q.Id == orderProduct.ProductsId);
+                ProductDto productName = products.First(q => q.Id == orderProduct.ProductsId);
                 orderProductDtos.Add(new OrderProductDto
                 {
                     Id = orderProduct.Id,
                     Price = orderProduct.Price,
                     Quantity = orderProduct.Quantity,
-                    ProductName = prodName.Title
+                    ProductName = productName.Title
                 });
             }
             return Ok(orderProductDtos);
