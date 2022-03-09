@@ -22,6 +22,9 @@ namespace API.Service.Repositories
             return await _dbcontext.EmployeeHasShifts.Where(c => c.EmployeeId == employeeId)
                         .Include(e => e.Employee)
                         .Include(q => q.Employee.User)
+                        .Include(w => w.Employee.User.Address)
+                        .Include(u => u.Employee.User.Address.PostalCode)
+                        .Include(a => a.Employee.User.Address.PostalCode.Country)
                         .Include(s => s.Shifts)
                         .FirstOrDefaultAsync();
         }
