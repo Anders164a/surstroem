@@ -31,12 +31,12 @@ namespace API.Controllers
         {
             if (!await _orderRepository.entityExists(id))
                 return NotFound();
-            var product = await _orderRepository.GetById(id);
+            var order = await _orderRepository.GetById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(product);
+            return Ok(order);
         }
 
         //api/Orders
@@ -60,12 +60,12 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var users = await _userRepository.GetUsersWithAllInfo();
+            var orders = await _orderRepository.GetOrdersWithAllInfo();
 
-            var userDto = new List<UserDto>();
-            foreach (var user in users)
+            var orderDto = new List<OrderDto>();
+            foreach (var order in orders)
             {
-                userDto.Add(new UserDto
+                orderDto.Add(new OrderDto
                 {
                     Id = user.Id,
                     FirstName = user.Firstname,

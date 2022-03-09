@@ -25,7 +25,12 @@ namespace API.Service.Repositories
                 .Include(o => o.PayAddress)
                 .Include(o => o.PayAddress.PostalCode)
                 .Include(o => o.PayAddress.PostalCode.Country)
-                .Include(o => o)
+                .Include(o => o.User)
+                .Include(o => o.User.Address)
+                .Include(o => o.User.Address.PostalCode)
+                .Include(o => o.User.Address.PostalCode.Country)
+                .Include(o => o.DeliveryState)
+                .Include(o => o.DeliveryType)
                 .ToListAsync();
         }
     }
