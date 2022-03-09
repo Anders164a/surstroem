@@ -15,5 +15,18 @@ namespace API.Service.Repositories
         {
 
         }
+
+        public async Task<ICollection<Order>> GetOrdersWithAllInfo()
+        {
+            return await _dbcontext.Set<Order>()
+                .Include(o => o.ShipAddress)
+                .Include(o => o.ShipAddress.PostalCode)
+                .Include(o => o.ShipAddress.PostalCode.Country)
+                .Include(o => o.PayAddress)
+                .Include(o => o.PayAddress.PostalCode)
+                .Include(o => o.PayAddress.PostalCode.Country)
+                .Include(o => o)
+                .ToListAsync();
+        }
     }
 }

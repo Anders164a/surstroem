@@ -54,6 +54,30 @@ namespace API.Controllers
             return Ok(orders);
         }
 
+        [HttpGet("GetAllOrdersInfo")]
+        public async Task<IActionResult> GetAllOrdersInfo()
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var users = await _userRepository.GetUsersWithAllInfo();
+
+            var userDto = new List<UserDto>();
+            foreach (var user in users)
+            {
+                userDto.Add(new UserDto
+                {
+                    Id = user.Id,
+                    FirstName = user.Firstname,
+                    LastName = user.Lastname,
+                    Email = user.Email,
+                    PhoneNumber = (int)user.PhoneNumber,
+                    Address = new AddressDto(user)
+                });
+            }
+            return Ok(userDto);
+        }
+
         //api/Orders
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] Order OrderToCreate)
