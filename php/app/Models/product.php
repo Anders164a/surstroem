@@ -21,4 +21,8 @@ class product extends Eloquent
     public function warranty_period() {
         return $this->hasOne(warranty_period::class, 'id', 'warranty_period_id');
     }
+
+    public function product_specification() {
+        return $this->hasOne(product_specification::class, 'id', 'product_specification_id');
+    }
 }

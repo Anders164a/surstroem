@@ -61,12 +61,12 @@ class ProductController extends Controller
         $product_repo = new product_repository();
         $new_product = $product_repo->store_product($request->title, $request->short_description, $request->description, $price, $request->weight, $request->width, $request->length, $request->height, $request->warranty_period_id, $request->color_id, $request->brand_id);
 
-        return json_encode(['id' => $new_product->get_id(), 'title' => $new_product->get_title(), 'price' => $new_product->get_price()]);
+        return json_encode($this->get_product($new_product->get_id()));
     }
 
     /**
+     * @return false|string
      * @throws form_not_filled_correctly
-     * @throws \classes\category\repository\exception\category_not_found_exception
      * @throws integer_not_allowed_null
      */
     public function update() {
