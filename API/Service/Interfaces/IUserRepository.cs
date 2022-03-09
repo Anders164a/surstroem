@@ -9,7 +9,8 @@ namespace API.Service.Interfaces
     public interface IUserRepository : IGenericRepository<User>
     {
         Task<ICollection<User>> GetUsersByAddressId(int addresId);
-        Task<User> GetUserContactInformation(int userId);
+        Task<ICollection<User>> GetUsersWithAllInfo();
+        Task<User> GetUserWithAllInfo(int userId);
         Task<User> GetUserByEmail(string userEmail);
         Task PutNewUserPassword(int userId, string passwordHash, string passwordSalt);
         Task PutNewUserAddress(int userId, int address);

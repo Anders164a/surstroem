@@ -29,13 +29,12 @@ namespace API.Service.Repositories
         }
 
 
-        public async Task<User> GetUserContactInformation(int userId)
+        public async Task<User> GetUserWithAllInfo(int userId)
         {
             return await _dbcontext.Users.Where(c => c.Id == userId)
                                 .Include(c => c.Address)
-                                .ThenInclude(s => s.PostalCode)
-                                .ThenInclude(d => d.Country)
-                                .AsSplitQuery()
+                                .Include(s => s.Address.PostalCode)
+                                .Include(d => d.Address.PostalCode.Country)
                 .FirstOrDefaultAsync();
         }
 

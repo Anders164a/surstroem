@@ -65,33 +65,72 @@ namespace API.Controllers
             return Ok(users);
         }
 
-        [HttpGet("GetUserContactInformations/{userId}")]
-        public async Task<IActionResult> GetUserContactInformationById(int userId)
+        [HttpGet("GetAllUserInfoById/{userId}")]
+        public async Task<IActionResult> GetAllUserInfoById(int userId)
         {
-            if (!await _userRepository.entityExists(userId))
-                return NotFound();
-            var chosenUser = await _userRepository.GetUserContactInformation(userId);
-
-            var userDto = new UserContactInfoDto();
-
-            userDto.FirstName = chosenUser.Firstname;
-            userDto.LastName = chosenUser.Lastname;
-            userDto.Email = chosenUser.Email;
-            userDto.PhoneNumber = (int)chosenUser.PhoneNumber;
-            userDto.StreetName = chosenUser.Address.StreetName;
-            userDto.HouseNumber = chosenUser.Address.HouseNumber;
-            userDto.Floor = chosenUser.Address.Floor;
-            userDto.Additional = chosenUser.Address.Additional;
-            userDto.PostalCode = chosenUser.Address.PostalCode.PostalCode1;
-            userDto.CityName = chosenUser.Address.PostalCode.CityName;
-            userDto.Country = chosenUser.Address.PostalCode.Country.Country1;
-
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            if (!await _userRepository.entityExists(userId))
+                return NotFound();
+            var user = await _userRepository.GetUserWithAllInfo(userId);
+
+            var userDto = new UserDto();
+
+            userDto.Id = user.Id;
+            userDto.FirstName = user.Firstname;
+            userDto.LastName = user.Lastname;
+            userDto.Email = user.Email;
+            userDto.PhoneNumber = (int)user.PhoneNumber;
+            userDto.Address = new AddressDto(user);
+            
             return Ok(userDto);
         }
+
+        [HttpGet("GetAllUsersInfo/{userId}")]
+        public async Task<IActionResult> GetAllUsersInfo(int userId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!await _userRepository.entityExists(userId))
+                return NotFound();
+            var users = await _userRepository.GetUsersWithAllInfo(userId);
+
+            var userDto = new UserDto();
+            foreach(var user in users)
+            userDto.Id = user.Id;
+            userDto.FirstName = user.Firstname;
+            userDto.LastName = user.Lastname;
+            userDto.Email = user.Email;
+            userDto.PhoneNumber = (int)user.PhoneNumber;
+            userDto.Address = new AddressDto(user);
+
+            return Ok(userDto);
+        }
+
+        /*{
+            var employees = await _employeeRepository.GetEmployeesContactInfo();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var employeeDto = new List<EmployeeDto>();
+
+            foreach (var employee in employees)
+            {
+                employeeDto.Add(new EmployeeDto
+                {
+                    Id = employee.Id,
+                    WorkPhone = (int)employee.WorkPhone,
+                    User = new UserDto(employee),
+                    Warehouse = new WarehouseDto(employee)
+                });
+            }
+            return Ok(employeeDto);
+        }*/
 
         //api/Users
         [HttpPost]
