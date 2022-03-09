@@ -17,6 +17,12 @@ namespace API.Service.Repositories
 
         }
 
+        public async Task<ICollection<ReviewOpinion>> GetReviewOpinionsByReviewId(int reviewId)
+        {
+            return await _dbcontext.ReviewOpinions.Where(c => c.ReviewId == reviewId)
+                .ToListAsync();
+        }
+
         public async Task<int> GetROByUserIdAndReviewId(int userId, int reviewId)
         {
             var result = await _dbcontext.ReviewOpinions.Where(c => c.UserId == userId && c.ReviewId == reviewId).FirstOrDefaultAsync();
