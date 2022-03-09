@@ -54,9 +54,7 @@ namespace API
                     };
                 });
 
-            services.AddScoped<IColorRepository, ColorRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
-            services.AddScoped<IBrandRepository, BrandRepository>();
             //services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
             //services.AddScoped<IDeliveryStateRepository, DeliveryStateRepository>();
@@ -66,7 +64,6 @@ namespace API
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderProductRepository, OrderProductRepository>();
             services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
             //services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<IReviewOpinionRepository, ReviewOpinionRepository>();
