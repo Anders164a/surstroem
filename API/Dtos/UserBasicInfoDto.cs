@@ -14,6 +14,11 @@ namespace API.Dtos
         public string Email { get; set; }
         public int PhoneNumber { get; set; }
 
+        public UserBasicInfoDto()
+        {
+
+        }
+
         public UserBasicInfoDto(Employee employee)
         {
             Id = employee.User.Id;

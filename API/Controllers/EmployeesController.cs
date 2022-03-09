@@ -52,9 +52,9 @@ namespace API.Controllers
                 employeeDto.Add(new EmployeeDto
                 {
                     Id = employee.Id,
-                    UserId = employee.UserId,
-                    WarehouseId = employee.WarehouseId,
-                    WorkPhone = (int)employee.WorkPhone
+                    WorkPhone = (int)employee.WorkPhone,
+                    Warehouse = new WarehouseDto(employee),
+                    User = new UserBasicInfoDto(employee)
                 });
             }
             return Ok(employeeDto);
@@ -101,17 +101,16 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var employeeDto = new List<EmployeeContactInfoDto>();
+            var employeeDto = new List<EmployeeDto>();
 
             foreach (var employee in employees)
             {
-                employeeDto.Add(new EmployeeContactInfoDto
+                employeeDto.Add(new EmployeeDto
                 {
-                    EmployeeId = employee.Id,
+                    Id = employee.Id,
                     WorkPhone = (int)employee.WorkPhone,
-                    UserInfo = new UserBasicInfoDto(employee),
-                    AddressInfo = new EmployeeAddressDto(employee),
-                    WarehouseInfos = new WarehouseInfoDto(employee)
+                    User = new UserBasicInfoDto(employee),
+                    Warehouse = new WarehouseDto(employee)
                 });
             }
             return Ok(employeeDto);

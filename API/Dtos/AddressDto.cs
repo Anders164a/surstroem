@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using surstroem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,19 @@ namespace API.Dtos
         public string Additional { get; set; }
 
         public PostalCodeDto PostalCodeDto { get; set; }
+
+        public AddressDto()
+        {
+
+        }
+
+        public AddressDto(User user)
+        {
+            Id = user.Address.Id;
+            StreetName = user.Address.StreetName;
+            HouseNumber = user.Address.HouseNumber;
+            Floor = user.Address.Floor;
+            Additional = user.Address.Additional;
+        }
     }
 }
