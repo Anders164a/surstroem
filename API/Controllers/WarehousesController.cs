@@ -70,21 +70,15 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var warehouseDto = new List<WarehouseInfoDto>();
+            var warehouseDto = new List<WarehouseDto>();
 
             foreach (var warehouse in warehouses)
             {
-                warehouseDto.Add(new WarehouseInfoDto
+                warehouseDto.Add(new WarehouseDto
                 {
-                    WarehouseId = warehouse.Id,
-                    WarehouseType = warehouse.WarehouseType.Type,
-                    WarehouseStreetName = warehouse.Address.StreetName,
-                    WarehouseHouseNumber = warehouse.Address.HouseNumber,
-                    WarehouseFloor = warehouse.Address.Floor,
-                    WarehouseAdditional = warehouse.Address.Additional,
-                    WarehousePostal = warehouse.Address.PostalCode.PostalCode1,
-                    WarehouseCity = warehouse.Address.PostalCode.CityName,
-                    WarehouseCountry = warehouse.Address.PostalCode.Country.Country1
+                    Id = warehouse.Id,
+                    WarehouseType = new WarehouseTypeDto(warehouse),
+                    Address = new AddressDto(warehouse)
                 });
             }
             return Ok(warehouseDto);
