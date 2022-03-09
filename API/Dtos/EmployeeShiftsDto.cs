@@ -7,9 +7,9 @@ namespace API.Dtos
 {
     public class EmployeeShiftsDto
     {
-        public int EmployeeId { get; set; }
+        public int Id { get; set; }
         public DateTime ShiftDate { get; set; }
-        public UserDto User { get; set; }
+        public EmployeeDto Employee { get; set; }
         public ShiftDto Shift { get; set; }
     }
 }

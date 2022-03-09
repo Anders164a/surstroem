@@ -18,5 +18,11 @@ namespace API.Dtos
         {
 
         }
+
+        public EmployeeDto(EmployeeHasShift employeeHasShift)
+        {
+            Id = employeeHasShift.Employee.Id;
+            WorkPhone = (int)employeeHasShift.Employee.WorkPhone;
+        }
     }
 }
