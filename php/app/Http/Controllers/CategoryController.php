@@ -7,7 +7,6 @@ use App\Exceptions\form_not_filled_correctly;
 use App\Exceptions\integer_not_allowed_null;
 use App\Http\Controllers\category\class\category_sort;
 use App\Http\Controllers\category\repository\category_repository;
-use App\Http\Controllers\category\repository\exception\category_not_found_exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
@@ -57,12 +56,12 @@ class CategoryController extends Controller
         $category_repo = new category_repository();
         $new_category = $category_repo->store_category($request->category, $parent_id);
 
-        return json_encode(['category' => $new_category->get_name(), 'parent_category_id' => $new_category->get_parent_category_id()]);
+        return json_encode($this->get_category($new_category->get_id()));
     }
 
     /**
+     * @return false|string
      * @throws form_not_filled_correctly
-     * @throws category_not_found_exception
      * @throws integer_not_allowed_null
      */
     public function update() {

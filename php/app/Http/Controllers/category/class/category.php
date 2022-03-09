@@ -13,6 +13,10 @@ class category
         $this->parent_category_id = $parent_category_id;
     }
 
+    public function get_id(): int {
+        return $this->id;
+    }
+
     public function get_name(): string {
         return $this->name;
     }
