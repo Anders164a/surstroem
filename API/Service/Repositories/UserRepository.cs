@@ -21,10 +21,10 @@ namespace API.Service.Repositories
         public async Task<ICollection<User>> GetUsersByAddressId(int addressId)
         {
             return await _dbcontext.Users.Where(c => c.AddressId == addressId)
-                               .Include(c => c.Id)
-                               .Include(c => c.Firstname)
-                               .Include(c => c.Lastname)
-                               .Include(c => c.Address)
+                .Include(c => c.Id)
+                .Include(c => c.Firstname)
+                .Include(c => c.Lastname)
+                .Include(c => c.Address)
                 .ToListAsync();
         }
 
@@ -32,9 +32,9 @@ namespace API.Service.Repositories
         public async Task<User> GetUserWithAllInfo(int userId)
         {
             return await _dbcontext.Users.Where(c => c.Id == userId)
-                                .Include(c => c.Address)
-                                .Include(s => s.Address.PostalCode)
-                                .Include(d => d.Address.PostalCode.Country)
+                .Include(c => c.Address)
+                .Include(s => s.Address.PostalCode)
+                .Include(d => d.Address.PostalCode.Country)
                 .FirstOrDefaultAsync();
         }
 
@@ -69,9 +69,18 @@ namespace API.Service.Repositories
         public async Task<User> GetUserByEmail(string userEmail)
         {
             return await _dbcontext.Users.Where(c => c.Email == userEmail)
-                                .Include(c => c.Address)
-                                .AsSplitQuery()
+                .Include(c => c.Address)
+                .AsSplitQuery()
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<ICollection<User>> GetUsersWithAllInfo()
+        {
+            return await _dbcontext.Set<User>()
+                .Include(c => c.Address)
+                .Include(s => s.Address.PostalCode)
+                .Include(d => d.Address.PostalCode.Country)
+                .ToListAsync();
         }
     }
 }

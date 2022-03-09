@@ -87,50 +87,29 @@ namespace API.Controllers
             return Ok(userDto);
         }
 
-        [HttpGet("GetAllUsersInfo/{userId}")]
-        public async Task<IActionResult> GetAllUsersInfo(int userId)
+        [HttpGet("GetAllUsersInfo")]
+        public async Task<IActionResult> GetAllUsersInfo()
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!await _userRepository.entityExists(userId))
-                return NotFound();
-            var users = await _userRepository.GetUsersWithAllInfo(userId);
+            var users = await _userRepository.GetUsersWithAllInfo();
 
-            var userDto = new UserDto();
-            foreach(var user in users)
-            userDto.Id = user.Id;
-            userDto.FirstName = user.Firstname;
-            userDto.LastName = user.Lastname;
-            userDto.Email = user.Email;
-            userDto.PhoneNumber = (int)user.PhoneNumber;
-            userDto.Address = new AddressDto(user);
-
-            return Ok(userDto);
-        }
-
-        /*{
-            var employees = await _employeeRepository.GetEmployeesContactInfo();
-
-            if (!ModelState.IsValid)
+            var userDto = new List<UserDto>();
+            foreach (var user in users)
             {
-                return BadRequest(ModelState);
-            }
-
-            var employeeDto = new List<EmployeeDto>();
-
-            foreach (var employee in employees)
-            {
-                employeeDto.Add(new EmployeeDto
+                userDto.Add(new UserDto 
                 {
-                    Id = employee.Id,
-                    WorkPhone = (int)employee.WorkPhone,
-                    User = new UserDto(employee),
-                    Warehouse = new WarehouseDto(employee)
+                    Id = user.Id,
+                    FirstName = user.Firstname,
+                    LastName = user.Lastname,
+                    Email = user.Email,
+                    PhoneNumber = (int)user.PhoneNumber,
+                    Address = new AddressDto(user)
                 });
             }
-            return Ok(employeeDto);
-        }*/
+            return Ok(userDto);
+        }
 
         //api/Users
         [HttpPost]
