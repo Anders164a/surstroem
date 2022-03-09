@@ -76,12 +76,9 @@ namespace API.Controllers
             EmployeeHasShiftDto.Add(new EmployeeShiftsDto
             {
                 EmployeeId = EmployeeHasShifts.EmployeeId,
-                FirstName = EmployeeHasShifts.Employee.User.Firstname,
-                LastName = EmployeeHasShifts.Employee.User.Lastname,
-                Email = EmployeeHasShifts.Employee.User.Email,
                 ShiftDate = EmployeeHasShifts.Date,
-                ShiftStart = EmployeeHasShifts.Shifts.ShiftStart,
-                ShiftEnd = EmployeeHasShifts.Shifts.ShiftEnd
+                User = new UserDto(EmployeeHasShifts),
+                Shift = new ShiftDto(EmployeeHasShifts)
             });
             
             return Ok(EmployeeHasShiftDto);
