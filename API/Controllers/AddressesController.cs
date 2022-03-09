@@ -69,7 +69,7 @@ namespace API.Controllers
                     HouseNumber = address.HouseNumber,
                     Floor = address.Floor,
                     Additional = address.Additional,
-                    PostalCodeDto = new PostalCodeDto(address)
+                    PostalCode = new PostalCodeDto(address)
                 });
             }
             return Ok(addressDto);

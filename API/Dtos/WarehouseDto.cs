@@ -9,8 +9,8 @@ namespace API.Dtos
     public class WarehouseDto
     {
         public int Id { get; set; }
-        public int WarehouseTypeId { get; set; }
 
+        public WarehouseTypeDto WarehouseType { get; set; }
         public AddressDto Address { get; set; }
 
         public WarehouseDto()
@@ -21,7 +21,8 @@ namespace API.Dtos
         public WarehouseDto(Employee employee)
         {
             Id = employee.Warehouse.Id;
-            WarehouseTypeId = employee.Warehouse.WarehouseTypeId;
+            WarehouseType = new WarehouseTypeDto(employee.Warehouse);
+            //Address = new AddressDto(employee.Warehouse);
         }
     }
 }

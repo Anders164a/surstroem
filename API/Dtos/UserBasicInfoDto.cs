@@ -14,6 +14,8 @@ namespace API.Dtos
         public string Email { get; set; }
         public int PhoneNumber { get; set; }
 
+        public AddressDto Address { get; set; }
+
         public UserBasicInfoDto()
         {
 

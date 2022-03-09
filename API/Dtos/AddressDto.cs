@@ -15,7 +15,7 @@ namespace API.Dtos
         public string Floor { get; set; }
         public string Additional { get; set; }
 
-        public PostalCodeDto PostalCodeDto { get; set; }
+        public PostalCodeDto PostalCode { get; set; }
 
         public AddressDto()
         {
@@ -28,7 +28,18 @@ namespace API.Dtos
             StreetName = user.Address.StreetName;
             HouseNumber = user.Address.HouseNumber;
             Floor = user.Address.Floor;
-            Additional = user.Address.Additional;
+            Additional = user.Address.Additional; 
+            PostalCode = new PostalCodeDto(user.Address);
+        }
+
+        public AddressDto(Warehouse warehouse)
+        {
+            Id = warehouse.Address.Id;
+            StreetName = warehouse.Address.StreetName;
+            HouseNumber = warehouse.Address.HouseNumber;
+            Floor = warehouse.Address.Floor;
+            Additional = warehouse.Address.Additional;
+            PostalCode = new PostalCodeDto(warehouse.Address);
         }
     }
 }

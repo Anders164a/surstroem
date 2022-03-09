@@ -28,22 +28,13 @@ namespace API.Controllers
             if (!await _userRepository.entityExists(id))
                 return NotFound();
 
-            var userDto = new UserDto();
             var user = await _userRepository.GetById(id);
 
-            userDto.Id = user.Id;
-            userDto.FirstName = user.Firstname;
-            userDto.LastName = user.Lastname;
-            userDto.Email = user.Email;
-            userDto.PasswordHash = user.PasswordHash;
-            userDto.PasswordSalt = user.PasswordSalt;
-            userDto.PhoneNumber = (int)user.PhoneNumber;
-            userDto.AddressId = (int)user.AddressId;
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(userDto);
+            return Ok(user);
         }
 
         //api/User
@@ -58,23 +49,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userDto = new List<UserDto>();
-
-            foreach (var a in users)
-            {
-                userDto.Add(new UserDto
-                {
-                    Id = a.Id,
-                    FirstName = a.Firstname,
-                    LastName = a.Lastname,
-                    Email = a.Email,
-                    PasswordHash = a.PasswordHash,
-                    PasswordSalt = a.PasswordSalt,
-                    PhoneNumber = (int)a.PhoneNumber,
-                    AddressId = (int)a.AddressId
-                });
-            }
-            return Ok(userDto);
+            return Ok(users);
         }
 
         [HttpGet("GetUsersByAdressId/{addressId}")]

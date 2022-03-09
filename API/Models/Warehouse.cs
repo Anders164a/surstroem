@@ -19,6 +19,8 @@ namespace surstroem.Models
 
         public virtual Address Address { get; set; }
         public virtual WarehouseType WarehouseType { get; set; }
+
+        public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<Shift> Shifts { get; set; }
         public virtual ICollection<Stock> Stocks { get; set; }
     }

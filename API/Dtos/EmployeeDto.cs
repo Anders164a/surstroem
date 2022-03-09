@@ -11,7 +11,7 @@ namespace API.Dtos
         public int Id { get; set; }
         public int WorkPhone { get; set; }
 
-        public UserBasicInfoDto User { get; set; }
+        public UserDto User { get; set; }
         public WarehouseDto Warehouse { get; set; }
 
         public EmployeeDto()

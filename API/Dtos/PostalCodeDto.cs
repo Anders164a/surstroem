@@ -24,13 +24,5 @@ namespace API.Dtos
             City = address.PostalCode.CityName;
             Country = new CountryDto(address.PostalCode);
         }
-
-        public PostalCodeDto(Employee employee)
-        {
-            Id = employee.User.Address.PostalCode.Id;
-            Postal = employee.User.Address.PostalCode.PostalCode1;
-            City = employee.User.Address.PostalCode.CityName;
-            Country = new CountryDto(employee);
-        }
     }
 }
