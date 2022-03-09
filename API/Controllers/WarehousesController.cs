@@ -59,6 +59,30 @@ namespace API.Controllers
         }
 
         //api/Warehouses
+        [HttpGet("GetWarehousesFullInfById/{id}")]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetWarehouseFullInfoById(int id)
+        {
+            if (!await _warehouseRepository.entityExists(id))
+                return NotFound();
+
+            var warehouse = await _warehouseRepository.GetWarehouseFullInfoById(id);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var warehouseDto = new WarehouseDto();
+
+            warehouseDto.Id = warehouse.Id;
+            warehouseDto.WarehouseType = new WarehouseTypeDto(warehouse);
+            warehouseDto.Address = new AddressDto(warehouse);
+            
+            return Ok(warehouseDto);
+        }
+
+        //api/Warehouses
         [HttpGet("GetWarehousesFullInfo")]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetWarehouseFullInfo()

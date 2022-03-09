@@ -26,5 +26,15 @@ namespace API.Service.Repositories
                     .Include(a => a.WarehouseType)
                     .ToListAsync();
         }
+
+        public async Task<Warehouse> GetWarehouseFullInfoById(int id)
+        {
+            return await _dbcontext.Warehouses.Where(c => c.Id == id)
+                    .Include(f => f.Address)
+                    .Include(w => w.Address.PostalCode)
+                    .Include(s => s.Address.PostalCode.Country)
+                    .Include(a => a.WarehouseType)
+                    .FirstOrDefaultAsync();
+        }
     }
 }
