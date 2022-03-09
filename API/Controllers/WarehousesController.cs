@@ -59,6 +59,30 @@ namespace API.Controllers
         }
 
         //api/Warehouses
+        [HttpGet("GetWarehousesFullInfById/{id}")]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetWarehouseFullInfoById(int id)
+        {
+            if (!await _warehouseRepository.entityExists(id))
+                return NotFound();
+
+            var warehouse = await _warehouseRepository.GetWarehouseFullInfoById(id);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var warehouseDto = new WarehouseDto();
+
+            warehouseDto.Id = warehouse.Id;
+            warehouseDto.WarehouseType = new WarehouseTypeDto(warehouse);
+            warehouseDto.Address = new AddressDto(warehouse);
+            
+            return Ok(warehouseDto);
+        }
+
+        //api/Warehouses
         [HttpGet("GetWarehousesFullInfo")]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetWarehouseFullInfo()
@@ -70,21 +94,15 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var warehouseDto = new List<WarehouseInfoDto>();
+            var warehouseDto = new List<WarehouseDto>();
 
             foreach (var warehouse in warehouses)
             {
-                warehouseDto.Add(new WarehouseInfoDto
+                warehouseDto.Add(new WarehouseDto
                 {
-                    WarehouseId = warehouse.Id,
-                    WarehouseType = warehouse.WarehouseType.Type,
-                    WarehouseStreetName = warehouse.Address.StreetName,
-                    WarehouseHouseNumber = warehouse.Address.HouseNumber,
-                    WarehouseFloor = warehouse.Address.Floor,
-                    WarehouseAdditional = warehouse.Address.Additional,
-                    WarehousePostal = warehouse.Address.PostalCode.PostalCode1,
-                    WarehouseCity = warehouse.Address.PostalCode.CityName,
-                    WarehouseCountry = warehouse.Address.PostalCode.Country.Country1
+                    Id = warehouse.Id,
+                    WarehouseType = new WarehouseTypeDto(warehouse),
+                    Address = new AddressDto(warehouse)
                 });
             }
             return Ok(warehouseDto);
