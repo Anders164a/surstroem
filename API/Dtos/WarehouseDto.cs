@@ -22,7 +22,7 @@ namespace API.Dtos
         {
             Id = employee.Warehouse.Id;
             WarehouseType = new WarehouseTypeDto(employee.Warehouse);
-            //Address = new AddressDto(employee.Warehouse);
+            Address = new AddressDto(employee.Warehouse);
         }
     }
 }
