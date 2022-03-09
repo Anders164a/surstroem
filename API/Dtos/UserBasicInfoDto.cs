@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Dtos
 {
-    public class UserDto
+    public class UserBasicInfoDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -16,19 +16,18 @@ namespace API.Dtos
 
         public AddressDto Address { get; set; }
 
-        public UserDto()
+        public UserBasicInfoDto()
         {
 
         }
 
-        public UserDto(Employee employee)
+        public UserBasicInfoDto(Employee employee)
         {
             Id = employee.User.Id;
             FirstName = employee.User.Firstname;
             LastName = employee.User.Lastname;
             Email = employee.User.Email;
             PhoneNumber = (int)employee.User.PhoneNumber;
-            Address = new AddressDto(employee.User);
         }
     }
 }

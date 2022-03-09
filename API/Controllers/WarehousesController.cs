@@ -52,8 +52,7 @@ namespace API.Controllers
                 warehouseDto.Add(new WarehouseDto
                 {
                     Id = warehouse.Id,
-                    AddressId = warehouse.AddressId,
-                    WarehouseTypeId = warehouse.WarehouseTypeId
+                    WarehouseType = new WarehouseTypeDto(warehouse)
                 });
             }
             return Ok(warehouseDto);

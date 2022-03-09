@@ -52,9 +52,9 @@ namespace API.Controllers
                 employeeDto.Add(new EmployeeDto
                 {
                     Id = employee.Id,
-                    UserId = employee.UserId,
-                    WarehouseId = employee.WarehouseId,
-                    WorkPhone = (int)employee.WorkPhone
+                    WorkPhone = (int)employee.WorkPhone,
+                    Warehouse = new WarehouseDto(employee),
+                    User = new UserDto(employee)
                 });
             }
             return Ok(employeeDto);
@@ -101,27 +101,16 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var employeeDto = new List<EmployeeContactInfoDto>();
+            var employeeDto = new List<EmployeeDto>();
 
             foreach (var employee in employees)
             {
-                employeeDto.Add(new EmployeeContactInfoDto
+                employeeDto.Add(new EmployeeDto
                 {
-                    EmployeeId = employee.Id,
-                    FirstName = employee.User.Firstname,
-                    LastName = employee.User.Lastname,
-                    PhoneNumber = (int)employee.User.PhoneNumber,
+                    Id = employee.Id,
                     WorkPhone = (int)employee.WorkPhone,
-                    Email = employee.User.Email,
-                    StreetName = employee.User.Address.StreetName,
-                    HouseNumber = employee.User.Address.HouseNumber,
-                    Floor = employee.User.Address.Floor,
-                    Additional = employee.User.Address.Additional,
-                    PostalCode = employee.User.Address.PostalCode.PostalCode1,
-                    CityName = employee.User.Address.PostalCode.CityName,
-                    Country = employee.User.Address.PostalCode.Country.Country1,
-                    WareHouseId = employee.Warehouse.Id,
-                    WareHouseType = employee.Warehouse.WarehouseType.Type
+                    User = new UserDto(employee),
+                    Warehouse = new WarehouseDto(employee)
                 });
             }
             return Ok(employeeDto);
