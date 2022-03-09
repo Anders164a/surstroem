@@ -26,12 +26,12 @@ namespace API.Controllers
         {
             if (!await _reviewOpinionRepository.entityExists(id))
                 return NotFound();
-            var product = await _reviewOpinionRepository.GetById(id);
+            var reviewOpinion = await _reviewOpinionRepository.GetById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(product);
+            return Ok(reviewOpinion);
         }
 
         //api/ReviewOpinions
@@ -39,13 +39,39 @@ namespace API.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetReviewOpinions()
         {
-            var ReviewOpinions = await _reviewOpinionRepository.GetAllAsync();
+            var reviewOpinions = await _reviewOpinionRepository.GetAllAsync();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return Ok(ReviewOpinions);
+            return Ok(reviewOpinions);
+        }
+
+        //api/ReviewOpinions/GetAllByReviewId
+        [HttpGet("GetAllByReviewId/{reviewId}")]
+        public async Task<IActionResult> GetReviewOpinionsByReviewId(int reviewId)
+        {
+            var reviewOpinions = await _reviewOpinionRepository.GetReviewOpinionsByReviewId(reviewId);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var reviewOpinionsDto = new List<ReviewOpinionForLikeDto>();
+
+            foreach (var reviewOpinion in reviewOpinions)
+            {
+                reviewOpinionsDto.Add(new ReviewOpinionForLikeDto
+                {
+                    Id = reviewOpinion.Id,
+                    IsLiked = reviewOpinion.IsLiked,
+                    IsDisliked = reviewOpinion.IsDisliked
+                });
+            }
+
+            return Ok(reviewOpinionsDto);
         }
 
         //api/ReviewOpinions
