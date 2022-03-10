@@ -30,15 +30,5 @@ namespace API.Dtos
             PhoneNumber = (int)employee.User.PhoneNumber;
             Address = new AddressDto(employee.User);
         }
-
-        public UserDto(EmployeeHasShift employeeHasShift)
-        {
-            Id = employeeHasShift.Employee.User.Id;
-            FirstName = employeeHasShift.Employee.User.Firstname;
-            LastName = employeeHasShift.Employee.User.Lastname;
-            Email = employeeHasShift.Employee.User.Email;
-            PhoneNumber = (int)employeeHasShift.Employee.User.PhoneNumber;
-            Address = new AddressDto(employeeHasShift.Employee.User);
-        }
     }
 }
