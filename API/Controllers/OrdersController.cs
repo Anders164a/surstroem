@@ -57,23 +57,21 @@ namespace API.Controllers
         [HttpGet("GetAllOrdersInfo")]
         public async Task<IActionResult> GetAllOrdersInfo()
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            var orders = await _orderRepository.GetAllAsync();
 
-            var orders = await _orderRepository.GetOrdersWithAllInfo();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             var orderDto = new List<OrderDto>();
+
             foreach (var order in orders)
             {
                 orderDto.Add(new OrderDto
                 {
                     Id = order.Id,
                     User = new UserDto(order),
-                    PayingAddress = order.PayingAddress,
-                    ShippingAddress = order.ShippingAddress,
-                    DeliveryState = order.DeliveryState,
-                    DeliveryType = order.DeliveryType
-
                 });
             }
             return Ok(orderDto);

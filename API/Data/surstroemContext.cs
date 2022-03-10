@@ -303,7 +303,7 @@ namespace surstroem.Data
                     .HasForeignKey(d => d.DeliveryTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("orders_ibfk_3");
-                /*
+                
                 entity.HasOne(d => d.PayingAddress)
                     .WithMany(p => p.PayingOrders)
                     .HasForeignKey(d => d.PayingAddressId)
@@ -314,7 +314,7 @@ namespace surstroem.Data
                     .WithMany(p => p.ShippingOrders)
                     .HasForeignKey(d => d.DeliveryTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("orders_ibfk_1");*/
+                    .HasConstraintName("orders_ibfk_1");
             });
 
             modelBuilder.Entity<OrderProduct>(entity =>

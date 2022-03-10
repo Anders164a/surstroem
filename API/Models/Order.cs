@@ -20,9 +20,9 @@ namespace surstroem.Models
         public int DeliveryStateId { get; set; }
         public int DeliveryTypeId { get; set; }
 
-        public virtual UserDto User { get; set; }
-        public virtual AddressDto ShippingAddress { get; set; } 
-        public virtual AddressDto PayingAddress { get; set; } 
+        public virtual User User { get; set; }
+        public virtual Address ShippingAddress { get; set; } 
+        public virtual Address PayingAddress { get; set; } 
         public virtual DeliveryState DeliveryState { get; set; }
         public virtual DeliveryType DeliveryType { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }

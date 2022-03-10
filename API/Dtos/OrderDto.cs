@@ -10,9 +10,9 @@ namespace API.Dtos
     {
         public int Id { get; set; }
 
-        public User User { get; set; }
-        public Address ShippingAddress { get; set; }
-        public Address PayingAddress { get; set; }
+        public UserDto User { get; set; }
+        public AddressDto ShippingAddress { get; set; }
+        public AddressDto PayingAddress { get; set; }
         public DeliveryState DeliveryState { get; set; }
         public DeliveryType DeliveryType { get; set; }
 
@@ -24,11 +24,11 @@ namespace API.Dtos
         public OrderDto(OrderProduct orderProduct)
         {
             Id = orderProduct.Order.Id;
-            User = orderProduct.Order.User;
-            ShippingAddress = orderProduct.Order.ShippingAddress;
-            PayingAddress = orderProduct.Order.PayingAddress;
-            DeliveryState = orderProduct.Order.DeliveryState;
-            DeliveryType = orderProduct.Order.DeliveryType;
+            User = new UserDto(orderProduct.Order);
+            ShippingAddress = new AddressDto(orderProduct.Order);
+            PayingAddress = new AddressDto(orderProduct.Order);
+            DeliveryState = new DeliveryStateDto(orderProduct.Order);
+            DeliveryType = new DeliveryTypeDto(orderProduct.Order);
         }
     }
 }
