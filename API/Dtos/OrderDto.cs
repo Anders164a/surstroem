@@ -11,8 +11,8 @@ namespace API.Dtos
         public int Id { get; set; }
 
         public User User { get; set; }
-        public Address ShipAddress { get; set; }
-        public Address PayAddress { get; set; }
+        public Address ShippingAddress { get; set; }
+        public Address PayingAddress { get; set; }
         public DeliveryState DeliveryState { get; set; }
         public DeliveryType DeliveryType { get; set; }
 
@@ -23,12 +23,12 @@ namespace API.Dtos
 
         public OrderDto(OrderProduct orderProduct)
         {
-            Id = orderProduct.Order.;
-            StreetName = user.Address.StreetName;
-            HouseNumber = user.Address.HouseNumber;
-            Floor = user.Address.Floor;
-            Additional = user.Address.Additional;
-            PostalCode = new PostalCodeDto(user.Address);
+            Id = orderProduct.Order.Id;
+            User = orderProduct.Order.User;
+            ShippingAddress = orderProduct.Order.ShippingAddress;
+            PayingAddress = orderProduct.Order.PayingAddress;
+            DeliveryState = orderProduct.Order.DeliveryState;
+            DeliveryType = orderProduct.Order.DeliveryType;
         }
     }
 }

@@ -67,15 +67,16 @@ namespace API.Controllers
             {
                 orderDto.Add(new OrderDto
                 {
-                    Id = user.Id,
-                    FirstName = user.Firstname,
-                    LastName = user.Lastname,
-                    Email = user.Email,
-                    PhoneNumber = (int)user.PhoneNumber,
-                    Address = new AddressDto(user)
+                    Id = order.Id,
+                    User = new UserDto(order),
+                    PayingAddress = order.PayingAddress,
+                    ShippingAddress = order.ShippingAddress,
+                    DeliveryState = order.DeliveryState,
+                    DeliveryType = order.DeliveryType
+
                 });
             }
-            return Ok(userDto);
+            return Ok(orderDto);
         }
 
         //api/Orders
