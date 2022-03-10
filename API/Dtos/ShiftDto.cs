@@ -19,12 +19,12 @@ namespace API.Dtos
                 
         }
 
-        public ShiftDto(EmployeeHasShift employeeHasShift)
+        public ShiftDto(Shift shift)
         {
-            Id = employeeHasShift.Shifts.Id;
-            ShiftStart = employeeHasShift.Shifts.ShiftStart;
-            ShiftEnd = employeeHasShift.Shifts.ShiftEnd;
-            Warehouse = new WarehouseDto(employeeHasShift.Shifts);
+            Id = shift.Id;
+            ShiftStart = shift.ShiftStart;
+            ShiftEnd = shift.ShiftEnd;
+            Warehouse = new WarehouseDto(shift.Warehouse);
         }
     }
 }

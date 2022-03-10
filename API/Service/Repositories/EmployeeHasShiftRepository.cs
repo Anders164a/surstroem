@@ -33,5 +33,22 @@ namespace API.Service.Repositories
                         .Include(s => s.Shifts)
                         .ToListAsync();
         }
+
+        public async Task<ICollection<EmployeeHasShift>> GetAllShiftsByEmployees()
+        {
+            return await _dbcontext.Set<EmployeeHasShift>()
+                        .Include(e => e.Employee)
+                        .Include(q => q.Employee.User)
+                        .Include(w => w.Employee.User.Address)
+                        .Include(x => x.Employee.User.Address.PostalCode)
+                        .Include(a => a.Employee.User.Address.PostalCode.Country)
+                        .Include(k => k.Employee.Warehouse)
+                        .Include(k => k.Employee.Warehouse.Address)
+                        .Include(k => k.Employee.Warehouse.Address.PostalCode)
+                        .Include(k => k.Employee.Warehouse.Address.PostalCode.Country)
+                        .Include(k => k.Employee.Warehouse.WarehouseType)
+                        .Include(s => s.Shifts)
+                        .ToListAsync();
+        }
     }
 }

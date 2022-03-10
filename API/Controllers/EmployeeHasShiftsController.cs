@@ -78,9 +78,36 @@ namespace API.Controllers
             {
                 Id = employeeShift.Id,
                 ShiftDate = employeeShift.Date,
-                Employee = new EmployeeDto(employeeShift),
-                Shift = new ShiftInfoDto(employeeShift)
+                Employee = new EmployeeDto(employeeShift.Employee),
+                Shift = new ShiftInfoDto(employeeShift.Shifts)
             });
+            }
+            return Ok(employeeHasShiftDto);
+        }
+
+        //api/EmployeeHasShifts
+        [HttpGet("GetAllShiftsByEmployees")]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetAllShiftsByEmployees()
+        {
+            var employeeHasShifts = await _employeeHasShiftRepository.GetAllShiftsByEmployees();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var employeeHasShiftDto = new List<EmployeeShiftsDto>();
+
+            foreach (var employeeShift in employeeHasShifts)
+            {
+                employeeHasShiftDto.Add(new EmployeeShiftsDto
+                {
+                    Id = employeeShift.Id,
+                    ShiftDate = employeeShift.Date,
+                    Employee = new EmployeeDto(employeeShift.Employee),
+                    Shift = new ShiftInfoDto(employeeShift.Shifts)
+                });
             }
             return Ok(employeeHasShiftDto);
         }

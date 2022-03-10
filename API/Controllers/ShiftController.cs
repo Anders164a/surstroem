@@ -81,7 +81,7 @@ namespace API.Controllers
                     Id = shift.Id,
                     ShiftStart = shift.ShiftStart,
                     ShiftEnd = shift.ShiftEnd,
-                    Warehouse = new WarehouseDto(shift)
+                    Warehouse = new WarehouseDto(shift.Warehouse)
                 });
             }
 

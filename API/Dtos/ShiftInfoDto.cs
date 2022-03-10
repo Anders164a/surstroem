@@ -12,19 +12,17 @@ namespace API.Dtos
         public DateTime ShiftStart { get; set; }
         public DateTime ShiftEnd { get; set; }
 
-        //public WarehouseDto Warehouse { get; set; }
 
         public ShiftInfoDto()
         {
 
         }
 
-        public ShiftInfoDto(EmployeeHasShift employeeHasShift)
+        public ShiftInfoDto(Shift shift)
         {
-            Id = employeeHasShift.Shifts.Id;
-            ShiftStart = employeeHasShift.Shifts.ShiftStart;
-            ShiftEnd = employeeHasShift.Shifts.ShiftEnd;
-            //Warehouse = new WarehouseDto(employeeHasShift.Shifts);
+            Id = shift.Id;
+            ShiftStart = shift.ShiftStart;
+            ShiftEnd = shift.ShiftEnd;
         }
     }
 }
