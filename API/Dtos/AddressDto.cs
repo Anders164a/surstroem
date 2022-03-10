@@ -41,5 +41,15 @@ namespace API.Dtos
             Additional = warehouse.Address.Additional;
             PostalCode = new PostalCodeDto(warehouse.Address);
         }
+
+        public AddressDto(Order order)
+        {
+            Id = order.PayingAddress.Id;
+            StreetName = order.PayingAddress.StreetName;
+            HouseNumber = order.PayingAddress.HouseNumber;
+            Floor = order.PayingAddress.Floor;
+            Additional = order.PayingAddress.Additional;
+            PostalCode = new PostalCodeDto(order.PayingAddress);
+        }
     }
 }
