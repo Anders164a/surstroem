@@ -8,6 +8,7 @@ namespace API.Service.Interfaces
 {
     public interface IOrderRepository : IGenericRepository<Order>
     {
+        Task<ICollection<Order>> GetOrdersFromUserId(int userId);
         Task<ICollection<Order>> GetOrdersWithAllInfo();
     }
 }

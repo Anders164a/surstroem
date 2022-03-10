@@ -264,9 +264,9 @@ namespace surstroem.Data
 
                 entity.HasIndex(e => e.DeliveryTypeId, "delivery_type_id");
 
-                entity.HasIndex(e => e.PayingAddressId, "paying_address");
+                entity.HasIndex(e => e.PayingAddressId, "paying_address_id");
 
-                entity.HasIndex(e => e.ShippingAddressId, "shipping_address");
+                entity.HasIndex(e => e.ShippingAddressId, "shipping_address_id");
 
                 entity.Property(e => e.Id)
                     .HasColumnType("int(11)")
@@ -282,11 +282,11 @@ namespace surstroem.Data
 
                 entity.Property(e => e.PayingAddressId)
                     .HasColumnType("int(11)")
-                    .HasColumnName("paying_address");
+                    .HasColumnName("paying_address_id");
 
                 entity.Property(e => e.ShippingAddressId)
                     .HasColumnType("int(11)")
-                    .HasColumnName("shipping_address");
+                    .HasColumnName("shipping_address_id");
 
                 entity.Property(e => e.UserId)
                     .HasColumnType("int(11)")

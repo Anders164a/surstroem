@@ -42,14 +42,14 @@ namespace API.Dtos
             PostalCode = new PostalCodeDto(warehouse.Address);
         }
 
-        public AddressDto(Order order)
+        public AddressDto(Address address)
         {
-            Id = order.PayingAddress.Id;
-            StreetName = order.PayingAddress.StreetName;
-            HouseNumber = order.PayingAddress.HouseNumber;
-            Floor = order.PayingAddress.Floor;
-            Additional = order.PayingAddress.Additional;
-            PostalCode = new PostalCodeDto(order.PayingAddress);
+            Id = address.Id;
+            StreetName = address.StreetName;
+            HouseNumber = address.HouseNumber;
+            Floor = address.Floor;
+            Additional = address.Additional;
+            PostalCode = new PostalCodeDto(address);
         }
     }
 }

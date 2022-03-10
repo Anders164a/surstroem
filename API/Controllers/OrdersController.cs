@@ -57,7 +57,7 @@ namespace API.Controllers
         [HttpGet("GetAllOrdersInfo")]
         public async Task<IActionResult> GetAllOrdersInfo()
         {
-            var orders = await _orderRepository.GetAllAsync();
+            var orders = await _orderRepository.GetOrdersWithAllInfo();
 
             if (!ModelState.IsValid)
             {
@@ -72,6 +72,37 @@ namespace API.Controllers
                 {
                     Id = order.Id,
                     User = new UserDto(order),
+                    ShippingAddress = new AddressDto(order.PayingAddress),
+                    PayingAddress = new AddressDto(order.ShippingAddress),
+                    DeliveryState = new DeliveryStateDto(order),
+                    DeliveryType = new DeliveryTypeDto(order)
+                });
+            }
+            return Ok(orderDto);
+        }
+
+        [HttpGet("GetAllByUserId/{userId}")]
+        public async Task<IActionResult> GetAllOrdersByUserId(int userId)
+        {
+            var orders = await _orderRepository.GetOrdersFromUserId(userId);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var orderDto = new List<OrderDto>();
+
+            foreach (var order in orders)
+            {
+                orderDto.Add(new OrderDto
+                {
+                    Id = order.Id,
+                    User = new UserDto(order),
+                    ShippingAddress = new AddressDto(order.PayingAddress),
+                    PayingAddress = new AddressDto(order.ShippingAddress),
+                    DeliveryState = new DeliveryStateDto(order),
+                    DeliveryType = new DeliveryTypeDto(order)
                 });
             }
             return Ok(orderDto);
