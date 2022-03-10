@@ -79,7 +79,7 @@ namespace API.Controllers
                 Id = employeeShift.Id,
                 ShiftDate = employeeShift.Date,
                 Employee = new EmployeeDto(employeeShift),
-                Shift = new ShiftDto(employeeShift)
+                Shift = new ShiftInfoDto(employeeShift)
             });
             }
             return Ok(employeeHasShiftDto);

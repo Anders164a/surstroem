@@ -11,7 +11,7 @@ namespace API.Dtos
         public int Id { get; set; }
         public DateTime ShiftDate { get; set; }
         public EmployeeDto Employee { get; set; }
-        public ShiftDto Shift { get; set; }
+        public ShiftInfoDto Shift { get; set; }
 
     }
 }
