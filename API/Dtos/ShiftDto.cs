@@ -9,9 +9,10 @@ namespace API.Dtos
     public class ShiftDto
     {
         public int Id { get; set; }
-        public int WarehouseId { get; set; }
         public DateTime ShiftStart { get; set; }
         public DateTime ShiftEnd { get; set; }
+
+        public WarehouseDto Warehouse { get; set; }
 
         public ShiftDto()
         {
@@ -23,11 +24,7 @@ namespace API.Dtos
             Id = employeeHasShift.Id;
             ShiftStart = employeeHasShift.Shifts.ShiftStart;
             ShiftEnd = employeeHasShift.Shifts.ShiftEnd;
-        }
-
-        public ShiftDto(Warehouse warehouse)
-        {
-
+            Warehouse = new WarehouseDto(employeeHasShift.Shifts);
         }
     }
 }

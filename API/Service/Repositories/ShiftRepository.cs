@@ -16,5 +16,17 @@ namespace API.Service.Repositories
         {
 
         }
+
+        public async Task<ICollection<Shift>> GetAllShiftsByWarehouseId(int warehouseId)
+        {
+            return await _dbcontext.Shifts.Where(c => c.WarehouseId == warehouseId)
+                        .Include(e => e.Warehouse.Employees)
+                        .Include(e => e.EmployeeHasShifts)
+                        .Include(e => e.Warehouse)
+                        .Include(e => e.Warehouse.Shifts)
+                        .Include(s => s.Warehouse.Address)
+                        .Include(s => s.Warehouse.Address.PostalCode)
+                        .ToListAsync();
+        }
     }
 }

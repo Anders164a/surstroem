@@ -53,12 +53,39 @@ namespace API.Controllers
                 ShiftDto.Add(new ShiftDto
                 {
                     Id = shift.Id,
-                    WarehouseId = shift.WarehouseId,
                     ShiftStart = shift.ShiftStart,
                     ShiftEnd = shift.ShiftEnd
                 });
             }
             return Ok(ShiftDto);
+        }
+
+        //api/Shifts
+        [HttpGet("GetAllShiftsByWarehouseId/{warehouseId}")]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetAllShiftsByWarehouseId(int warehouseId)
+        {
+            var shifts = await _shiftRepository.GetAllShiftsByWarehouseId(warehouseId);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var shiftDto = new List<ShiftDto>();
+
+            foreach (var shift in shifts)
+            {
+                shiftDto.Add(new ShiftDto
+                {
+                    Id = shift.Id,
+                    ShiftStart = shift.ShiftStart,
+                    ShiftEnd = shift.ShiftEnd,
+                    Warehouse = new WarehouseDto(shift),
+                });
+            }
+
+            return Ok(shiftDto);
         }
 
         //api/Shifts

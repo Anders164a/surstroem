@@ -1,4 +1,5 @@
-﻿using System;
+﻿using surstroem.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,5 +12,6 @@ namespace API.Dtos
         public DateTime ShiftDate { get; set; }
         public EmployeeDto Employee { get; set; }
         public ShiftDto Shift { get; set; }
+
     }
 }

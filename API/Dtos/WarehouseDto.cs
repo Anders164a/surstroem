@@ -24,5 +24,12 @@ namespace API.Dtos
             WarehouseType = new WarehouseTypeDto(employee.Warehouse);
             Address = new AddressDto(employee.Warehouse);
         }
+
+        public WarehouseDto(Shift shift)
+        {
+            Id = shift.Warehouse.Id;
+            WarehouseType = new WarehouseTypeDto(shift.Warehouse);
+            Address = new AddressDto(shift.Warehouse);
+        }
     }
 }
