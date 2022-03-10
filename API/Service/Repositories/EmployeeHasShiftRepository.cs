@@ -25,6 +25,7 @@ namespace API.Service.Repositories
                         .Include(w => w.Employee.User.Address)
                         .Include(u => u.Employee.User.Address.PostalCode)
                         .Include(a => a.Employee.User.Address.PostalCode.Country)
+                        .Include(k => k.Employee.Warehouse)
                         .Include(s => s.Shifts)
                         .FirstOrDefaultAsync();
         }
