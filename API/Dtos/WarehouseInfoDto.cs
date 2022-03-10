@@ -23,17 +23,17 @@ namespace API.Dtos
 
         }
 
-        public WarehouseInfoDto(Employee employee)
+        public WarehouseInfoDto(Warehouse warehouse)
         {
-            WarehouseId = employee.Warehouse.Id;
-            WarehouseType = employee.Warehouse.WarehouseType.Type;
-            WarehouseStreetName = employee.Warehouse.Address.StreetName;
-            WarehouseHouseNumber = employee.Warehouse.Address.HouseNumber;
-            WarehouseFloor = employee.Warehouse.Address.Floor;
-            WarehouseAdditional = employee.Warehouse.Address.Additional;
-            WarehousePostal = employee.Warehouse.Address.PostalCode.PostalCode1;
-            WarehouseCity = employee.Warehouse.Address.PostalCode.CityName;
-            WarehouseCountry = employee.Warehouse.Address.PostalCode.Country.Country1;
+            WarehouseId = warehouse.Id;
+            WarehouseType = warehouse.WarehouseType.Type;
+            WarehouseStreetName = warehouse.Address.StreetName;
+            WarehouseHouseNumber = warehouse.Address.HouseNumber;
+            WarehouseFloor = warehouse.Address.Floor;
+            WarehouseAdditional = warehouse.Address.Additional;
+            WarehousePostal = warehouse.Address.PostalCode.PostalCode1;
+            WarehouseCity = warehouse.Address.PostalCode.CityName;
+            WarehouseCountry = warehouse.Address.PostalCode.Country.Country1;
         }
     }
 }

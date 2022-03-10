@@ -18,5 +18,13 @@ namespace API.Dtos
         {
 
         }
+
+        public EmployeeDto(Employee employee)
+        {
+            Id = employee.Id;
+            WorkPhone = (int)employee.WorkPhone;
+            User = new UserDto(employee);
+            Warehouse = new WarehouseDto(employee.Warehouse);
+        }
     }
 }

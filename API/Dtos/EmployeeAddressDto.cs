@@ -28,7 +28,6 @@ namespace API.Dtos
             HouseNumber = employee.User.Address.HouseNumber;
             Floor = employee.User.Address.Floor;
             Additional = employee.User.Address.Additional;
-            //PostalCodeInfo = new PostalCodeDto(employee);
         }
     }
 }

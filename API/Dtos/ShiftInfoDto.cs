@@ -6,25 +6,23 @@ using System.Threading.Tasks;
 
 namespace API.Dtos
 {
-    public class ShiftDto
+    public class ShiftInfoDto
     {
         public int Id { get; set; }
         public DateTime ShiftStart { get; set; }
         public DateTime ShiftEnd { get; set; }
 
-        public WarehouseDto Warehouse { get; set; }
 
-        public ShiftDto()
+        public ShiftInfoDto()
         {
-                
+
         }
 
-        public ShiftDto(Shift shift)
+        public ShiftInfoDto(Shift shift)
         {
             Id = shift.Id;
             ShiftStart = shift.ShiftStart;
             ShiftEnd = shift.ShiftEnd;
-            Warehouse = new WarehouseDto(shift.Warehouse);
         }
     }
 }

@@ -8,5 +8,6 @@ namespace API.Service.Interfaces
 {
     public interface IShiftRepository : IGenericRepository<Shift>
     {
+        Task<ICollection<Shift>> GetAllShiftsByWarehouseId(int warehouseId);
     }
 }

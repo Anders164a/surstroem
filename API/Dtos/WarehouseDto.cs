@@ -18,11 +18,11 @@ namespace API.Dtos
 
         }
 
-        public WarehouseDto(Employee employee)
+        public WarehouseDto(Warehouse warehouse)
         {
-            Id = employee.Warehouse.Id;
-            WarehouseType = new WarehouseTypeDto(employee.Warehouse);
-            Address = new AddressDto(employee.Warehouse);
+            Id = warehouse.Id;
+            WarehouseType = new WarehouseTypeDto(warehouse);
+            Address = new AddressDto(warehouse);
         }
     }
 }

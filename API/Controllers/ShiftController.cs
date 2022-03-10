@@ -26,12 +26,12 @@ namespace API.Controllers
         {
             if (!await _shiftRepository.entityExists(id))
                 return NotFound();
-            var product = await _shiftRepository.GetById(id);
+            var shift = await _shiftRepository.GetById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(product);
+            return Ok(shift);
         }
 
         //api/Shifts
@@ -39,26 +39,42 @@ namespace API.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetShifts()
         {
-            var Shifts = await _shiftRepository.GetAllAsync();
+            var shifts = await _shiftRepository.GetAllAsync();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            return Ok(shift);
+        }
+
+        //api/Shifts
+        [HttpGet("GetAllShiftsByWarehouseId/{warehouseId}")]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetAllShiftsByWarehouseId(int warehouseId)
+        {
+            var shifts = await _shiftRepository.GetAllShiftsByWarehouseId(warehouseId);
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var ShiftDto = new List<ShiftDto>();
+            var shiftDto = new List<ShiftDto>();
 
-            foreach (var shift in Shifts)
+            foreach (var shift in shifts)
             {
-                ShiftDto.Add(new ShiftDto
+                shiftDto.Add(new ShiftDto
                 {
                     Id = shift.Id,
-                    WarehouseId = shift.WarehouseId,
                     ShiftStart = shift.ShiftStart,
-                    ShiftEnd = shift.ShiftEnd
+                    ShiftEnd = shift.ShiftEnd,
+                    Warehouse = new WarehouseDto(shift.Warehouse)
                 });
             }
-            return Ok(ShiftDto);
+
+            return Ok(shiftDto);
         }
 
         //api/Shifts
