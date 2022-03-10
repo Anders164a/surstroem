@@ -26,12 +26,12 @@ namespace API.Controllers
         {
             if (!await _shiftRepository.entityExists(id))
                 return NotFound();
-            var product = await _shiftRepository.GetById(id);
+            var shift = await _shiftRepository.GetById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(product);
+            return Ok(shift);
         }
 
         //api/Shifts
@@ -39,25 +39,14 @@ namespace API.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetShifts()
         {
-            var Shifts = await _shiftRepository.GetAllAsync();
+            var shifts = await _shiftRepository.GetAllAsync();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            var ShiftDto = new List<ShiftDto>();
-
-            foreach (var shift in Shifts)
-            {
-                ShiftDto.Add(new ShiftDto
-                {
-                    Id = shift.Id,
-                    ShiftStart = shift.ShiftStart,
-                    ShiftEnd = shift.ShiftEnd
-                });
-            }
-            return Ok(ShiftDto);
+            
+            return Ok(shift);
         }
 
         //api/Shifts
