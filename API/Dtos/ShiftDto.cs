@@ -21,7 +21,7 @@ namespace API.Dtos
 
         public ShiftDto(EmployeeHasShift employeeHasShift)
         {
-            Id = employeeHasShift.Id;
+            Id = employeeHasShift.Shifts.Id;
             ShiftStart = employeeHasShift.Shifts.ShiftStart;
             ShiftEnd = employeeHasShift.Shifts.ShiftEnd;
             Warehouse = new WarehouseDto(employeeHasShift.Shifts);
