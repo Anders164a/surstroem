@@ -264,6 +264,10 @@ namespace surstroem.Data
 
                 entity.HasIndex(e => e.DeliveryTypeId, "delivery_type_id");
 
+                entity.HasIndex(e => e.PayingAddressId, "paying_address_id");
+
+                entity.HasIndex(e => e.ShippingAddressId, "shipping_address_id");
+
                 entity.Property(e => e.Id)
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
@@ -276,13 +280,13 @@ namespace surstroem.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("delivery_type_id");
 
-                entity.Property(e => e.PayingAddress)
+                entity.Property(e => e.PayingAddressId)
                     .HasColumnType("int(11)")
-                    .HasColumnName("paying_address");
+                    .HasColumnName("paying_address_id");
 
-                entity.Property(e => e.ShippingAddress)
+                entity.Property(e => e.ShippingAddressId)
                     .HasColumnType("int(11)")
-                    .HasColumnName("shipping_address");
+                    .HasColumnName("shipping_address_id");
 
                 entity.Property(e => e.UserId)
                     .HasColumnType("int(11)")
@@ -292,10 +296,22 @@ namespace surstroem.Data
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.DeliveryStateId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("orders_ibfk_2");
+                    .HasConstraintName("orders_ibfk_4");
 
                 entity.HasOne(d => d.DeliveryType)
                     .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.DeliveryTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("orders_ibfk_3");
+                
+                entity.HasOne(d => d.PayingAddress)
+                    .WithMany(p => p.PayingOrders)
+                    .HasForeignKey(d => d.PayingAddressId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("orders_ibfk_2");
+
+                entity.HasOne(d => d.ShippingAddress)
+                    .WithMany(p => p.ShippingOrders)
                     .HasForeignKey(d => d.DeliveryTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("orders_ibfk_1");

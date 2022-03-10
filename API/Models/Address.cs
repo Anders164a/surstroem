@@ -23,5 +23,7 @@ namespace surstroem.Models
         public virtual PostalCode PostalCode { get; set; }
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Warehouse> Warehouses { get; set; }
+        public virtual ICollection<Order> PayingOrders { get; set; }
+        public virtual ICollection<Order> ShippingOrders { get; set; }
     }
 }

@@ -30,5 +30,15 @@ namespace API.Dtos
             PhoneNumber = (int)employee.User.PhoneNumber;
             Address = new AddressDto(employee.User);
         }
+
+        public UserDto(Order order)
+        {
+            Id = order.User.Id;
+            FirstName = order.User.Firstname;
+            LastName = order.User.Lastname;
+            Email = order.User.Email;
+            PhoneNumber = (int)order.User.PhoneNumber;
+            Address = new AddressDto(order.User);
+        }
     }
 }

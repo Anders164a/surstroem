@@ -31,12 +31,12 @@ namespace API.Controllers
         {
             if (!await _orderRepository.entityExists(id))
                 return NotFound();
-            var product = await _orderRepository.GetById(id);
+            var order = await _orderRepository.GetById(id);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(product);
+            return Ok(order);
         }
 
         //api/Orders
@@ -52,6 +52,60 @@ namespace API.Controllers
             }
 
             return Ok(orders);
+        }
+
+        [HttpGet("GetAllOrdersInfo")]
+        public async Task<IActionResult> GetAllOrdersInfo()
+        {
+            var orders = await _orderRepository.GetOrdersWithAllInfo();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var orderDto = new List<OrderDto>();
+
+            foreach (var order in orders)
+            {
+                orderDto.Add(new OrderDto
+                {
+                    Id = order.Id,
+                    User = new UserDto(order),
+                    ShippingAddress = new AddressDto(order.PayingAddress),
+                    PayingAddress = new AddressDto(order.ShippingAddress),
+                    DeliveryState = new DeliveryStateDto(order),
+                    DeliveryType = new DeliveryTypeDto(order)
+                });
+            }
+            return Ok(orderDto);
+        }
+
+        [HttpGet("GetAllByUserId/{userId}")]
+        public async Task<IActionResult> GetAllOrdersByUserId(int userId)
+        {
+            var orders = await _orderRepository.GetOrdersFromUserId(userId);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var orderDto = new List<OrderDto>();
+
+            foreach (var order in orders)
+            {
+                orderDto.Add(new OrderDto
+                {
+                    Id = order.Id,
+                    User = new UserDto(order),
+                    ShippingAddress = new AddressDto(order.PayingAddress),
+                    PayingAddress = new AddressDto(order.ShippingAddress),
+                    DeliveryState = new DeliveryStateDto(order),
+                    DeliveryType = new DeliveryTypeDto(order)
+                });
+            }
+            return Ok(orderDto);
         }
 
         //api/Orders
