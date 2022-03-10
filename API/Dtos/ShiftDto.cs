@@ -26,13 +26,5 @@ namespace API.Dtos
             ShiftEnd = employeeHasShift.Shifts.ShiftEnd;
             Warehouse = new WarehouseDto(employeeHasShift.Shifts);
         }
-
-        public ShiftDto(Shift shift)
-        {
-            Id = shift.Id;
-            ShiftStart = shift.ShiftStart;
-            ShiftEnd = shift.ShiftEnd;
-            Warehouse = new WarehouseDto(shift);
-        }
     }
 }

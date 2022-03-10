@@ -26,6 +26,7 @@ namespace API.Service.Repositories
                         .Include(e => e.Warehouse.Shifts)
                         .Include(s => s.Warehouse.Address)
                         .Include(s => s.Warehouse.Address.PostalCode)
+                        .Include(s => s.Warehouse.Address.PostalCode.Country)
                         .ToListAsync();
         }
     }
