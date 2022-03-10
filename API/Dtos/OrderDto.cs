@@ -21,14 +21,14 @@ namespace API.Dtos
 
         }
 
-        public OrderDto(OrderProduct orderProduct)
+        public OrderDto(Order order)
         {
-            Id = orderProduct.Order.Id;
-            User = new UserDto(orderProduct.Order);
-            ShippingAddress = new AddressDto(orderProduct.Order.ShippingAddress);
-            PayingAddress = new AddressDto(orderProduct.Order.PayingAddress);
-            DeliveryState = new DeliveryStateDto(orderProduct.Order);
-            DeliveryType = new DeliveryTypeDto(orderProduct.Order);
+            Id = order.Id;
+            User = new UserDto(order);
+            ShippingAddress = new AddressDto(order.ShippingAddress);
+            PayingAddress = new AddressDto(order.PayingAddress);
+            DeliveryState = new DeliveryStateDto(order);
+            DeliveryType = new DeliveryTypeDto(order);
         }
     }
 }

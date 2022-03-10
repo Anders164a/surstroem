@@ -69,8 +69,12 @@ namespace API.Controllers
                 var jsonString = await response.Content.ReadAsStringAsync();
                 products = JsonConvert.DeserializeObject<List<ProductDto>>(jsonString);
             }
+            else 
+            {
+                return BadRequest(ModelState);
+            }
 
-            foreach(var orderProduct in orderProducts) 
+            foreach (var orderProduct in orderProducts) 
             {
                 ProductDto productName = products.First(q => q.Id == orderProduct.ProductsId);
                 orderProductDtos.Add(new OrderProductDto
@@ -82,6 +86,31 @@ namespace API.Controllers
                 });
             }
             return Ok(orderProductDtos);
+        }
+
+        [HttpGet("GetOrdersByProductId/{productId}")]
+        public async Task<IActionResult> GetOrderByProductId(int productId)
+        {
+            var orderProducts = await _orderProductRepository.GetOrdersByProductId(productId);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var orderProductDto = new List<OrderProductOrderDto>();
+
+            foreach (var orderProduct in orderProducts)
+            {
+                orderProductDto.Add(new OrderProductOrderDto
+                {
+                    Id = orderProduct.Id,
+                    Price = orderProduct.Price,
+                    Quantity = orderProduct.Quantity,
+                    Order = new OrderDto(orderProduct.Order)
+                });
+            }
+            return Ok(orderProductDto);
         }
 
         //api/OrderProducts
