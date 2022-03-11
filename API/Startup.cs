@@ -68,7 +68,7 @@ namespace API
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<IReviewOpinionRepository, ReviewOpinionRepository>();
             services.AddScoped<IShiftRepository, ShiftRepository>();
-            //services.AddScoped<IStockRepository, StockRepository>();
+            services.AddScoped<IStockRepository, StockRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IWarehouseRepository, WarehouseRepository>();
             services.AddScoped<IWarehouseTypeRepository, WarehouseTypeRepository>();
