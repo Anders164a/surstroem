@@ -52,7 +52,7 @@ namespace API.Controllers
                 warehouseDto.Add(new WarehouseDto
                 {
                     Id = warehouse.Id,
-                    WarehouseType = new WarehouseTypeDto(warehouse)
+                    WarehouseType = new WarehouseTypeDto(warehouse.WarehouseType)
                 });
             }
             return Ok(warehouseDto);
@@ -76,8 +76,8 @@ namespace API.Controllers
             var warehouseDto = new WarehouseDto();
 
             warehouseDto.Id = warehouse.Id;
-            warehouseDto.WarehouseType = new WarehouseTypeDto(warehouse);
-            warehouseDto.Address = new AddressDto(warehouse);
+            warehouseDto.WarehouseType = new WarehouseTypeDto(warehouse.WarehouseType);
+            warehouseDto.Address = new AddressDto(warehouse.Address);
             
             return Ok(warehouseDto);
         }
@@ -101,8 +101,8 @@ namespace API.Controllers
                 warehouseDto.Add(new WarehouseDto
                 {
                     Id = warehouse.Id,
-                    WarehouseType = new WarehouseTypeDto(warehouse),
-                    Address = new AddressDto(warehouse)
+                    WarehouseType = new WarehouseTypeDto(warehouse.WarehouseType),
+                    Address = new AddressDto(warehouse.Address)
                 });
             }
             return Ok(warehouseDto);

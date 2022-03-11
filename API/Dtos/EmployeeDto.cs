@@ -23,7 +23,7 @@ namespace API.Dtos
         {
             Id = employee.Id;
             WorkPhone = (int)employee.WorkPhone;
-            User = new UserDto(employee);
+            User = new UserDto(employee.User);
             Warehouse = new WarehouseDto(employee.Warehouse);
         }
     }

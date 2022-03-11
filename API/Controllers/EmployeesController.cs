@@ -54,7 +54,7 @@ namespace API.Controllers
                     Id = employee.Id,
                     WorkPhone = (int)employee.WorkPhone,
                     Warehouse = new WarehouseDto(employee.Warehouse),
-                    User = new UserDto(employee)
+                    User = new UserDto(employee.User)
                 });
             }
             return Ok(employeeDto);
@@ -109,7 +109,7 @@ namespace API.Controllers
                 {
                     Id = employee.Id,
                     WorkPhone = (int)employee.WorkPhone,
-                    User = new UserDto(employee),
+                    User = new UserDto(employee.User),
                     Warehouse = new WarehouseDto(employee.Warehouse)
                 });
             }

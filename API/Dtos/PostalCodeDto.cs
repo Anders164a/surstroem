@@ -17,12 +17,12 @@ namespace API.Dtos
 
         public PostalCodeDto() { }
 
-        public PostalCodeDto (Address address) 
+        public PostalCodeDto (PostalCode postalCode) 
         {
-            Id = address.PostalCode.Id;
-            Postal = address.PostalCode.PostalCode1;
-            City = address.PostalCode.CityName;
-            Country = new CountryDto(address.PostalCode);
+            Id = postalCode.Id;
+            Postal = postalCode.PostalCode1;
+            City = postalCode.CityName;
+            Country = new CountryDto(postalCode.Country);
         }
     }
 }

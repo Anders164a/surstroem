@@ -24,11 +24,11 @@ namespace API.Dtos
         public OrderDto(Order order)
         {
             Id = order.Id;
-            User = new UserDto(order);
+            User = new UserDto(order.User);
             ShippingAddress = new AddressDto(order.ShippingAddress);
             PayingAddress = new AddressDto(order.PayingAddress);
-            DeliveryState = new DeliveryStateDto(order);
-            DeliveryType = new DeliveryTypeDto(order);
+            DeliveryState = new DeliveryStateDto(order.DeliveryState);
+            DeliveryType = new DeliveryTypeDto(order.DeliveryType);
         }
     }
 }

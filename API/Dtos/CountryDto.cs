@@ -13,10 +13,10 @@ namespace API.Dtos
 
         public CountryDto() { }
 
-        public CountryDto(PostalCode postal) 
+        public CountryDto(Country country) 
         {
-            Id = postal.Country.Id;
-            Country = postal.Country.Country1;
+            Id = country.Id;
+            Country = country.Country1;
         }
     }
 }

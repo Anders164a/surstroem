@@ -54,7 +54,7 @@ namespace API.Controllers
                     Id = postalCode.Id,
                     Postal = postalCode.PostalCode1,
                     City = postalCode.CityName,
-                    Country = new CountryDto(postalCode)
+                    Country = new CountryDto(postalCode.Country)
                 });
             }
             return Ok(postalCodeDto);
@@ -81,7 +81,7 @@ namespace API.Controllers
                     Id = postalCode.Id,
                     Postal = postalCode.PostalCode1,
                     City = postalCode.CityName,
-                    Country = new CountryDto(postalCode)
+                    Country = new CountryDto(postalCode.Country)
                 });
             }
             return Ok(postalCodeDto);

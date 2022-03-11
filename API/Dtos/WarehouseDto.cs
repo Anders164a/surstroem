@@ -21,8 +21,8 @@ namespace API.Dtos
         public WarehouseDto(Warehouse warehouse)
         {
             Id = warehouse.Id;
-            WarehouseType = new WarehouseTypeDto(warehouse);
-            Address = new AddressDto(warehouse);
+            WarehouseType = new WarehouseTypeDto(warehouse.WarehouseType);
+            Address = new AddressDto(warehouse.Address);
         }
     }
 }

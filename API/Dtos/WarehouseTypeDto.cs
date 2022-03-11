@@ -16,10 +16,10 @@ namespace API.Dtos
 
         }
 
-        public WarehouseTypeDto(Warehouse warehouse)
+        public WarehouseTypeDto(WarehouseType warehouseType)
         {
-            Id = warehouse.WarehouseType.Id;
-            Type = warehouse.WarehouseType.Type;
+            Id = warehouseType.Id;
+            Type = warehouseType.Type;
         }
     }
 }

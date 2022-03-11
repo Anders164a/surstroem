@@ -21,13 +21,13 @@ namespace API.Dtos
 
         }
 
-        public UserBasicInfoDto(Employee employee)
+        public UserBasicInfoDto(User user)
         {
-            Id = employee.User.Id;
-            FirstName = employee.User.Firstname;
-            LastName = employee.User.Lastname;
-            Email = employee.User.Email;
-            PhoneNumber = (int)employee.User.PhoneNumber;
+            Id = user.Id;
+            FirstName = user.Firstname;
+            LastName = user.Lastname;
+            Email = user.Email;
+            PhoneNumber = (int)user.PhoneNumber;
         }
     }
 }

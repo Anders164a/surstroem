@@ -16,10 +16,10 @@ namespace API.Dtos
 
         }
 
-        public DeliveryTypeDto(Order order)
+        public DeliveryTypeDto(DeliveryType deliveryType)
         {
-            Id = order.DeliveryTypeId;
-            Type = order.DeliveryType.Type;
+            Id = deliveryType.Id;
+            Type = deliveryType.Type;
         }
     }
 }

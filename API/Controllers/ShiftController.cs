@@ -46,7 +46,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
             
-            return Ok(shift);
+            return Ok(shifts);
         }
 
         //api/Shifts

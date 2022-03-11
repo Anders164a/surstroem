@@ -16,10 +16,10 @@ namespace API.Dtos
         
         }
 
-        public DeliveryStateDto(Order order)
+        public DeliveryStateDto(DeliveryState deliveryState)
         {
-            Id = order.DeliveryStateId;
-            State = order.DeliveryState.State;
+            Id = deliveryState.Id;
+            State = deliveryState.State;
         }
     }
 }

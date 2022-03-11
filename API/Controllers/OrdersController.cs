@@ -71,11 +71,11 @@ namespace API.Controllers
                 orderDto.Add(new OrderDto
                 {
                     Id = order.Id,
-                    User = new UserDto(order),
+                    User = new UserDto(order.User),
                     ShippingAddress = new AddressDto(order.PayingAddress),
                     PayingAddress = new AddressDto(order.ShippingAddress),
-                    DeliveryState = new DeliveryStateDto(order),
-                    DeliveryType = new DeliveryTypeDto(order)
+                    DeliveryState = new DeliveryStateDto(order.DeliveryState),
+                    DeliveryType = new DeliveryTypeDto(order.DeliveryType)
                 });
             }
             return Ok(orderDto);
@@ -98,11 +98,11 @@ namespace API.Controllers
                 orderDto.Add(new OrderDto
                 {
                     Id = order.Id,
-                    User = new UserDto(order),
+                    User = new UserDto(order.User),
                     ShippingAddress = new AddressDto(order.PayingAddress),
                     PayingAddress = new AddressDto(order.ShippingAddress),
-                    DeliveryState = new DeliveryStateDto(order),
-                    DeliveryType = new DeliveryTypeDto(order)
+                    DeliveryState = new DeliveryStateDto(order.DeliveryState),
+                    DeliveryType = new DeliveryTypeDto(order.DeliveryType)
                 });
             }
             return Ok(orderDto);

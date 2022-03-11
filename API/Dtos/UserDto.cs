@@ -21,24 +21,14 @@ namespace API.Dtos
 
         }
 
-        public UserDto(Employee employee)
+        public UserDto(User user)
         {
-            Id = employee.User.Id;
-            FirstName = employee.User.Firstname;
-            LastName = employee.User.Lastname;
-            Email = employee.User.Email;
-            PhoneNumber = (int)employee.User.PhoneNumber;
-            Address = new AddressDto(employee.User);
-        }
-
-        public UserDto(Order order)
-        {
-            Id = order.User.Id;
-            FirstName = order.User.Firstname;
-            LastName = order.User.Lastname;
-            Email = order.User.Email;
-            PhoneNumber = (int)order.User.PhoneNumber;
-            Address = new AddressDto(order.User);
+            Id = user.Id;
+            FirstName = user.Firstname;
+            LastName = user.Lastname;
+            Email = user.Email;
+            PhoneNumber = (int)user.PhoneNumber;
+            Address = new AddressDto(user.Address);
         }
     }
 }

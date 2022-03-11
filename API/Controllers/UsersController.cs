@@ -82,7 +82,7 @@ namespace API.Controllers
             userDto.LastName = user.Lastname;
             userDto.Email = user.Email;
             userDto.PhoneNumber = (int)user.PhoneNumber;
-            userDto.Address = new AddressDto(user);
+            userDto.Address = new AddressDto(user.Address);
             
             return Ok(userDto);
         }
@@ -105,7 +105,7 @@ namespace API.Controllers
                     LastName = user.Lastname,
                     Email = user.Email,
                     PhoneNumber = (int)user.PhoneNumber,
-                    Address = new AddressDto(user)
+                    Address = new AddressDto(user.Address)
                 });
             }
             return Ok(userDto);
