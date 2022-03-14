@@ -22,11 +22,7 @@ class product_repository implements product_repository_interface
             ->get()
             ->makeHidden(["color_id", "brand_id", "warranty_period_id", "product_specification_id"]);
 
-        foreach ($products as $product) {
-            helper::remove_null_values($product);
-        }
-
-        return $products;
+        return helper::remove_collections_null_values($products);
     }
 
     public function store_product(string $product_title, ?string $short_description, ?string $description, float $price, ?float $weight, ?float $width, ?float $length, ?float $height, ?int $warranty_period_id, ?int $color_id, int $brand_id): product {
@@ -93,7 +89,7 @@ class product_repository implements product_repository_interface
 
             $product->makeHidden(["color_id", "brand_id", "warranty_period_id", "product_specification_id"]);
 
-            helper::remove_null_values($product);
+            helper::remove_null_values_in_object($product);
 
             return $product;
     }

@@ -8,7 +8,7 @@ use App\Exceptions\integer_not_allowed_null;
 use App\Http\Controllers\product\repository\product_repository;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class product_controller extends Controller
 {
     public function __construct()
     {
