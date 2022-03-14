@@ -10,18 +10,19 @@ use Illuminate\Http\Request;
 
 class product_category_controller extends Controller
 {
+    private product_category_repository $product_category_repo;
+
     public function __construct()
     {
         //$this->middleware('auth');
         //$this->middleware('check.auth:products.edit')->only('edit');
+
+        $this->product_category_repo = new product_category_repository();
     }
 
     public function get_all()
     {
-        $product_category_repo = new product_category_repository();
-        $all_product_categories = $product_category_repo->get_all();
-
-        return json_encode($all_product_categories);
+        return json_encode($this->product_category_repo->get_all());
     }
 
     public function get_product_category($id): object {
@@ -29,8 +30,7 @@ class product_category_controller extends Controller
             throw integer_not_allowed_null::integer_not_null();
         }
 
-        $product_category_repo = new product_category_repository();
-        return $product_category_repo->get_product_category($id);
+        return $this->product_category_repo->get_product_category($id);
     }
 
     public function get_categories_from_product_id(Request $request) {
@@ -40,8 +40,7 @@ class product_category_controller extends Controller
 
         $product_id = strval($request->product_id);
 
-        $product_category_repo = new product_category_repository();
-        return $product_category_repo->get_categories_from_product_id($product_id);
+        return $this->product_category_repo->get_categories_from_product_id($product_id);
     }
 
     public function get_products_from_category_id(Request $request) {
@@ -51,8 +50,7 @@ class product_category_controller extends Controller
 
         $category_id = strval($request->category_id);
 
-        $product_category_repo = new product_category_repository();
-        return $product_category_repo->get_products_from_category_id($category_id);
+        return $this->product_category_repo->get_products_from_category_id($category_id);
     }
 
     public function get_products_from_a_parent_category(Request $request) {
@@ -60,9 +58,7 @@ class product_category_controller extends Controller
             throw form_not_filled_correctly::form_does_not_fulfill_requirements();
         }
 
-        $product_category_repo = new product_category_repository();
-
-        return $product_category_repo->get_products_from_a_parent_category($request->category_id);
+        return $this->product_category_repo->get_products_from_a_parent_category($request->category_id);
     }
 
     public function store(Request $request) {
@@ -70,8 +66,7 @@ class product_category_controller extends Controller
             throw form_not_filled_correctly::form_does_not_fulfill_requirements();
         }
 
-        $product_category_repo = new product_category_repository();
-        $new_product_category = $product_category_repo->store_product_category($request->product_id, $request->category_id);
+        $new_product_category = $this->product_category_repo->store_product_category($request->product_id, $request->category_id);
 
         return json_encode($this->get_product_category($new_product_category->get_id()));
     }
@@ -92,8 +87,7 @@ class product_category_controller extends Controller
             throw form_not_filled_correctly::form_does_not_fulfill_requirements();
         }
 
-        $product_repo = new product_category_repository();
-        $product = $product_repo->update_product_category($_PUT);
+        $product = $this->product_category_repo->update_product_category($_PUT);
 
         return json_encode($product);
     }
@@ -104,9 +98,7 @@ class product_category_controller extends Controller
                 throw integer_not_allowed_null::integer_not_null();
             }
 
-            $product_repo = new product_category_repository();
-
-            $product_repo->delete_product_category($request->id);
+            $this->product_category_repo->delete_product_category($request->id);
         } catch (could_not_delete_exception $e) {
             throw $e;
         }
