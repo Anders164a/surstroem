@@ -27,8 +27,6 @@ class product_repository implements product_repository_interface
 
     public function store_product(string $product_title, ?string $short_description, ?string $description, float $price, ?float $weight, ?float $width, ?float $length, ?float $height, ?int $warranty_period_id, ?int $color_id, int $brand_id): product {
         $new_specification = new product_specification();
-        $new_specification->short_description = $short_description;
-        $new_specification->description = $description;
         $new_specification->weight = $weight;
         $new_specification->width = $width;
         $new_specification->length = $length;
@@ -36,6 +34,8 @@ class product_repository implements product_repository_interface
         $new_specification->save();
 
         $new_product = new \App\Models\product();
+        $new_product->short_description = $short_description;
+        $new_product->description = $description;
         $new_product->product_title = $product_title;
         $new_product->price = $price;
         $new_product->product_specification_id = $new_specification->id;
@@ -52,8 +52,6 @@ class product_repository implements product_repository_interface
         $product = $this->get_product($_PUT['id']);
         $product_specification = $this->get_product_specification($_PUT['product_specification_id']);
 
-        $product_specification->short_description = $_PUT['short_description'] ?? null;
-        $product_specification->description = $_PUT['description'] ?? null;
         $product_specification->weight = $_PUT['weight'] ?? null;
         $product_specification->width = $_PUT['width'] ?? null;
         $product_specification->length = $_PUT['length'] ?? null;
@@ -63,6 +61,8 @@ class product_repository implements product_repository_interface
         $price = floatval($_PUT['price']);
 
         $product->product_title = $_PUT['title'];
+        $product->short_description = $_PUT['short_description'];
+        $product->description = $_PUT['description'];
         $product->price = $price;
         $product->warranty_period_id = $_PUT['warranty_period_id'] ?? null;
         $product->color_id = $_PUT['color_id'] ?? null;
@@ -94,7 +94,7 @@ class product_repository implements product_repository_interface
             return $product;
     }
 
-    public function get_product_specification(int $product_specification_id) {
+    public function get_product_specification(int $product_specification_id): object {
         return product_specification::query()
             ->where('id', '=', $product_specification_id)
             ->first();

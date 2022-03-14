@@ -8,24 +8,18 @@ class product
     private ?string $short_description;
     private ?string $description;
     private float $price;
-    private ?float $weight;
-    private ?float $width;
-    private ?float $length;
-    private ?float $height;
+    private int $product_specification_id;
     private ?int $warranty_period_id;
     private ?int $color_id;
     private int $brand_id;
 
-    public function __construct(int $id, string $product_title, ?string $short_description, ?string $description, float $price, ?float $weight, ?float $width, ?float $length, ?float $height, ?int $warranty_period_id, ?int $color_id, int $brand_id) {
+    public function __construct(int $id, string $product_title, ?string $short_description, ?string $description, float $price, int $product_specification_id, ?int $warranty_period_id, ?int $color_id, int $brand_id) {
         $this->id = $id;
         $this->product_title = $product_title;
         $this->short_description = $short_description;
         $this->description = $description;
         $this->price = $price;
-        $this->weight = $weight;
-        $this->width = $width;
-        $this->length = $length;
-        $this->height = $height;
+        $this->product_specification_id = $product_specification_id;
         $this->warranty_period_id = $warranty_period_id;
         $this->color_id = $color_id;
         $this->brand_id = $brand_id;
@@ -51,20 +45,8 @@ class product
         return $this->price;
     }
 
-    public function get_weight(): ?float {
-        return $this->weight;
-    }
-
-    public function get_width(): ?float {
-        return $this->width;
-    }
-
-    public function get_length(): ?float {
-        return $this->length;
-    }
-
-    public function get_height(): ?float {
-        return $this->height;
+    public function get_product_specification_id(): ?float {
+        return $this->product_specification_id;
     }
 
     public function get_warranty_period_id(): ?int {
