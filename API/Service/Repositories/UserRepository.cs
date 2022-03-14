@@ -18,17 +18,6 @@ namespace API.Service.Repositories
 
         }
 
-        public async Task<ICollection<User>> GetUsersByAddressId(int addressId)
-        {
-            return await _dbcontext.Users.Where(c => c.AddressId == addressId)
-                .Include(c => c.Id)
-                .Include(c => c.Firstname)
-                .Include(c => c.Lastname)
-                .Include(c => c.Address)
-                .ToListAsync();
-        }
-
-
         public async Task<User> GetUserWithAllInfo(int userId)
         {
             return await _dbcontext.Users.Where(c => c.Id == userId)

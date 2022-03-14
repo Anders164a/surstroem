@@ -52,19 +52,6 @@ namespace API.Controllers
             return Ok(users);
         }
 
-        [HttpGet("GetUsersByAdressId/{addressId}")]
-        public async Task<IActionResult> GetUsersByAddress(int addressId)
-        {
-            ICollection<User> users;
-
-            users = await _userRepository.GetUsersByAddressId(addressId);
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            return Ok(users);
-        }
-
         [HttpGet("GetAllUserInfoById/{userId}")]
         public async Task<IActionResult> GetAllUserInfoById(int userId)
         {

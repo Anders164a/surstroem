@@ -98,19 +98,13 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var orderProductDto = new List<OrderProductOrderDto>();
+            var orderDto = new List<OrderDto>();
 
             foreach (var orderProduct in orderProducts)
             {
-                orderProductDto.Add(new OrderProductOrderDto
-                {
-                    Id = orderProduct.Id,
-                    Price = orderProduct.Price,
-                    Quantity = orderProduct.Quantity,
-                    Order = new OrderDto(orderProduct.Order)
-                });
+                orderDto.Add(new OrderDto(orderProduct.Order));
             }
-            return Ok(orderProductDto);
+            return Ok(orderDto);
         }
 
         //api/OrderProducts

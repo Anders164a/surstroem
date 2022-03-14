@@ -17,14 +17,6 @@ namespace API.Dtos
         [JsonProperty("description")]
         public string Description { get; set; }
         [JsonProperty("price")]
-        public decimal Price { get; set; }
-        [JsonProperty("weight")]
-        public double Weight { get; set; }
-        [JsonProperty("width")]
-        public double Width { get; set; }
-        [JsonProperty("length")]
-        public double Length { get; set; }
-        [JsonProperty("height")]
         public double Height { get; set; }
         [JsonProperty("warranty_period_id")]
         public int WarrantyPeriodId { get; set; }

@@ -351,7 +351,7 @@ namespace surstroem.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("order_products_ibfk_2");
 
-                entity.HasOne(d => d.Products)
+                entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderProducts)
                     .HasForeignKey(d => d.ProductsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
