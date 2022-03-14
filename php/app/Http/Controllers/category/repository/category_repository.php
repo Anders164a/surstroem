@@ -17,11 +17,7 @@ class category_repository implements category_repository_interface
             ->get()
             ->makeHidden('parent_category_id');
 
-        foreach ($categories as $category) {
-            helper::remove_null_values($category);
-        }
-
-        return $categories;
+        return helper::remove_collections_null_values($categories);
     }
 
     public function store_category(string $category, ?int $parent_category_id): category {
@@ -57,7 +53,7 @@ class category_repository implements category_repository_interface
 
         $category->makeHidden('parent_category_id');
 
-        helper::remove_null_values($category);
+        helper::remove_null_values_in_object($category);
 
         return $category;
     }

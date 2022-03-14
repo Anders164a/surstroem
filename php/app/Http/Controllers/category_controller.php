@@ -10,7 +10,7 @@ use App\Http\Controllers\category\repository\category_repository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class category_controller extends Controller
 {
     public function __construct()
     {
