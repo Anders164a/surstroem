@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface product_category_repository_interface
 {
-    public function get_all(): Collection;
+    public function get_product_categories(): Collection;
 
     public function get_products_from_category_id(int $category_id): Collection;
 

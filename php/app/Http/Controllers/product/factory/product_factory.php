@@ -12,10 +12,7 @@ class product_factory
             $product_data->short_description,
             $product_data->description,
             $product_data->price,
-            $product_data->weight,
-            $product_data->width,
-            $product_data->length,
-            $product_data->height,
+            $product_data->product_specification_id,
             $product_data->warranty_period_id,
             $product_data->color_id,
             $product_data->brand_id

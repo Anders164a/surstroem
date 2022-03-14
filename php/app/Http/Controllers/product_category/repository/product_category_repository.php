@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Http;
 
 class product_category_repository implements product_category_repository_interface
 {
-    public function get_all(): Collection
+    public function get_product_categories(): Collection
     {
         $product_categories = \App\Models\product_category::query()
             ->with([
@@ -55,7 +55,7 @@ class product_category_repository implements product_category_repository_interfa
         return $this->get_products_from_product_categories($products_in_product_categories);
     }
 
-    private function get_products_from_product_categories(array $product_category_ids) {
+    private function get_products_from_product_categories(array $product_category_ids): ?Collection {
         return helper::remove_collections_null_values(product::query()
             ->whereIn('id', $product_category_ids)
             ->with([
@@ -184,13 +184,13 @@ class product_category_repository implements product_category_repository_interfa
         $object->category->makeHidden(["parent_category_id"]);
     }
 
-    private function get_product_categories_from_categories(array $category_ids) {
+    private function get_product_categories_from_categories(array $category_ids): Collection {
         return \App\Models\product_category::query()
             ->whereIn('category_id', $category_ids)
             ->get();
     }
 
-    private function get_categories(array $categories, int $parent_id, array $child_category_from_categories = []) {
+    private function get_categories(array $categories, int $parent_id, array $child_category_from_categories = []): array {
         if (empty($child_category_from_categories)) {
             foreach ($categories as $category) {
                 if ($category["parent_category_id"] == $parent_id) {
@@ -218,7 +218,7 @@ class product_category_repository implements product_category_repository_interfa
         return $categories;
     }
 
-    private function get_child_categories(int $parent_id) {
+    private function get_child_categories(int $parent_id): ?array {
         return json_decode(Http::get("http://127.0.0.1/api/category/", [
             "parent_id" => $parent_id
         ])->body(), JSON_OBJECT_AS_ARRAY);
