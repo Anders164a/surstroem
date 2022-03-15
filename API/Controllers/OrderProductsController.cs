@@ -22,7 +22,7 @@ namespace API.Controllers
         }
 
         // GET: api/OrderProducts/1
-        [HttpGet("{id}")/*, Authorize(Roles = "Admin")*/]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetOrderProduct(int id)
         {
             if (!await _orderProductRepository.entityExists(id))

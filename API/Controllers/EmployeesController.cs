@@ -1,5 +1,6 @@
 ﻿using API.Dtos;
 using API.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using surstroem.Models;
 using System;
@@ -11,6 +12,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class EmployeesController : ControllerBase
     {
         private IEmployeeRepository _employeeRepository;
@@ -44,53 +46,11 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            var employeeDto = new List<EmployeeDto>();
-
-            foreach (var employee in employees)
-            {
-                employeeDto.Add(new EmployeeDto
-                {
-                    Id = employee.Id,
-                    WorkPhone = (int)employee.WorkPhone,
-                    Warehouse = new WarehouseDto(employee.Warehouse),
-                    User = new UserDto(employee.User)
-                });
-            }
-            return Ok(employeeDto);
+            return Ok(employees);
         }
 
         //api/Employees
-        [HttpGet("GetEmployeesWithWarehouseInfo")]
-        [ProducesResponseType(400)]
-        public async Task<IActionResult> GetEmployeesWithWarehouseInfos()
-        {
-            var employees = await _employeeRepository.GetEmployeesWithWarehouseInfo();
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var employeesDto = new List<EmployeeWarehouseDto>();
-
-            foreach (var employee in employees)
-            {
-                employeesDto.Add(new EmployeeWarehouseDto
-                {
-                    EmployeeId = employee.Id,
-                    FirstName = employee.User.Firstname,
-                    LastName = employee.User.Lastname,
-                    WorkPhone = (int)employee.WorkPhone,
-                    Email = employee.User.Email,
-                    WarehouseInfos = new WarehouseInfoDto(employee.Warehouse)
-                });
-            }
-            return Ok(employeesDto);
-        }
-
-        //api/Employees
-        [HttpGet("GetEmployeesContactInfo")]
+        [HttpGet("GetAllEmployeesInfo")]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetEmployeesContactInfo()
         {

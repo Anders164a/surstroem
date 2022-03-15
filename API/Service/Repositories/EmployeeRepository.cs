@@ -31,17 +31,5 @@ namespace API.Service.Repositories
                     .Include(o => o.Warehouse.Address.PostalCode.Country)
                     .ToListAsync();
         }
-
-        public async Task<ICollection<Employee>> GetEmployeesWithWarehouseInfo()
-        {
-            return await _dbcontext.Set<Employee>()
-                    .Include(q => q.User)
-                    .Include(c => c.Warehouse)
-                    .Include(s => s.Warehouse.WarehouseType)
-                    .Include(f => f.Warehouse.Address)
-                    .Include(a => a.Warehouse.Address.PostalCode)
-                    .Include(w => w.Warehouse.Address.PostalCode.Country)
-                    .ToListAsync();
-        }
     }
 }
