@@ -83,6 +83,7 @@ namespace API.Controllers
                     Price = orderProduct.Price,
                     Quantity = orderProduct.Quantity,
                     ProductName = productName.Title
+                    //Order = new OrderDto(orderProduct.Order)
                 });
             }
             return Ok(orderProductDtos);
