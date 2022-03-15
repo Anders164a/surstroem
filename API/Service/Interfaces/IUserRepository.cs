@@ -10,7 +10,6 @@ namespace API.Service.Interfaces
     {
         Task<ICollection<User>> GetUsersWithAllInfo();
         Task<User> GetUserWithAllInfo(int userId);
-        Task<User> GetUserByEmail(string userEmail);
         Task PutNewUserPassword(int userId, string passwordHash, string passwordSalt);
         Task PutNewUserAddress(int userId, int address);
         Task PutNewUserInfo(int userId, string firstName, string lastName, string email, int phoneNumber);

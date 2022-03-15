@@ -55,14 +55,6 @@ namespace API.Service.Repositories
             await _dbcontext.SaveChangesAsync();
         }
 
-        public async Task<User> GetUserByEmail(string userEmail)
-        {
-            return await _dbcontext.Users.Where(c => c.Email == userEmail)
-                .Include(c => c.Address)
-                .AsSplitQuery()
-                .FirstOrDefaultAsync();
-        }
-
         public async Task<ICollection<User>> GetUsersWithAllInfo()
         {
             return await _dbcontext.Set<User>()

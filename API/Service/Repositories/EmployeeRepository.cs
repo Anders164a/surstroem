@@ -17,6 +17,21 @@ namespace API.Service.Repositories
 
         }
 
+        public async Task<Employee> GetEmployeeWithAllInfo(int employeeId)
+        {
+            return await _dbcontext.Employees.Where(c => c.Id == employeeId)
+                .Include(c => c.User)
+                .Include(c => c.User.Address)
+                .Include(s => s.User.Address.PostalCode)
+                .Include(d => d.User.Address.PostalCode.Country)
+                .Include(c => c.Warehouse)
+                .Include(s => s.Warehouse.WarehouseType)
+                .Include(p => p.Warehouse.Address)
+                .Include(i => i.Warehouse.Address.PostalCode)
+                .Include(o => o.Warehouse.Address.PostalCode.Country)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<ICollection<Employee>> GetEmployeesContactInfo()
         {
             return await _dbcontext.Set<Employee>()

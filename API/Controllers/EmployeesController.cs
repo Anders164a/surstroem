@@ -49,6 +49,26 @@ namespace API.Controllers
             return Ok(employees);
         }
 
+        [HttpGet("GetAllUserInfoById/{employeeId}")]
+        public async Task<IActionResult> GetAllEmployeeInfoById(int employeeId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!await _employeeRepository.entityExists(employeeId))
+                return NotFound();
+            var employee = await _employeeRepository.GetEmployeeWithAllInfo(employeeId);
+
+            var employeeDto = new EmployeeDto();
+
+            employeeDto.Id = employee.Id;
+            employeeDto.WorkPhone = employee.WorkPhone;
+            employeeDto.User = new UserDto(employee.User);
+            employeeDto.Warehouse = new WarehouseDto(employee.Warehouse);
+
+            return Ok(employeeDto);
+        }
+
         //api/Employees
         [HttpGet("GetAllEmployeesInfo")]
         [ProducesResponseType(400)]

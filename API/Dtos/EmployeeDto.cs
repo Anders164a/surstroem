@@ -9,7 +9,7 @@ namespace API.Dtos
     public class EmployeeDto
     {
         public int Id { get; set; }
-        public int WorkPhone { get; set; }
+        public int? WorkPhone { get; set; }
 
         public UserDto User { get; set; }
         public WarehouseDto Warehouse { get; set; }
