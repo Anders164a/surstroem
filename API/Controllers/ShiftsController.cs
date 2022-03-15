@@ -12,10 +12,10 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ShiftController : ControllerBase
+    public class ShiftsController : ControllerBase
     {
         private IShiftRepository _shiftRepository;
-        public ShiftController(IShiftRepository shiftRepository)
+        public ShiftsController(IShiftRepository shiftRepository)
         {
             _shiftRepository = shiftRepository;
         }

@@ -10,10 +10,10 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DeliveryTypeController : ControllerBase
+    public class DeliveryTypesController : ControllerBase
     {
         private IDeliveryTypeRepository _deliveryTypeRepository;
-        public DeliveryTypeController(IDeliveryTypeRepository deliveryTypeRepository)
+        public DeliveryTypesController(IDeliveryTypeRepository deliveryTypeRepository)
         {
             _deliveryTypeRepository = deliveryTypeRepository;
         }
