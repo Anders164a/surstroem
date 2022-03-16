@@ -51,7 +51,7 @@ class product_controller extends Controller implements controller_interface
     }
 
     public function store(Request $request): object {
-        if (empty($request->title) || empty($request->price) || empty($request->brand_id) || empty($requestshort_description) || empty($requestdescription)) {
+        if (empty($request->title) || empty($request->price) || empty($request->brand_id) || empty($request->short_description) || empty($request->description)) {
             throw form_not_filled_correctly::form_does_not_fulfill_requirements();
         }
 
