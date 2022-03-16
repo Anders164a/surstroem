@@ -6,12 +6,7 @@ using System.Collections.Generic;
 namespace surstroem.Models
 {
     public partial class User
-    {
-        public User()
-        {
-            Orders = new HashSet<Order>();
-        }
-        
+    {   
         public int Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
@@ -22,6 +17,5 @@ namespace surstroem.Models
         public string PasswordSalt { get; set; }
 
         public virtual Address Address { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }
