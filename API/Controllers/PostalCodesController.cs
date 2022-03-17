@@ -45,19 +45,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var postalCodeDto = new List<PostalCodeDto>();
-
-            foreach (var postalCode in postalCodes)
-            {
-                postalCodeDto.Add(new PostalCodeDto
-                {
-                    Id = postalCode.Id,
-                    Postal = postalCode.PostalCode1,
-                    City = postalCode.CityName,
-                    Country = new CountryDto(postalCode.Country)
-                });
-            }
-            return Ok(postalCodeDto);
+            return Ok(postalCodes);
         }
 
         //api/Address

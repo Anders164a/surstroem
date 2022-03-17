@@ -22,7 +22,7 @@ namespace API.Controllers
         }
 
         // GET: api/Employees/1
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetEmployee(int id)
         {
             if (!await _employeeRepository.entityExists(id))

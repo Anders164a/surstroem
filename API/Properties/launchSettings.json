@@ -17,7 +17,7 @@
       }
     },
 		"API": {
-			"applicationUrl": "https://localhost",
+			"applicationUrl": "https://10.130.54.58:81",
 			"commandName": "Project",
 			"dotnetRunMessages": "true",
 			"environmentVariables": {
