@@ -13,7 +13,6 @@ class category_repository implements category_repository_interface
     public function get_categories(): Collection {
         $categories = \App\Models\category::query()
             ->with(['parent_category'])
-            ->orderBy('categories.category')
             ->get()
             ->makeHidden('parent_category_id');
 
